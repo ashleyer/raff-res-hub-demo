@@ -1,0 +1,164 @@
+{
+  "iphone-se@320 /gratitude": {
+    "stacked": true,
+    "labels": [
+      "Sign inResident sign in",
+      "Sign upResident sign up"
+    ],
+    "headerHeight": 127,
+    "logoWithinHeader": true
+  },
+  "iphone-se@320 /": {
+    "stacked": true,
+    "labels": [
+      "Sign inResident sign in",
+      "Sign upResident sign up"
+    ],
+    "headerHeight": 126,
+    "logoWithinHeader": true
+  },
+  "iphone-se@320 /amenities": {
+    "stacked": true,
+    "labels": [
+      "Sign inResident sign in",
+      "Sign upResident sign up"
+    ],
+    "headerHeight": 127,
+    "logoWithinHeader": true
+  },
+  "android-small@360 /gratitude": {
+    "stacked": true,
+    "labels": [
+      "Sign inResident sign in",
+      "Sign upResident sign up"
+    ],
+    "headerHeight": 127,
+    "logoWithinHeader": true
+  },
+  "android-small@360 /": {
+    "stacked": true,
+    "labels": [
+      "Sign inResident sign in",
+      "Sign upResident sign up"
+    ],
+    "headerHeight": 126,
+    "logoWithinHeader": true
+  },
+  "android-small@360 /amenities": {
+    "stacked": true,
+    "labels": [
+      "Sign inResident sign in",
+      "Sign upResident sign up"
+    ],
+    "headerHeight": 127,
+    "logoWithinHeader": true
+  },
+  "iphone-14@390 /gratitude": {
+    "stacked": true,
+    "labels": [
+      "Sign inResident sign in",
+      "Sign upResident sign up"
+    ],
+    "headerHeight": 127,
+    "logoWithinHeader": true
+  },
+  "iphone-14@390 /": {
+    "stacked": true,
+    "labels": [
+      "Sign inResident sign in",
+      "Sign upResident sign up"
+    ],
+    "headerHeight": 126,
+    "logoWithinHeader": true
+  },
+  "iphone-14@390 /amenities": {
+    "stacked": true,
+    "labels": [
+      "Sign inResident sign in",
+      "Sign upResident sign up"
+    ],
+    "headerHeight": 127,
+    "logoWithinHeader": true
+  },
+  "iphone-plus@414 /gratitude": {
+    "stacked": true,
+    "labels": [
+      "Sign inResident sign in",
+      "Sign upResident sign up"
+    ],
+    "headerHeight": 127,
+    "logoWithinHeader": true
+  },
+  "iphone-plus@414 /": {
+    "stacked": true,
+    "labels": [
+      "Sign inResident sign in",
+      "Sign upResident sign up"
+    ],
+    "headerHeight": 126,
+    "logoWithinHeader": true
+  },
+  "iphone-plus@414 /amenities": {
+    "stacked": true,
+    "labels": [
+      "Sign inResident sign in",
+      "Sign upResident sign up"
+    ],
+    "headerHeight": 127,
+    "logoWithinHeader": true
+  },
+  "iphone-pro-max@430 /gratitude": {
+    "stacked": true,
+    "labels": [
+      "Sign inResident sign in",
+      "Sign upResident sign up"
+    ],
+    "headerHeight": 127,
+    "logoWithinHeader": true
+  },
+  "iphone-pro-max@430 /": {
+    "stacked": true,
+    "labels": [
+      "Sign inResident sign in",
+      "Sign upResident sign up"
+    ],
+    "headerHeight": 126,
+    "logoWithinHeader": true
+  },
+  "iphone-pro-max@430 /amenities": {
+    "stacked": true,
+    "labels": [
+      "Sign inResident sign in",
+      "Sign upResident sign up"
+    ],
+    "headerHeight": 127,
+    "logoWithinHeader": true
+  },
+  "tablet-portrait@768 /gratitude": {
+    "stacked": false,
+    "labels": [
+      "Sign inResident sign in",
+      "Sign upResident sign up"
+    ],
+    "headerHeight": 113,
+    "logoWithinHeader": true
+  },
+  "tablet-portrait@768 /": {
+    "stacked": false,
+    "labels": [
+      "Sign inResident sign in",
+      "Sign upResident sign up"
+    ],
+    "headerHeight": 112,
+    "logoWithinHeader": true
+  },
+  "tablet-portrait@768 /amenities": {
+    "stacked": false,
+    "labels": [
+      "Sign inResident sign in",
+      "Sign upResident sign up"
+    ],
+    "headerHeight": 113,
+    "logoWithinHeader": true
+  }
+}

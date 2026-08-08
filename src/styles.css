@@ -1,0 +1,360 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Raffles Boston Residences design system.
+ * Matched to rafflesresidencesboston.com / raffles.com/boston:
+ * warm greige paper, espresso ink, Raffles champagne gold.
+ * Light transitional serif display + wide-tracked humanist sans.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-emerald-deep: var(--emerald-deep);
+  --color-ivory: var(--ivory);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Jost", "Helvetica Neue", sans-serif;
+}
+
+:root {
+  --radius: 0px;
+
+  /* Spacing / rhythm — the brand sites run on generous, airy bands. */
+  --space-band: clamp(4rem, 9vw, 9rem);
+  --space-gutter: clamp(1.25rem, 5vw, 4.5rem);
+
+  /* Warm greige paper, espresso ink, champagne gold. */
+  --background: oklch(0.964 0.006 82);
+  --foreground: oklch(0.265 0.011 62);
+  --card: oklch(0.986 0.004 82);
+  --card-foreground: oklch(0.265 0.011 62);
+  --popover: oklch(0.986 0.004 82);
+  --popover-foreground: oklch(0.265 0.011 62);
+  --primary: oklch(0.315 0.013 62);
+  --primary-foreground: oklch(0.972 0.006 82);
+  --secondary: oklch(0.928 0.008 82);
+  --secondary-foreground: oklch(0.3 0.012 62);
+  --muted: oklch(0.928 0.008 82);
+  --muted-foreground: oklch(0.475 0.009 68);
+  --accent: oklch(0.915 0.012 80);
+  --accent-foreground: oklch(0.3 0.012 62);
+  --destructive: oklch(0.5 0.15 28);
+  --destructive-foreground: oklch(0.97 0.006 82);
+  --border: oklch(0.878 0.008 82);
+  --input: oklch(0.845 0.009 82);
+  --ring: oklch(0.7 0.062 78);
+  --gold: oklch(0.72 0.068 78);
+  --gold-ink: oklch(0.545 0.062 74);
+  --gold-soft: oklch(0.845 0.04 82);
+  /* Deep warm charcoal used for masthead, footer and photo scrims. */
+  --emerald-deep: oklch(0.235 0.008 62);
+  --ivory: oklch(0.964 0.006 82);
+  --chart-1: oklch(0.72 0.068 78);
+  --chart-2: oklch(0.45 0.02 62);
+  --chart-3: oklch(0.62 0.03 78);
+  --chart-4: oklch(0.55 0.04 220);
+  --chart-5: oklch(0.66 0.07 46);
+  --sidebar: oklch(0.235 0.008 62);
+  --sidebar-foreground: oklch(0.955 0.006 82);
+  --sidebar-primary: oklch(0.79 0.068 80);
+  --sidebar-primary-foreground: oklch(0.235 0.008 62);
+  --sidebar-accent: oklch(0.295 0.009 62);
+  --sidebar-accent-foreground: oklch(0.955 0.006 82);
+  --sidebar-border: oklch(0.33 0.008 62);
+  --sidebar-ring: oklch(0.79 0.068 80);
+}
+
+.dark {
+  --background: oklch(0.964 0.006 82);
+  --foreground: oklch(0.265 0.011 62);
+}
+
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem);
+    line-height: 1.75;
+    letter-spacing: 0.012em;
+    -webkit-font-smoothing: antialiased;
+  }
+
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    line-height: 1.14;
+    letter-spacing: 0.005em;
+    color: var(--foreground);
+  }
+
+  h1 {
+    font-size: clamp(2.25rem, 5.4vw, 4rem);
+  }
+  h2 {
+    font-size: clamp(1.75rem, 3.6vw, 2.75rem);
+  }
+  h3 {
+    font-size: clamp(1.375rem, 2.2vw, 1.875rem);
+  }
+}
+
+/* Generous editorial rhythm, matching the brand sites' section bands. */
+@utility section-band {
+  padding-block: var(--space-band);
+}
+
+@utility gutter {
+  padding-inline: var(--space-gutter);
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold-ink, var(--gold));
+}
+
+@utility gold-rule {
+  height: 1px;
+  width: 3rem;
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+
+/* Dark emerald chrome (masthead/footer) with inverted token scope. */
+@utility chrome-dark {
+  background-color: var(--emerald-deep);
+  color: var(--ivory);
+  --foreground: oklch(0.958 0.006 82);
+  --muted-foreground: oklch(0.79 0.008 78);
+  --primary: oklch(0.83 0.062 80);
+  --gold: oklch(0.83 0.062 80);
+  --gold-ink: oklch(0.83 0.062 80);
+  --border: oklch(0.34 0.008 62);
+}
+
+/* WCAG 2.2 AA: always-visible focus indicator with sufficient contrast. */
+@layer base {
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+    border-radius: 1px;
+  }
+
+  /* Keep the indicator legible against the dark emerald chrome. */
+  .chrome-dark :where(a, button, [tabindex]):focus-visible {
+    outline-color: oklch(0.92 0.06 90);
+  }
+}
+
+/* ---------------------------------------------------------------
+ * Editorial styling aligned to rafflesresidencesboston.com:
+ * hairline rules, wide-tracked uppercase navigation, fluid display type.
+ * ------------------------------------------------------------- */
+
+@utility nav-link {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--foreground);
+  position: relative;
+  transition: color 200ms ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0.5rem;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 260ms ease;
+  }
+
+  &:hover::after,
+  &:focus-visible::after,
+  &.is-active::after {
+    transform: scaleX(1);
+  }
+
+}
+
+@utility btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding-block: 0.5rem;
+  padding-inline: 1.25rem;
+  max-width: 100%;
+  text-align: center;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+  border: 1px solid var(--foreground);
+  font-family: var(--font-sans);
+  font-size: clamp(0.625rem, 0.55rem + 0.3vw, 0.6875rem);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+
+  &:hover {
+    background-color: var(--foreground);
+    color: var(--background);
+  }
+}
+
+
+/* Fluid editorial display sizes */
+@utility display-hero {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(2.5rem, 7vw, 5.75rem);
+  line-height: 1.02;
+  letter-spacing: 0.005em;
+}
+
+@utility display-section {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(1.875rem, 4.2vw, 3.125rem);
+  line-height: 1.1;
+  letter-spacing: 0.005em;
+}
+
+@utility measure {
+  max-width: 62ch;
+}
+
+/* ---------------------------------------------------------------
+ * Landing: cinematic full-bleed panels and scroll reveals
+ * ------------------------------------------------------------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(1.75rem);
+  transition:
+    opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .scroll-cue-line::after {
+    animation: none !important;
+  }
+}
+
+.script {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+}
+
+.scroll-cue-line {
+  position: relative;
+  display: block;
+  width: 1px;
+  height: 4.5rem;
+  background: color-mix(in oklab, currentColor 25%, transparent);
+  overflow: hidden;
+}
+
+.scroll-cue-line::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 40%;
+  background: currentColor;
+  animation: cue-travel 2.4s ease-in-out infinite;
+}
+
+@keyframes cue-travel {
+  0% {
+    transform: translateY(-100%);
+  }
+  60%,
+  100% {
+    transform: translateY(250%);
+  }
+}
+
+/* Panel overlay scrim for legible type over photography */
+@utility panel-scrim {
+  background: linear-gradient(
+    to top,
+    color-mix(in oklab, var(--emerald-deep) 88%, transparent) 0%,
+    color-mix(in oklab, var(--emerald-deep) 55%, transparent) 45%,
+    color-mix(in oklab, var(--emerald-deep) 22%, transparent) 100%
+  );
+}
