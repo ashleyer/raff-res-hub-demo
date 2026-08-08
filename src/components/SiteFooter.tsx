@@ -226,14 +226,6 @@ export function SiteFooter() {
             </DialogTitle>
           </DialogHeader>
           <ul className="space-y-3 text-sm">
-            <li>
-              <a
-                className="text-primary underline underline-offset-4"
-                href="mailto:ashleye.romano@gmail.com"
-              >
-                ashleye.romano@gmail.com
-              </a>
-            </li>
             <li className="flex flex-wrap items-center gap-x-3 gap-y-1">
               <a className="text-primary underline underline-offset-4" href="tel:+19788575775">
                 Call or text: 978-857-5775

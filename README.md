@@ -11,54 +11,109 @@ part in building governance — all in one place.
 
 ## What you can do
 
-| Section | What it's for |
+A full residential-living experience, rebuilt end-to-end for the browser: real-time-feeling
+bookings, a private social network for the building, live governance, and a lightweight
+recommendations engine — all dressed in Raffles' quiet, editorial visual language.
+
+### Daily living
+
+| Feature | What it does |
 | --- | --- |
-| **Home** (`/`) | A quiet landing page that leads you into each part of the residence, plus a "For You" band of personalized picks. |
-| **Amenities** (`/amenities`) | Photos, descriptions and reservation requests for the Residents' Lounge (Floor 21), private dining, spa and more, with a visual time-slot grid, in-residence dining orders, and a directory of hotel venues. |
-| **Concierge** (`/concierge`) | Submit a service request and follow its status. |
-| **Hotel Bridge** (`/hotel-bridge`) | A simulated link to the hotel's property-management system: pull up your folio, reserve a priority table, or order in-residence delivery. Includes a "simulate outage" toggle that trips a real circuit-breaker, just to show how the app degrades gracefully. |
-| **Events** (`/events`) | RSVP to resident events (with capacity limits), suggest new ones, and browse a carousel of past events. |
-| **Account** (`/account`) | View monthly statements, pay condo fees, see payment history, and a market-value snapshot for the unit. |
-| **Services** (`/services`) | Valet the car, report a maintenance issue, request a package/parcel, and log a lost & found item. |
-| **Directory** (`/directory`) | Your resident profile with opt-in visibility, household members and pets, plus neighbours who choose to be listed. |
-| **Messages** (`/messages`) | Private and group conversations between residents. |
-| **Community** (`/community`) | Interest groups, discussion topics, and a "Thank You" notes board for staff. |
-| **Gallery** (`/gallery`) | A resident photo wall — uploads stay in your own browser and are never sent anywhere. |
-| **Marketplace** (`/marketplace`) | Buy, sell, give away, or ask neighbours for recommendations. |
-| **Proposals** (`/proposals`) | Resident ideas that everyone can vote up or down. |
-| **Governance** (`/governance`) | Board measures, live ballots, and the governing documents. |
-| **Management** (`/management`) | Board and staff photos and bios, announcements, the resident handbook, and the monthly satisfaction survey. |
-| **For You** (`/for-you`) | The full personalized-recommendations feed, with the "why this fits you" signal for each pick made visible. |
-| **About / Press / Sales & Leasing** | Brand heritage, press coverage, and current sale/lease/parking listings. |
+| **Amenities** (`/amenities`) | Browse the Residents' Lounge (Floor 21), private dining, spa and more, then reserve a time slot on a visual availability grid, place an in-residence dining order, or explore the full directory of hotel venues — La Padrona, the Long Bar, Guerlain Spa, and beyond. |
+| **Hotel Bridge** (`/hotel-bridge`) | A live-feeling bridge into the hotel's property-management system: pull up your folio, reserve a priority table, or order delivery. Built on a genuine circuit-breaker pattern with caching and retry, so it demonstrates *resilient* integration design — flip the "simulate outage" switch and watch the app degrade gracefully instead of breaking. |
+| **Concierge** (`/concierge`) | Lodge a service request and track it through to completion, with live status updates. |
+| **Account** (`/account`) | Review monthly statements, pay condo fees, browse payment history, and check a live market-value snapshot for the unit. |
+| **Services** (`/services`) | Call the valet, report a maintenance issue, request parcel delivery, or log a lost & found item — each with its own status tracking. |
+
+### Community & social
+
+| Feature | What it does |
+| --- | --- |
+| **Directory** (`/directory`) | An opt-in resident directory: control your own visibility and contact preferences, manage household members and pets, and browse neighbours who've chosen to be listed. |
+| **Messages** (`/messages`) | Private one-to-one and group conversations between residents. |
+| **Community** (`/community`) | A resident forum with interest circles to join, a "Thank You" notes board for building staff, and a curated social feed styled after the building's Instagram presence. |
+| **Gallery** (`/gallery`) | A resident photo wall — uploads are rendered entirely client-side and never leave your browser. |
+| **Marketplace** (`/marketplace`) | Buy, sell, give away, or crowdsource recommendations from neighbours, with threaded replies on every listing. |
+| **Events** (`/events`) | RSVP to upcoming events with live capacity limits, pitch new ones, and browse a carousel of highlights from past gatherings. |
+
+### Governance & feedback
+
+| Feature | What it does |
+| --- | --- |
+| **Proposals** (`/proposals`) | A resident idea board — submit, browse, and upvote/downvote what the building should do next. |
+| **Governance** (`/governance`) | Board measures and live ballots, plus the governing documents themselves, embedded and searchable. |
+| **Management** (`/management`) | Board and staff bios, building announcements, the full resident handbook, and a monthly satisfaction survey with a staff-only results dashboard. |
+
+### Personalization
+
+| Feature | What it does |
+| --- | --- |
+| **For You** (site-wide band + full page at `/for-you`) | A recommendations engine that scores amenities, events, communities, and marketplace listings against your stated interests, bookings, and activity — then, when configured, has an AI pass rewrite the "why this fits you" line for extra polish. The signal behind every pick is shown, not hidden, and the feature works identically with or without the AI enabled. |
+
+### Discover the building
+
+**About**, **Press**, and **Sales & Leasing** round things out with brand heritage, press coverage, and current sale/lease/parking listings — no sign-in required.
+
+### Thoughtful details, everywhere
+
+- **Notification bell** (header, site-wide) — surfaces an in-app alert the moment the concierge desk replies to, assigns, or updates one of your requests.
+- **Explicit consent for "Remember me"** (`/login`) — turning it on opens a plain-language dialog explaining exactly what gets stored and for how long, before anything is written to your device.
+- **One-click "forget me"** (`/directory`) — clears any remembered sign-in details from the browser on demand.
+- **Accessible password strength meter** — strength is conveyed through icons and readable text, never colour alone.
+- **Demo tags everywhere it matters** — a small "Demo" marker sits on any invented photo, bio, or listing so nothing on screen is ever mistaken for a real resident or real information.
 
 Most pages render for everyone; the interactive parts (booking, posting, voting, messaging,
 your account) ask you to sign in first.
 
 ## Signing in
 
-This is a **resident preview**, not a real login system — accounts and sessions are
-stored only in your browser and reset if you clear site data. There's no public sign-up
-gate: pick whichever way you'd like to explore.
+This is a **resident preview**, not a real login system — there's no server and no
+database. Accounts and sessions live only in `localStorage` on the device you're using,
+and disappear if you clear site data or switch browsers. There's no sign-up gate either:
+pick whichever of these gets you in fastest.
 
-- **Any listed resident** — use one of the resident emails shown on the sign-in page
-  (e.g. `ashleye.romano@gmail.com`, Residence 22H) with the shared preview passcode
-  **`raffles2026`**.
+- **Any listed resident, no registration** — use one of the resident emails shown on the
+  sign-in page (e.g. `a.romano@residents.raffles-boston.test`, Residence 22H) with the shared preview
+  passcode **`raffles2026`**. This always works, with no account required, for as long as
+  the demo exists.
 - **Open demo account** — sign in with **`demo@demo.com`** / **`checkitout02116`** (no
   residence number needed). Not every feature is available on this account.
-- **Register your own household** — the sign-up tab creates a new resident on this
-  device only; it's remembered until you sign out.
-- **Forgot password** (`/reset-password`) works too — it's fully simulated: a one-time
-  code is shown on screen instead of emailed, and expires after 15 minutes or on reload.
+- **Guest passcode access** — type *any* email address with the passcode `raffles2026`
+  and a lightweight resident record is created for you on the spot. It's saved to this
+  browser, so the same combination keeps working on later visits — but it's a passcode,
+  not a personal password.
+- **Register your own household** ("Create account") — this is a real, persistent
+  account: a proper email + password saved to this browser's storage. Once created, you
+  sign back in with your own password every time — you never have to register twice on
+  the same device.
+- **Forgot password** (`/reset-password`) is fully simulated end to end: a one-time code
+  is shown on screen instead of being emailed, and it expires after 15 minutes or the
+  moment you reload the page.
+
+Whichever way you sign in, your **session** lapses automatically after 12 hours of
+inactivity (sliding forward while you're active) — at that point you sign in again, you
+don't lose or need to recreate the account itself. Turning on **"Remember me"** just
+pre-fills your email and residence number on this browser for up to 30 days; it never
+stores a password, and it asks for explicit confirmation before saving anything (see
+`src/components/RememberMeConsent.tsx`). Because everything is local, a real account only
+exists on the device that created it — clearing site data, opening a private window, or
+switching machines means starting over, though the always-available seeded emails and the
+`raffles2026` passcode remain a fallback that never requires registering anything.
 
 ### Staff / building personnel
 
-There's a second, separate account system for building staff, reached via
+There's a second, entirely separate account system for building staff, reached via
 **Personnel Sign Up / Sign In** at the bottom of the login page (`/staff-signup`,
-`/staff-signin`). It's independent of resident accounts and doesn't currently grant any
-extra access — it exists to show what an internal staff directory could look like.
+`/staff-signin`). No staff accounts are seeded — you register once per browser, after
+which sign-in works with your own password indefinitely. Unlike resident sessions, a
+staff session has **no expiry at all**; you stay signed in until you explicitly sign out.
+That said, `/staff-dashboard` is currently an intentionally empty placeholder, and
+signing in as staff grants no elevated access anywhere else in the app — it exists to
+demonstrate what an internal personnel directory could look like, not to gate any real
+functionality.
 
-Two internal tools are instead protected by a shared access phrase shown right on the
-page:
+Two internal tools are protected separately, by a shared access phrase shown right on the
+page itself — unrelated to staff accounts entirely:
 
 - **Concierge Desk** (`/concierge-desk`) — the staff-side queue for triaging resident
   requests.
@@ -77,7 +132,7 @@ screens.
 ## Questions or feedback
 
 Built with 🤍 in Raffles Residences Boston, Unit 22H by Ashley Romano —
-[ashleye.romano@gmail.com](mailto:ashleye.romano@gmail.com) · [978-857-5775](tel:978-857-5775)
+[978-857-5775](tel:978-857-5775)
 
 ---
 
@@ -210,7 +265,6 @@ I welcome contributions! Please:
 
 Found an issue or have a suggestion? Please contact Ashley:
 
-- **Email**: [ashleye.romano@gmail.com](mailto:ashleye.romano@gmail.com)
 - **Phone**: [978-857-5775](tel:978-857-5775)
 
 Include as much detail as possible about the bug or feature request.

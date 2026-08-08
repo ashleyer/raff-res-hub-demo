@@ -34,3 +34,7 @@ dist-ssr
 # Lovable internal
 .lovable/
 tests/visual/output
+
+.history/
+
+.vscode/
