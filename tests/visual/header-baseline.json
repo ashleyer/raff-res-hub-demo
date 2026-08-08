@@ -5,7 +5,7 @@
       "Sign inResident sign in",
       "Sign upResident sign up"
     ],
-    "headerHeight": 127,
+    "headerHeight": 129,
     "logoWithinHeader": true
   },
   "iphone-se@320 /": {
@@ -14,7 +14,7 @@
       "Sign inResident sign in",
       "Sign upResident sign up"
     ],
-    "headerHeight": 126,
+    "headerHeight": 128,
     "logoWithinHeader": true
   },
   "iphone-se@320 /amenities": {
@@ -23,7 +23,7 @@
       "Sign inResident sign in",
       "Sign upResident sign up"
     ],
-    "headerHeight": 127,
+    "headerHeight": 129,
     "logoWithinHeader": true
   },
   "android-small@360 /gratitude": {
@@ -32,7 +32,7 @@
       "Sign inResident sign in",
       "Sign upResident sign up"
     ],
-    "headerHeight": 127,
+    "headerHeight": 129,
     "logoWithinHeader": true
   },
   "android-small@360 /": {
@@ -41,7 +41,7 @@
       "Sign inResident sign in",
       "Sign upResident sign up"
     ],
-    "headerHeight": 126,
+    "headerHeight": 128,
     "logoWithinHeader": true
   },
   "android-small@360 /amenities": {
@@ -50,7 +50,7 @@
       "Sign inResident sign in",
       "Sign upResident sign up"
     ],
-    "headerHeight": 127,
+    "headerHeight": 129,
     "logoWithinHeader": true
   },
   "iphone-14@390 /gratitude": {
@@ -59,7 +59,7 @@
       "Sign inResident sign in",
       "Sign upResident sign up"
     ],
-    "headerHeight": 127,
+    "headerHeight": 129,
     "logoWithinHeader": true
   },
   "iphone-14@390 /": {
@@ -68,7 +68,7 @@
       "Sign inResident sign in",
       "Sign upResident sign up"
     ],
-    "headerHeight": 126,
+    "headerHeight": 128,
     "logoWithinHeader": true
   },
   "iphone-14@390 /amenities": {
@@ -77,7 +77,7 @@
       "Sign inResident sign in",
       "Sign upResident sign up"
     ],
-    "headerHeight": 127,
+    "headerHeight": 129,
     "logoWithinHeader": true
   },
   "iphone-plus@414 /gratitude": {
@@ -86,7 +86,7 @@
       "Sign inResident sign in",
       "Sign upResident sign up"
     ],
-    "headerHeight": 127,
+    "headerHeight": 129,
     "logoWithinHeader": true
   },
   "iphone-plus@414 /": {
@@ -95,7 +95,7 @@
       "Sign inResident sign in",
       "Sign upResident sign up"
     ],
-    "headerHeight": 126,
+    "headerHeight": 128,
     "logoWithinHeader": true
   },
   "iphone-plus@414 /amenities": {
@@ -104,7 +104,7 @@
       "Sign inResident sign in",
       "Sign upResident sign up"
     ],
-    "headerHeight": 127,
+    "headerHeight": 129,
     "logoWithinHeader": true
   },
   "iphone-pro-max@430 /gratitude": {
@@ -113,7 +113,7 @@
       "Sign inResident sign in",
       "Sign upResident sign up"
     ],
-    "headerHeight": 127,
+    "headerHeight": 129,
     "logoWithinHeader": true
   },
   "iphone-pro-max@430 /": {
@@ -122,7 +122,7 @@
       "Sign inResident sign in",
       "Sign upResident sign up"
     ],
-    "headerHeight": 126,
+    "headerHeight": 128,
     "logoWithinHeader": true
   },
   "iphone-pro-max@430 /amenities": {
@@ -131,7 +131,7 @@
       "Sign inResident sign in",
       "Sign upResident sign up"
     ],
-    "headerHeight": 127,
+    "headerHeight": 129,
     "logoWithinHeader": true
   },
   "tablet-portrait@768 /gratitude": {
