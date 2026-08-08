@@ -1,10 +1,10 @@
 /**
  * Health / readiness probes.
  *
- * This project has no database or GraphQL mesh provisioned yet (Lovable Cloud
- * is not enabled), so those checks report `skipped` rather than faking a pass.
- * As soon as the env vars below exist the checks start exercising them for
- * real, without any further code change.
+ * This project has no database or GraphQL mesh provisioned yet, so those
+ * checks report `skipped` rather than faking a pass. As soon as the env vars
+ * below exist the checks start exercising them for real, without any further
+ * code change.
  */
 
 export type CheckStatus = "ok" | "degraded" | "down" | "skipped";

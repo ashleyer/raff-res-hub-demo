@@ -1,5 +1,3 @@
-import { reportLovableError } from "./lovable-error-reporting";
-
 export type RuntimeErrorRecord = {
   id: string;
   at: string;
@@ -87,7 +85,6 @@ export function logRuntimeError(
 
   persist(record);
   console.error(`[runtime:${resolvedKind}]`, record.message, extra);
-  reportLovableError(err, { source: "client_runtime_logger", kind: resolvedKind, ...extra });
 }
 
 function visibleTextLength() {

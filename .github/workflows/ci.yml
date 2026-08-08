@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Cancel superseded runs on the same branch/PR so only the latest push is checked.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check-and-unit:
+    name: Typecheck, lint, unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          # Pinned to the 22.x line (not just ">=22"): jsdom's declared support
+          # window is ^22.22.2 || ^24.15.0 || >=26.0.0, and some in-between
+          # Node builds ship a native localStorage that can collide with
+          # jsdom's inside Vitest (see src/test/setup.ts for the workaround).
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm test
+
+  e2e:
+    name: Functional, visual & accessibility smoke tests
+    needs: check-and-unit
+    runs-on: ubuntu-latest
+    env:
+      SMOKE_BASE_URL: http://localhost:4173
+      VISUAL_BASE_URL: http://localhost:4173
+      A11Y_BASE_URL: http://localhost:4173
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - name: Start preview server
+        run: npx vite preview --port 4173 --strictPort &
+      - name: Wait for preview server
+        run: npx wait-on --timeout 60000 http://localhost:4173
+      - name: Functional smoke test (routes, health, sign-in flow)
+        run: npm run test:smoke
+      - name: Visual regression (header layout across breakpoints)
+        run: npm run test:visual
+      - name: Accessibility audit (axe-core, WCAG 2.2 AA)
+        run: npm run test:a11y
+      - name: Upload visual regression screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-regression-output
+          path: tests/visual/output/
+          retention-days: 14

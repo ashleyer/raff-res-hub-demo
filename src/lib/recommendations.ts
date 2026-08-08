@@ -4,9 +4,7 @@
  * Every suggestion is derived deterministically from data points the resident
  * has already generated inside the portal — profile interests, amenity
  * bookings, event RSVPs, community memberships, marketplace and forum
- * activity, house-account status and open service requests. The AI layer
- * (see `recommendations.functions.ts`) only rewrites the one-line reason; it
- * never chooses what is recommended.
+ * activity, house-account status and open service requests.
  */
 
 import { AMENITIES, SEED_EVENTS } from "./intranet-data";

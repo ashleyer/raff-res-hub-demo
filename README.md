@@ -146,7 +146,6 @@ Built with 🤍 in Raffles Residences Boston, Unit 22H by Ashley Romano —
 - **Styling**: Tailwind CSS v4 + [shadcn/ui](https://ui.shadcn.com) primitives
   (`new-york` style, Radix UI underneath) in `src/components/ui/`
 - **Build tool**: Vite 8, configured through `@lovable.dev/vite-tanstack-config`
-  (this project is connected to [Lovable](https://lovable.dev) — see `AGENTS.md`)
 - **Forms/validation**: `react-hook-form` + `zod`
 - **Testing**: Vitest + Testing Library (unit), Playwright (visual regression + smoke test)
 
@@ -170,16 +169,11 @@ deliberate choice for a portfolio/demo project, not an oversight:
   to mirror the shape of a production integration without calling one. Powers
   `/hotel-bridge`.
 - **"For You" recommendations** (`src/lib/recommendations.ts`) are rule-based:
-  scored from a resident's stated interests, bookings, RSVPs, and open tickets. An
-  optional AI pass (`src/lib/recommendations.functions.ts`,
-  `src/lib/ai-gateway.server.ts`) rewrites the top reasons via Lovable's AI Gateway
-  (Gemini) if a `LOVABLE_API_KEY` is set — it falls back to the rule-written copy
-  otherwise, so the app works fully without any AI key.
+  scored from a resident's stated interests, bookings, RSVPs, and open tickets.
 - **Error handling**: a server middleware (`src/start.ts`) and client boundary
   (`src/components/AppErrorBoundary.tsx`) catch failures and render a static fallback
   page instead of a blank screen; a runtime logger
-  (`src/lib/runtime-error-logger.ts`) also watches for blank-screen conditions and
-  reports into the Lovable editor when running there.
+  (`src/lib/runtime-error-logger.ts`) also watches for blank-screen conditions.
 - **Health checks**: `GET /health` (liveness) and `GET /health/ready` (readiness —
   reports which optional integrations are actually configured).
 
@@ -192,7 +186,6 @@ Copy or edit `.env` at the project root:
 | `SUPABASE_URL` / `VITE_SUPABASE_URL` | Supabase project URL (currently scaffolded, not required for the app to run) |
 | `SUPABASE_PUBLISHABLE_KEY` / `VITE_SUPABASE_PUBLISHABLE_KEY` | Supabase anon/publishable key |
 | `SUPABASE_PROJECT_ID` / `VITE_SUPABASE_PROJECT_ID` | Supabase project ID |
-| `LOVABLE_API_KEY` | Optional — enables the AI-polished wording on "For You" recommendation cards |
 | `GRAPHQL_MESH_URL` | Optional — reported by `/health/ready` if set; not otherwise used |
 
 None of these are required to run the app locally — every feature works with them unset.
