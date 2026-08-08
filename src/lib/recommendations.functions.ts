@@ -22,7 +22,7 @@ export type PolishedReason = { id: string; reason: string };
  * rephrases. Any failure falls back to the rule-written copy.
  */
 export const polishRecommendations = createServerFn({ method: "POST" })
-  .inputValidator((input: unknown) => PolishInput.parse(input))
+  .validator((input: unknown) => PolishInput.parse(input))
   .handler(async ({ data }): Promise<{ items: PolishedReason[]; error?: string }> => {
     const key = process.env["LOVABLE_API_KEY"];
     if (!key) return { items: [], error: "AI is not configured." };

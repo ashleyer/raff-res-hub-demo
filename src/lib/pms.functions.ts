@@ -5,7 +5,7 @@ import { isOutletId, type OutletId } from "@/lib/pms-types";
 const outletId = z.custom<OutletId>(isOutletId, { message: "Unknown outlet" });
 
 export const getHotelFolio = createServerFn({ method: "POST" })
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z
       .object({ unit: z.string().min(1).max(60), simulateFault: z.boolean().optional() })
       .parse(input),
@@ -23,7 +23,7 @@ export const getHotelFolio = createServerFn({ method: "POST" })
   });
 
 export const requestPriorityTable = createServerFn({ method: "POST" })
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z
       .object({
         outletId,
@@ -46,7 +46,7 @@ export const requestPriorityTable = createServerFn({ method: "POST" })
   });
 
 export const requestInResidenceDelivery = createServerFn({ method: "POST" })
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z
       .object({
         outletId,

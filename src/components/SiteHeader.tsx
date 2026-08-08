@@ -144,7 +144,7 @@ export function SiteHeader({ variant = "solid" }: { variant?: "solid" | "overlay
                 </button>
               </>
             ) : (
-              <div className="flex flex-col items-stretch gap-1.5 sm:flex-row sm:items-center sm:gap-2">
+              <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:gap-3">
                 <Link
                   to="/login"
                   search={{ mode: "signin" }}
