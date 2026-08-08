@@ -1,4 +1,4 @@
-# Raffles Residences Boston — Resident Intranet
+# FOR DEMO ONLY: Raffles Residences Boston — Resident Intranet
 
 A private online home for residents of Raffles Residences Boston: reserve amenities,
 request the concierge, pay condo fees, meet neighbours, shop the marketplace, and take
