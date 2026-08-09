@@ -66,7 +66,7 @@ recommendations engine — all dressed in Raffles' quiet, editorial visual langu
 
 ### Thoughtful details, everywhere
 
-- **Notify security of an issue** (footer, every page) — a solid-red alert button, deliberately styled apart from ordinary navigation so it doesn't blend in, opens a pre-filled security email draft and confirms with an on-screen reference number the moment it's sent.
+- **Notify security of an issue** (footer, every page — no sign-in required) — a solid-red alert button, deliberately styled apart from ordinary navigation so it doesn't blend in. It opens a pre-filled security email draft *and* lodges a Priority "Security" request on the same concierge desk queue used by the Concierge page's own Security category — two front doors, one reviewed queue — then confirms with an on-screen reference number either way.
 - **"How sign-in & sessions work"** (`/login`) — a dismissible reference covering the passcode, the demo account, profile visibility defaults, household/pet profiles, session length, password reset, which routes require sign-in, and how staff accounts differ — so nothing about the access model is a surprise.
 - **Notification bell** (header, site-wide) — surfaces an in-app alert the moment the concierge desk replies to, assigns, or updates one of your requests.
 - **Explicit consent for "Remember me"** (`/login`) — turning it on opens a plain-language dialog explaining exactly what gets stored and for how long, before anything is written to your device.

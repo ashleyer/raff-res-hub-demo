@@ -1,30 +1,29 @@
 import { useState } from "react";
 import { ShieldAlert, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
+import { usePortal } from "@/lib/portal-store";
 
 const SECURITY_MAILTO =
   "mailto:security@raffles-boston.demo?subject=Security%20issue%20report&body=Residence%3A%0ALocation%3A%0ATime%20observed%3A%0AWhat%20happened%3A%0A";
 
 type Receipt = { reference: string; at: string };
 
-function makeReceipt(): Receipt {
-  const now = new Date();
-  const stamp = now.toISOString().slice(2, 16).replace(/[-:T]/g, "");
-  return {
-    reference: `SEC-${stamp}`,
-    at: now.toLocaleString(undefined, {
-      weekday: "short",
-      month: "short",
-      day: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-    }),
-  };
+function formatLoggedAt(now: Date): string {
+  return now.toLocaleString(undefined, {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  });
 }
 
 /**
- * Security notification trigger. Opens the desk's mail draft, then confirms with a
- * toast and an on-screen receipt so the resident knows the alert was raised.
+ * Security notification trigger. Opens the desk's mail draft (for a production
+ * deployment's real inbox) AND lodges a Priority "Security" concierge request,
+ * so the click lands in the same staff-reviewed queue as the concierge form's
+ * own Security category — one review pipeline behind two front doors, by design.
+ * Confirms with a toast and an on-screen receipt either way.
  */
 export function NotifySecurity({
   label = "Notify security of an issue",
@@ -35,6 +34,7 @@ export function NotifySecurity({
   className?: string;
   ariaLabel?: string;
 }) {
+  const { currentUser, addConciergeRequest } = usePortal();
   const [receipt, setReceipt] = useState<Receipt | null>(null);
 
   return (
@@ -44,10 +44,16 @@ export function NotifySecurity({
         className={className}
         aria-label={ariaLabel}
         onClick={() => {
-          const next = makeReceipt();
-          setReceipt(next);
+          const id = addConciergeRequest({
+            service: "Security",
+            detail:
+              'Submitted via the site-wide "Notify security" button — no further detail given yet. Follow up with the resident directly.',
+            unit: currentUser?.unit ?? "Not signed in",
+            priority: "Priority",
+          });
+          setReceipt({ reference: `SEC-${id}`, at: formatLoggedAt(new Date()) });
           toast.success("Security has been notified.", {
-            description: `Reference ${next.reference} · ${next.at}`,
+            description: `Reference SEC-${id} — also queued on the concierge desk.`,
           });
         }}
       >
@@ -76,11 +82,12 @@ export function NotifySecurity({
             </div>
             <div className="flex justify-between gap-4">
               <dt>Routed to</dt>
-              <dd className="text-foreground">Security desk</dd>
+              <dd className="text-foreground">Concierge desk queue</dd>
             </div>
           </dl>
           <p className="mt-3 text-xs text-muted-foreground">
-            Demo receipt — no message is actually delivered. For emergencies, dial 911.
+            Demo receipt — the email draft isn't actually delivered, but this request is now on the
+            concierge desk queue like any other. For emergencies, dial 911.
           </p>
         </div>
       )}
