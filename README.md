@@ -11,7 +11,8 @@ This is an independent portfolio project designed and built by **Ashley Romano**
 resident of Raffles Residences Boston, from her own unit — not an official Raffles,
 Accor, or building-management product. For the full, non-technical story of why it
 exists and who built it, run the app and visit **`/about-this-app`** (linked from the
-bottom of every page), or read on below for what it does and how it's built.
+footer and the navigation menu of every page), or read on below for what it does and
+how it's built.
 
 > **Demo site only.** Everything shown is simulated — accounts, statements, bookings,
 > messages, and even the property-management/hotel integration. No real residents,
@@ -61,10 +62,11 @@ recommendations engine — all dressed in Raffles' quiet, editorial visual langu
 
 ### Discover the building
 
-**About**, **Press**, and **Sales & Leasing** round things out with brand heritage, press coverage, and current sale/lease/parking listings — no sign-in required. **About This App** (`/about-this-app`, linked from a slim bar at the bottom of every page) tells the non-technical story of why this demo exists and who built it.
+**About**, **Press**, and **Sales & Leasing** round things out with brand heritage, press coverage, and current sale/lease/parking listings — no sign-in required. **About This App** (`/about-this-app`, signed with a small green `<AR/>` tag in the footer and the navigation menu, rather than an icon) tells the non-technical story of why this demo exists and who built it.
 
 ### Thoughtful details, everywhere
 
+- **Notify security of an issue** (footer, every page) — a solid-red alert button, deliberately styled apart from ordinary navigation so it doesn't blend in, opens a pre-filled security email draft and confirms with an on-screen reference number the moment it's sent.
 - **"How sign-in & sessions work"** (`/login`) — a dismissible reference covering the passcode, the demo account, profile visibility defaults, household/pet profiles, session length, password reset, which routes require sign-in, and how staff accounts differ — so nothing about the access model is a surprise.
 - **Notification bell** (header, site-wide) — surfaces an in-app alert the moment the concierge desk replies to, assigns, or updates one of your requests.
 - **Explicit consent for "Remember me"** (`/login`) — turning it on opens a plain-language dialog explaining exactly what gets stored and for how long, before anything is written to your device.
@@ -85,7 +87,8 @@ pick whichever of these gets you in fastest.
 - **Any listed resident, no registration** — use one of the resident emails shown on the
   sign-in page (e.g. `a.romano@residents.raffles-boston.test`, Residence 22H) with the shared preview
   passcode **`raffles2026`**. This always works, with no account required, for as long as
-  the demo exists.
+  the demo exists. Each one is clearly marked **Fictional** on the sign-in page, so it's
+  never mistaken for a real resident.
 - **Open demo account** — sign in with **`demo@demo.com`** / **`checkitout02116`** (no
   residence number needed). Not every feature is available on this account.
 - **Guest passcode access** — type *any* email address with the passcode `raffles2026`
@@ -134,7 +137,10 @@ Both use the demo code **`residences-office`**.
 ## Accessibility
 
 The interface is built to WCAG 2.2 AA: keyboard-navigable throughout, visible focus
-outlines, screen-reader labels, and contrast-checked colour throughout. Two automated
+outlines, screen-reader labels, and contrast-checked colour throughout. Body text and
+headings run at a heavier weight than the site's thin editorial display type would
+suggest, specifically so the quiet, hairline-serif aesthetic never comes at the cost of
+legibility. Two automated
 checks hold that line on every change: an [axe-core](https://github.com/dequelabs/axe-core)
 audit (`npm run test:a11y`) scans every public and resident-only page for WCAG 2.0/2.1/2.2
 A & AA violations, and a visual regression check (`npm run test:visual`) specifically

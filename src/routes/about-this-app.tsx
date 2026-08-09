@@ -40,7 +40,7 @@ const FEATURES: { icon: typeof Sparkles; title: string; body: string }[] = [
   {
     icon: Bell,
     title: "Ask for anything, and know it landed",
-    body: "Housekeeping, valet, a guest arrival, a security concern — lodge it with the concierge desk and get an on-screen receipt, not just a hope that an email went through.",
+    body: "Housekeeping, valet, a guest arrival, a security concern — lodge it with the concierge desk and get an on-screen receipt, not just a hope that an email went through. A dedicated security-alert button, styled to stand apart from ordinary navigation, sits in the footer of every page for anything that can't wait.",
   },
   {
     icon: Users,
@@ -65,7 +65,7 @@ const FEATURES: { icon: typeof Sparkles; title: string; body: string }[] = [
   {
     icon: ShieldCheck,
     title: "Built to hold up, not just look nice",
-    body: "Session handling, accessibility (WCAG 2.2 AA), and automated visual, unit and accessibility checks run against this codebase the same way they would for a production product.",
+    body: "Session handling, accessibility (WCAG 2.2 AA) — including type weight tuned for legibility against the site's quiet, thin editorial display font — and automated visual, unit and accessibility checks run against this codebase the same way they would for a production product.",
   },
 ];
 
