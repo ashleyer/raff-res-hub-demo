@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { X } from "lucide-react";
+import { ExternalLink, X } from "lucide-react";
 import { toast } from "sonner";
 import { NotificationBell } from "@/components/NotificationBell";
 import { usePortal } from "@/lib/portal-store";
+import { AboutAppLink } from "@/components/AboutAppLink";
 import rafflesLogo from "@/assets/raffles-logo.png";
 
 const NAV_GROUPS = [
@@ -39,6 +40,10 @@ const NAV_GROUPS = [
       { label: "Thank you notes", to: "/gratitude" },
       { label: "Marketplace", to: "/marketplace" },
       { label: "Proposals", to: "/proposals" },
+      {
+        label: "Instagram",
+        href: "https://www.instagram.com/rafflesresidencesboston/",
+      },
     ],
   },
 
@@ -212,22 +217,45 @@ export function SiteHeader({ variant = "solid" }: { variant?: "solid" | "overlay
               <div key={group.heading}>
                 <p className="eyebrow">{group.heading}</p>
                 <ul className="mt-5 space-y-1">
-                  {group.items.map((item) => (
-                    <li key={item.to}>
-                      <Link
-                        to={item.to}
-                        onClick={() => setOpen(false)}
-                        activeOptions={{ exact: item.to === "/" }}
-                        activeProps={{ className: "text-primary", "aria-current": "page" }}
-                        className="flex min-h-11 items-center font-display text-2xl font-light transition-colors hover:text-primary sm:text-3xl"
-                      >
-                        {item.label}
-                      </Link>
-                    </li>
-                  ))}
+                  {group.items.map((item) =>
+                    "href" in item ? (
+                      <li key={item.href}>
+                        <a
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => setOpen(false)}
+                          className="flex min-h-11 items-center gap-2 font-display text-2xl transition-colors hover:text-primary sm:text-3xl"
+                        >
+                          {item.label}
+                          <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
+                          <span className="sr-only">(opens in a new tab)</span>
+                        </a>
+                      </li>
+                    ) : (
+                      <li key={item.to}>
+                        <Link
+                          to={item.to}
+                          onClick={() => setOpen(false)}
+                          activeOptions={{ exact: item.to === "/" }}
+                          activeProps={{ className: "text-primary", "aria-current": "page" }}
+                          className="flex min-h-11 items-center font-display text-2xl transition-colors hover:text-primary sm:text-3xl"
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    ),
+                  )}
                 </ul>
               </div>
             ))}
+          </div>
+
+          <div className="mt-14 border-t border-border pt-8 text-center">
+            <AboutAppLink
+              className="inline-flex min-h-11 items-center gap-2 text-xs text-muted-foreground transition-colors hover:text-foreground"
+              onClick={() => setOpen(false)}
+            />
           </div>
         </nav>
       </div>

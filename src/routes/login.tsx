@@ -145,6 +145,9 @@ function LoginPage() {
               the preview passcode, or register your own account — it will be remembered on this
               device until you sign out.
             </p>
+            <p className="mt-3 text-xs font-medium tracking-[0.08em] text-destructive uppercase">
+              Fictional demo profiles — not real residents of the building.
+            </p>
             <div className="mt-4">
               <HowAccessWorksModal />
             </div>
@@ -157,7 +160,12 @@ function LoginPage() {
             <ul className="mt-6 space-y-4">
               {RESIDENTS.slice(0, 4).map((r) => (
                 <li key={r.id} className="border-t border-border pt-4 text-sm">
-                  <p>{r.name}</p>
+                  <p className="flex items-center gap-2">
+                    {r.name}
+                    <span className="text-[0.625rem] font-medium tracking-[0.1em] text-destructive uppercase">
+                      Fictional
+                    </span>
+                  </p>
                   <p className="text-muted-foreground">{r.unit}</p>
                   <p className="mt-1 text-xs text-muted-foreground">
                     {r.email} · passcode {DEMO_PASSCODE}

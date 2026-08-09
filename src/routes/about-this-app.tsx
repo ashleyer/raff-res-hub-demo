@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { ContactLink } from "@/components/ContactLink";
+import ashleyPortrait from "@/assets/aero_headshot.png";
 
 export const Route = createFileRoute("/about-this-app")({
   head: () => ({
@@ -68,85 +69,100 @@ const FEATURES: { icon: typeof Sparkles; title: string; body: string }[] = [
   },
 ];
 
-function InitialsPortrait() {
-  return (
-    <div
-      className="flex aspect-square w-full max-w-56 items-center justify-center border border-border bg-secondary/40"
-      role="img"
-      aria-label="Portrait placeholder for Ashley Romano"
-    >
-      <span className="font-display text-6xl font-light text-primary">AR</span>
-    </div>
-  );
-}
-
 function AboutThisAppPage() {
   return (
     <PageShell
       eyebrow="The Story Behind This Demo"
       title="Why this app exists"
-      intro="Two years of living at Raffles Residences Boston taught me one thing before anything else: residents want community. So does the person writing this. So I built a demo to see what software could do about it."
+      intro={
+        <span className="block text-lg text-foreground sm:text-xl">
+          Two years of living at Raffles Residences Boston taught me one thing before anything else:{" "}
+          <span className="text-primary">residents want community</span>. So does the person writing
+          this. So I built a demo to see what software could do about it.
+        </span>
+      }
     >
       <section aria-labelledby="origin-heading" className="mt-16 border-t border-border pt-14">
         <p className="eyebrow">Unit 22H</p>
-        <h2 id="origin-heading" className="mt-3 text-3xl">
+        <h2 id="origin-heading" className="mt-3 font-display text-4xl font-light sm:text-5xl">
           The same conversation, over and over
         </h2>
-        <div className="gold-rule mt-4" />
-        <div className="measure mt-6 space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
-          <p>
-            I've lived here for two years. In that time, at dinners, in the elevator, at events in
-            the Residents' Lounge, one topic keeps coming back no matter who I'm talking to:
-            residents want to feel more connected — to each other, to the staff who take such good
-            care of us, and to the building itself. I want that too.
+        <div className="gold-rule mt-5" />
+        <div className="measure mt-8 space-y-6">
+          <p className="text-pretty text-xl leading-relaxed font-light text-foreground sm:text-2xl">
+            I've lived here for two years. At dinners, in the elevator, at events in the Residents'
+            Lounge — one topic keeps coming back no matter who I'm talking to:{" "}
+            <span className="text-primary">residents want to feel more connected</span> to each
+            other, to the staff who take such good care of us, and to the building itself. I want
+            that too.
           </p>
-          <p>
-            I'm also, by nature and by trade, a nerd who codes for fun. So instead of just agreeing
-            over another glass of wine, I built this: a fully working demo of what an intranet for a
-            residence like ours could look like — concierge requests, amenity bookings, a resident
-            directory, governance ballots, a marketplace, a gratitude board for staff, even a
-            simulated bridge into the hotel's own systems. Everything you can click on this site
-            actually works.
+          <p className="text-base leading-relaxed text-foreground/90 sm:text-lg">
+            I'm also, by nature and by trade, a{" "}
+            <span className="font-medium text-foreground">nerd who codes for fun</span>. So instead
+            of just agreeing over another glass of wine, I built this: a fully working demo of what
+            an intranet for a residence like ours could look like — concierge requests, amenity
+            bookings, a resident directory, governance ballots, a marketplace, a gratitude board for
+            staff, even a simulated bridge into the hotel's own systems.{" "}
+            <span className="font-medium text-foreground">
+              Everything you can click on this site actually works.
+            </span>
           </p>
-          <p>
+          <p className="text-base leading-relaxed text-foreground/90 sm:text-lg">
             It's not affiliated with Raffles, Accor, or the real building's management — it's an
             independent, self-funded side project, built and paid for on my own time, to explore one
             question honestly: could a well-built app make everyone here — staff, residents, and the
-            community around them — a little happier? I think the answer is yes, and I'd love the
-            chance to build it for real.
+            community around them — a little happier?{" "}
+            <span className="text-primary">
+              I think the answer is yes, and I'd love the chance to build it for real.
+            </span>
           </p>
         </div>
       </section>
 
-      <section aria-labelledby="features-heading" className="mt-20 border-t border-border pt-14">
-        <p className="eyebrow">What's actually inside</p>
-        <h2 id="features-heading" className="mt-3 text-3xl">
-          What this demo does
-        </h2>
-        <div className="gold-rule mt-4" />
-        <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {FEATURES.map((f) => (
-            <li key={f.title} className="border border-border bg-card p-6">
-              <f.icon className="h-5 w-5 text-primary" aria-hidden="true" />
-              <h3 className="mt-4 text-lg leading-snug">{f.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.body}</p>
-            </li>
-          ))}
-        </ul>
+      <section className="mt-20 border-t border-border bg-secondary/30 py-14">
+        <div className="mx-auto max-w-7xl px-1">
+          <p className="eyebrow">What's actually inside</p>
+          <h2 id="features-heading" className="mt-3 font-display text-4xl font-light sm:text-5xl">
+            What this demo does
+          </h2>
+          <div className="gold-rule mt-5" />
+          <ul
+            aria-labelledby="features-heading"
+            className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {FEATURES.map((f) => (
+              <li key={f.title} className="border border-border bg-card p-6">
+                <span className="inline-flex h-10 w-10 items-center justify-center border border-primary/40 bg-primary/10">
+                  <f.icon className="h-5 w-5 text-primary" aria-hidden="true" />
+                </span>
+                <h3 className="mt-4 text-xl leading-snug">{f.title}</h3>
+                <p className="mt-2 text-base leading-relaxed text-muted-foreground">{f.body}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
       <section aria-labelledby="who-heading" className="mt-20 border-t border-border pt-14">
         <p className="eyebrow">Who built it</p>
-        <h2 id="who-heading" className="mt-3 text-3xl">
+        <h2 id="who-heading" className="mt-3 font-display text-4xl font-light sm:text-5xl">
           Meet Ashley Romano
         </h2>
-        <div className="gold-rule mt-4" />
+        <div className="gold-rule mt-5" />
 
-        <div className="mt-8 grid gap-10 lg:grid-cols-[14rem_1fr]">
-          <InitialsPortrait />
+        <div className="mt-10 grid gap-10 lg:grid-cols-[16rem_1fr]">
+          <figure className="mx-auto w-full max-w-56 lg:mx-0">
+            <img
+              src={ashleyPortrait}
+              alt="Ashley Romano"
+              width={1024}
+              height={1024}
+              className="aspect-square w-full border-2 border-primary/50 object-cover"
+            />
+          </figure>
 
-          <div className="space-y-5">
-            <ul className="flex flex-wrap gap-2 text-[0.65rem] tracking-[0.16em] text-primary uppercase">
+          <div className="space-y-6">
+            <ul className="flex flex-wrap gap-2 text-xs tracking-[0.14em] text-primary uppercase">
               {[
                 "Co-Founder & President, StayRele",
                 "Harvard & Boston University",
@@ -155,19 +171,22 @@ function AboutThisAppPage() {
                 "Google · IBM · Anthropic AI certified",
                 "MIT Innovation & Technology",
               ].map((chip) => (
-                <li key={chip} className="border border-primary/40 px-3 py-1.5">
+                <li key={chip} className="border border-primary/40 bg-primary/10 px-3 py-1.5">
                   {chip}
                 </li>
               ))}
             </ul>
 
-            <div className="measure space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+            <div className="measure space-y-5 text-base leading-relaxed text-foreground/90 sm:text-lg">
               <p>
-                By day, I'm Co-Founder (Technical) and President of{" "}
-                <span className="text-foreground">StayRele</span>, a pre-launch social platform
-                built against the attention economy. I lead a 21-person team, wrote the company's
-                founder-adopted AI Governance Playbook and Moderation Governance Policy, and still
-                ship production code myself in TypeScript, React Native, and C#/.NET most weeks.
+                By day, I'm{" "}
+                <span className="font-medium text-foreground">
+                  Co-Founder (Technical) and President of StayRele
+                </span>
+                , a pre-launch social platform built against the attention economy. I lead a
+                21-person team, wrote the company's founder-adopted AI Governance Playbook and
+                Moderation Governance Policy, and still ship production code myself in TypeScript,
+                React Native, and C#/.NET most weeks.
               </p>
               <p>
                 I didn't take the usual road here. After years of entrepreneurial pursuits and
@@ -175,8 +194,11 @@ function AboutThisAppPage() {
                 immersive, which led to Liberty Mutual's FAANG-competitive TechStart engineering
                 apprenticeship — and to shipping real production code in its Investments and Legal
                 Strategic Services business units. The legal work stuck: I went on to design four
-                proprietary access-to-justice algorithms for a legaltech startup, three of which are
-                now under provisional patent.
+                proprietary access-to-justice algorithms for a legaltech startup,{" "}
+                <span className="font-medium text-primary">
+                  three of which are now under provisional patent
+                </span>
+                .
               </p>
               <p>
                 Curiosity about AI pulled me into the Boston Google Developer Group and Gemini
@@ -184,7 +206,7 @@ function AboutThisAppPage() {
                 Innovation and Technology certificate. On the side, I do AI benchmarking task work
                 for a Stanford-backed startup, which keeps my skills sharp and my humility sharper.
               </p>
-              <p>
+              <p className="border-l-2 border-primary/50 pl-5 text-foreground italic">
                 I mentor women and anyone entering tech, and I run my team on a fail-forward rule I
                 apply to myself first: break things, admit it, laugh, learn. In coding, there's no
                 room for egos — there's always room for a laugh. My mistakes are the only reason I
@@ -192,18 +214,22 @@ function AboutThisAppPage() {
               </p>
               <p>
                 I'm a former SAT teacher, the designated talker for a giant multi-generational
-                family, and once the face of an open-source developer community with 15,000+
-                members. In enterprise engineering, I was consistently chosen to cross-functionally
-                present sprint reviews to 100+ stakeholders — making sure engineers and executives
-                were actually speaking the same language. I've spoken at Liberty Mutual's Women in
-                Tech and TechStart programs about my path into software, in a style I'd describe as
+                family, and once the face of an{" "}
+                <span className="font-medium text-foreground">
+                  open-source developer community with 15,000+ members
+                </span>
+                . In enterprise engineering, I was consistently chosen to cross-functionally present
+                sprint reviews to 100+ stakeholders — making sure engineers and executives were
+                actually speaking the same language. I've spoken at Liberty Mutual's Women in Tech
+                and TechStart programs about my path into software, in a style I'd describe as
                 practical, energetic, and just funny enough to keep a room of engineers awake after
                 lunch. Beyond software, I volunteer with animal, environmental, and neighbourhood
                 organizations across Boston, Paradise Valley, Concord, and Nantucket.
               </p>
               <p>
-                And, evenings and weekends, I live at Raffles Residences Boston in Unit 22H — which
-                is where this particular idea came from.
+                And, evenings and weekends, I live at Raffles Residences Boston in{" "}
+                <span className="font-medium text-primary">Unit 22H</span> — which is where this
+                particular idea came from.
               </p>
             </div>
           </div>
@@ -215,15 +241,15 @@ function AboutThisAppPage() {
         <h2 id="motto-heading" className="sr-only">
           Ashley's motto
         </h2>
-        <blockquote className="chrome-dark mt-6 border border-border p-8 text-center sm:p-12">
-          <Sparkles className="mx-auto h-6 w-6 text-primary" aria-hidden="true" />
-          <p className="measure mx-auto mt-5 text-pretty font-display text-xl leading-relaxed font-light sm:text-2xl">
+        <blockquote className="chrome-dark mt-6 border border-primary/40 p-8 text-center sm:p-14">
+          <Sparkles className="mx-auto h-7 w-7 text-primary" aria-hidden="true" />
+          <p className="measure mx-auto mt-6 text-pretty font-display text-2xl leading-relaxed font-light sm:text-3xl">
             "AI + Tech are one of humanity's greatest advances; let's learn it, experiment with it,
             + apply it so we change what's going on right now — until it helps over harms humans +
             their communities, and so it loses its currently bad rap, and instead gives way to even
             greater emotional, physical, spiritual, + financial gain for Earth's inhabitants."
           </p>
-          <p className="mt-6 text-sm tracking-[0.2em] text-primary uppercase">
+          <p className="mt-8 text-base font-medium tracking-[0.2em] text-primary uppercase sm:text-lg">
             Just Say No to the Status Quo!
           </p>
         </blockquote>
@@ -233,10 +259,10 @@ function AboutThisAppPage() {
         aria-labelledby="contact-heading"
         className="mt-20 border-t border-border pt-14 text-center"
       >
-        <h2 id="contact-heading" className="text-2xl">
+        <h2 id="contact-heading" className="font-display text-3xl font-light sm:text-4xl">
           Say hello, ask a question, or file a bug
         </h2>
-        <p className="measure mx-auto mt-3 text-sm leading-relaxed text-muted-foreground">
+        <p className="measure mx-auto mt-4 text-base leading-relaxed text-foreground/90 sm:text-lg">
           I built this alone, on my own time — I'd genuinely love to hear what you think of it.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-8">
@@ -245,9 +271,9 @@ function AboutThisAppPage() {
             value="ashleye.romano@gmail.com"
             kind="mail"
             ariaLabel="Email Ashley Romano at ashleye.romano@gmail.com"
-            className="nav-link inline-flex min-h-11 items-center gap-2 text-muted-foreground hover:text-foreground"
+            className="nav-link inline-flex min-h-11 items-center gap-2 text-base text-foreground hover:text-primary"
           >
-            <Mail className="h-4 w-4" aria-hidden="true" />
+            <Mail className="h-4 w-4 text-primary" aria-hidden="true" />
             ashleye.romano@gmail.com
           </ContactLink>
           <ContactLink
@@ -255,18 +281,18 @@ function AboutThisAppPage() {
             value="978-857-5775"
             kind="tel"
             ariaLabel="Call or text Ashley Romano at 978-857-5775"
-            className="nav-link inline-flex min-h-11 items-center gap-2 text-muted-foreground hover:text-foreground"
+            className="nav-link inline-flex min-h-11 items-center gap-2 text-base text-foreground hover:text-primary"
           >
-            <Phone className="h-4 w-4" aria-hidden="true" />
+            <Phone className="h-4 w-4 text-primary" aria-hidden="true" />
             Call or text: 978-857-5775
           </ContactLink>
           <a
             href="https://github.com/ashleyer/raff-res-hub-demo"
             target="_blank"
             rel="noopener noreferrer"
-            className="nav-link inline-flex min-h-11 items-center gap-2 text-muted-foreground hover:text-foreground"
+            className="nav-link inline-flex min-h-11 items-center gap-2 text-base text-foreground hover:text-primary"
           >
-            <Github className="h-4 w-4" aria-hidden="true" />
+            <Github className="h-4 w-4 text-primary" aria-hidden="true" />
             GitHub repo
           </a>
         </div>

@@ -13,7 +13,6 @@ import appCss from "../styles.css?url";
 import { Toaster } from "@/components/ui/sonner";
 import { PortalProvider } from "@/lib/portal-store";
 import { DemoBanner, DemoModal } from "@/components/DemoNotice";
-import { AboutAppBar } from "@/components/AboutAppBar";
 import { SurveyPrompt } from "@/components/SurveyPrompt";
 import { AppErrorBoundary } from "@/components/AppErrorBoundary";
 import { RuntimeErrorReporter } from "@/components/RuntimeErrorReporter";
@@ -141,7 +140,6 @@ function RootComponent() {
         <SurveyPrompt />
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <Outlet />
-        <AboutAppBar />
         <Toaster position="top-center" />
       </PortalProvider>
     </QueryClientProvider>

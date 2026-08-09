@@ -103,7 +103,7 @@ function Index() {
 
         <div className="mx-auto w-full max-w-5xl px-5 text-center sm:px-8">
           <Reveal>
-            <h1 className="font-display text-[clamp(2rem,6.4vw,5rem)] leading-[1.06] font-light tracking-[0.06em] uppercase">
+            <h1 className="font-display text-[clamp(2rem,6.4vw,5rem)] leading-[1.06] tracking-[0.06em] uppercase">
               For Your Home in Boston
             </h1>
             <p className="mt-5 text-[0.7rem] tracking-[0.34em] uppercase sm:text-xs">

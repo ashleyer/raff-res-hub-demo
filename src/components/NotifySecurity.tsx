@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ShieldCheck } from "lucide-react";
+import { ShieldAlert, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
 
 const SECURITY_MAILTO =
@@ -28,7 +28,7 @@ function makeReceipt(): Receipt {
  */
 export function NotifySecurity({
   label = "Notify security of an issue",
-  className = "btn-outline mt-6 w-full self-center sm:w-auto",
+  className = "btn-alert mt-6 w-full self-center sm:w-auto",
   ariaLabel = "Notify security of an issue by email",
 }: {
   label?: string;
@@ -51,6 +51,7 @@ export function NotifySecurity({
           });
         }}
       >
+        <ShieldAlert className="h-4 w-4 shrink-0" aria-hidden="true" />
         {label}
       </a>
 

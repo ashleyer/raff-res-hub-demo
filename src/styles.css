@@ -125,7 +125,7 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    font-weight: 300;
+    font-weight: 400;
     font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem);
     line-height: 1.75;
     letter-spacing: 0.012em;
@@ -138,7 +138,7 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.14;
     letter-spacing: 0.005em;
     color: var(--foreground);
@@ -265,11 +265,41 @@
   }
 }
 
+/* Distinct from btn-outline on purpose — reserved for the security alert
+   trigger, so it doesn't read as just another nav-style action button.
+   Solid fill (not just outlined) mirrors the destructive Button variant
+   already defined in ui/button.tsx, for a consistent "alert" treatment. */
+@utility btn-alert {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 2.75rem;
+  padding-block: 0.5rem;
+  padding-inline: 1.25rem;
+  max-width: 100%;
+  text-align: center;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+  border: 1px solid var(--destructive);
+  background-color: var(--destructive);
+  color: var(--destructive-foreground);
+  font-family: var(--font-sans);
+  font-size: clamp(0.625rem, 0.55rem + 0.3vw, 0.6875rem);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: background-color 200ms ease;
+
+  &:hover {
+    background-color: color-mix(in oklab, var(--destructive) 85%, black);
+  }
+}
+
 
 /* Fluid editorial display sizes */
 @utility display-hero {
   font-family: var(--font-display);
-  font-weight: 300;
+  font-weight: 400;
   font-size: clamp(2.5rem, 7vw, 5.75rem);
   line-height: 1.02;
   letter-spacing: 0.005em;
@@ -277,7 +307,7 @@
 
 @utility display-section {
   font-family: var(--font-display);
-  font-weight: 300;
+  font-weight: 400;
   font-size: clamp(1.875rem, 4.2vw, 3.125rem);
   line-height: 1.1;
   letter-spacing: 0.005em;
