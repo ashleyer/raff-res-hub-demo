@@ -84,12 +84,12 @@ function AboutThisAppPage() {
     >
       <section aria-labelledby="origin-heading" className="mt-16 border-t border-border pt-14">
         <p className="eyebrow">Unit 22H</p>
-        <h2 id="origin-heading" className="mt-3 font-display text-4xl font-light sm:text-5xl">
+        <h2 id="origin-heading" className="mt-3 font-display text-4xl sm:text-5xl">
           The same conversation, over and over
         </h2>
         <div className="gold-rule mt-5" />
         <div className="measure mt-8 space-y-6">
-          <p className="text-pretty text-xl leading-relaxed font-light text-foreground sm:text-2xl">
+          <p className="text-pretty text-xl leading-relaxed text-foreground sm:text-2xl">
             I've lived here for two years. At dinners, in the elevator, at events in the Residents'
             Lounge — one topic keeps coming back no matter who I'm talking to:{" "}
             <span className="text-primary">residents want to feel more connected</span> to each
@@ -122,7 +122,7 @@ function AboutThisAppPage() {
       <section className="mt-20 border-t border-border bg-secondary/30 py-14">
         <div className="mx-auto max-w-7xl px-1">
           <p className="eyebrow">What's actually inside</p>
-          <h2 id="features-heading" className="mt-3 font-display text-4xl font-light sm:text-5xl">
+          <h2 id="features-heading" className="mt-3 font-display text-4xl sm:text-5xl">
             What this demo does
           </h2>
           <div className="gold-rule mt-5" />
@@ -145,7 +145,7 @@ function AboutThisAppPage() {
 
       <section aria-labelledby="who-heading" className="mt-20 border-t border-border pt-14">
         <p className="eyebrow">Who built it</p>
-        <h2 id="who-heading" className="mt-3 font-display text-4xl font-light sm:text-5xl">
+        <h2 id="who-heading" className="mt-3 font-display text-4xl sm:text-5xl">
           Meet Ashley Romano
         </h2>
         <div className="gold-rule mt-5" />
@@ -243,7 +243,7 @@ function AboutThisAppPage() {
         </h2>
         <blockquote className="chrome-dark mt-6 border border-primary/40 p-8 text-center sm:p-14">
           <Sparkles className="mx-auto h-7 w-7 text-primary" aria-hidden="true" />
-          <p className="measure mx-auto mt-6 text-pretty font-display text-2xl leading-relaxed font-light sm:text-3xl">
+          <p className="measure mx-auto mt-6 text-pretty font-display text-2xl leading-relaxed sm:text-3xl">
             "AI + Tech are one of humanity's greatest advances; let's learn it, experiment with it,
             + apply it so we change what's going on right now — until it helps over harms humans +
             their communities, and so it loses its currently bad rap, and instead gives way to even
@@ -259,7 +259,7 @@ function AboutThisAppPage() {
         aria-labelledby="contact-heading"
         className="mt-20 border-t border-border pt-14 text-center"
       >
-        <h2 id="contact-heading" className="font-display text-3xl font-light sm:text-4xl">
+        <h2 id="contact-heading" className="font-display text-3xl sm:text-4xl">
           Say hello, ask a question, or file a bug
         </h2>
         <p className="measure mx-auto mt-4 text-base leading-relaxed text-foreground/90 sm:text-lg">
