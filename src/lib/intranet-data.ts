@@ -196,7 +196,8 @@ export const AMENITIES: Amenity[] = [
     description:
       "A full demonstration kitchen with marble island and seating, reservable for cooking evenings, family gatherings and chef-led dinners. Hotel catering may be laid here.",
     hours: "Open 24 hours",
-    service: "Catering from the hotel kitchen may be attached to any sitting.",
+    service:
+      "A complimentary resident breakfast is served here daily until 9:00 AM. Outside that window, catering from the hotel kitchen may be attached to any sitting.",
     slots: ["Morning · 09:00", "Luncheon · 12:30", "Evening · 18:30", "Late · 21:30"],
     image: nantucketKitchenImg,
   },
@@ -266,6 +267,7 @@ export const VENUES: Venue[] = [
     hours: [
       "Monday – Friday · 6:30 AM – 12:00 AM",
       "Saturday & Sunday · 7:00 AM – 12:00 AM",
+      "Breakfast served daily · 6:30 AM – 11:00 AM",
       "Food served until 11:00 PM",
     ],
     note: "The Long Bar cannot be reserved in its entirety. Tables are booked through the hotel.",
@@ -572,6 +574,7 @@ export const CONCIERGE_SERVICES = [
   "Floristry",
   "Package & Courier",
   "Engineering",
+  "Security",
   "Other",
 ] as const;
 

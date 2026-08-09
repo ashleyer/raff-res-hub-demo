@@ -249,6 +249,17 @@ export function SiteFooter() {
                 ashleye.romano@gmail.com
               </ContactLink>
             </li>
+            <li>
+              <ContactLink
+                href="tel:+19788575775"
+                value="978-857-5775"
+                kind="tel"
+                ariaLabel="Call or text Ashley Romano at 978-857-5775"
+                className="text-primary underline underline-offset-4"
+              >
+                Call or text: 978-857-5775
+              </ContactLink>
+            </li>
           </ul>
         </DialogContent>
       </Dialog>

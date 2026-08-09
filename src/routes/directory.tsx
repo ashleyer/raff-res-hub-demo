@@ -6,6 +6,7 @@ import { Info, PawPrint, Plus, Trash2, Users } from "lucide-react";
 import { PageShell, SectionCard } from "@/components/PageShell";
 import { RequireSession } from "@/components/RequireSession";
 import { SavedDetailsControl } from "@/components/SavedDetailsControl";
+import { ContactLink } from "@/components/ContactLink";
 import { usePortal } from "@/lib/portal-store";
 import type { HouseholdMember, HouseholdPet } from "@/lib/portal-data";
 import { Button } from "@/components/ui/button";
@@ -134,21 +135,27 @@ function DirectoryBody() {
                           {r.contactOptIn && (m.email || m.phone) && (
                             <span className="mt-0.5 block text-xs">
                               {m.email && (
-                                <a
+                                <ContactLink
                                   className="text-primary underline underline-offset-4"
                                   href={`mailto:${m.email}`}
+                                  value={m.email}
+                                  kind="mail"
+                                  ariaLabel={`Email ${m.name} at ${m.email}`}
                                 >
                                   {m.email}
-                                </a>
+                                </ContactLink>
                               )}
                               {m.email && m.phone && " · "}
                               {m.phone && (
-                                <a
+                                <ContactLink
                                   className="text-primary underline underline-offset-4"
                                   href={`tel:${m.phone.replace(/[^\d+]/g, "")}`}
+                                  value={m.phone}
+                                  kind="tel"
+                                  ariaLabel={`Call ${m.name} at ${m.phone}`}
                                 >
                                   {m.phone}
-                                </a>
+                                </ContactLink>
                               )}
                             </span>
                           )}
@@ -179,21 +186,27 @@ function DirectoryBody() {
                   {r.contactOptIn ? (
                     <>
                       <span className="text-muted-foreground">Household contact · </span>
-                      <a
+                      <ContactLink
                         className="text-primary underline underline-offset-4"
                         href={`mailto:${r.email}`}
+                        value={r.email}
+                        kind="mail"
+                        ariaLabel={`Email ${r.unit} at ${r.email}`}
                       >
                         {r.email}
-                      </a>
+                      </ContactLink>
                       {r.phone && (
                         <>
                           <span className="text-muted-foreground"> · </span>
-                          <a
+                          <ContactLink
                             className="text-primary underline underline-offset-4"
                             href={`tel:${r.phone.replace(/[^\d+]/g, "")}`}
+                            value={r.phone}
+                            kind="tel"
+                            ariaLabel={`Call ${r.unit} at ${r.phone}`}
                           >
                             {r.phone}
-                          </a>
+                          </ContactLink>
                         </>
                       )}
                     </>

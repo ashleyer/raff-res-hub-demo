@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RememberMeConsent } from "@/components/RememberMeConsent";
+import { HowAccessWorksModal } from "@/components/HowAccessWorksModal";
 import { safeRedirectPath } from "@/lib/session-guard";
 import { signInSchema, signUpSchema, validate, type FieldErrors } from "@/lib/auth-validation";
 
@@ -127,9 +128,9 @@ function LoginPage() {
             </div>
             <div className="mt-4">
               {mode === "signin" ? (
-                <SignInForm redirectTo={redirect} />
+                <SignInForm {...(redirect ? { redirectTo: redirect } : {})} />
               ) : (
-                <SignUpForm redirectTo={redirect} />
+                <SignUpForm {...(redirect ? { redirectTo: redirect } : {})} />
               )}
             </div>
           </div>
@@ -144,6 +145,9 @@ function LoginPage() {
               the preview passcode, or register your own account — it will be remembered on this
               device until you sign out.
             </p>
+            <div className="mt-4">
+              <HowAccessWorksModal />
+            </div>
             <p className="mt-4 border border-border bg-background p-4 text-sm leading-relaxed">
               Demo login — email <span className="text-foreground">{DEMO_ACCOUNT.email}</span>,
               password <span className="text-foreground">{DEMO_ACCOUNT.password}</span>. No

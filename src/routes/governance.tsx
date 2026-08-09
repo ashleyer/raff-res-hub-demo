@@ -1,8 +1,8 @@
-import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { FileText, Gavel } from "lucide-react";
 import { toast } from "sonner";
-import { GOVERNANCE_DOCUMENTS, MEASURES, type GovernanceMeasure } from "@/lib/intranet-data";
+import { GOVERNANCE_DOCUMENTS, type GovernanceMeasure } from "@/lib/intranet-data";
+import { usePortal } from "@/lib/portal-store";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ResidenceHandbook } from "@/components/ResidenceHandbook";
@@ -29,8 +29,7 @@ export const Route = createFileRoute("/governance")({
 });
 
 function GovernancePage() {
-  const [measures, setMeasures] = useState<GovernanceMeasure[]>(MEASURES);
-  const [ballots, setBallots] = useState<Record<number, "for" | "against">>({});
+  const { measures, ballots, castBallot } = usePortal();
 
   const cast = (m: GovernanceMeasure, choice: "for" | "against") => {
     if (m.status !== "Open for ballot") {
@@ -41,18 +40,7 @@ function GovernancePage() {
       toast.error("Your ballot for this measure is already recorded.");
       return;
     }
-    setBallots((prev) => ({ ...prev, [m.id]: choice }));
-    setMeasures((prev) =>
-      prev.map((x) =>
-        x.id === m.id
-          ? {
-              ...x,
-              inFavour: x.inFavour + (choice === "for" ? 1 : 0),
-              against: x.against + (choice === "against" ? 1 : 0),
-            }
-          : x,
-      ),
-    );
+    castBallot(m.id, choice);
     toast.success(
       `Ballot recorded — ${choice === "for" ? "in favour" : "against"} ${m.reference}.`,
     );

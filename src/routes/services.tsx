@@ -16,9 +16,15 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 
+const SERVICE_TABS = ["valet", "maintenance", "mail", "lost"] as const;
+
 export const Route = createFileRoute("/services")({
   ssr: false,
   beforeLoad: requireResidentSession,
+  validateSearch: (search: Record<string, unknown>): { tab?: (typeof SERVICE_TABS)[number] } => {
+    const tab = SERVICE_TABS.find((t) => t === search["tab"]);
+    return tab ? { tab } : {};
+  },
   head: () => ({
     meta: [
       { title: "Resident Services — Valet, Maintenance, Mail & Lost Property" },
@@ -45,7 +51,8 @@ const TABS = [
 ];
 
 function ServicesPage() {
-  const [tab, setTab] = useState("valet");
+  const { tab: initialTab } = Route.useSearch();
+  const [tab, setTab] = useState<string>(initialTab ?? "valet");
 
   return (
     <PageShell

@@ -69,41 +69,43 @@ function StaffSignInPage() {
         className="mt-12 max-w-md space-y-5"
         noValidate
       >
-        <div className="space-y-2">
-          <Label htmlFor="staff-signin-email">Work email</Label>
-          <Input
-            id="staff-signin-email"
-            type="email"
-            autoComplete="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="min-h-11"
-          />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="staff-signin-password">Password</Label>
-          <Input
-            id="staff-signin-password"
-            type="password"
-            autoComplete="current-password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="min-h-11"
-          />
-        </div>
-        <p role="alert" aria-live="polite" className="min-h-5 text-sm text-destructive">
-          {error}
-        </p>
-        <Button
-          type="submit"
-          disabled={busy}
-          className="min-h-11 w-full tracking-[0.18em] uppercase"
-        >
-          {busy ? <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" /> : null}
-          Sign in
-        </Button>
+        <fieldset disabled={busy} className="space-y-5 disabled:opacity-70">
+          <div className="space-y-2">
+            <Label htmlFor="staff-signin-email">Work email</Label>
+            <Input
+              id="staff-signin-email"
+              type="email"
+              autoComplete="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="min-h-11"
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="staff-signin-password">Password</Label>
+            <Input
+              id="staff-signin-password"
+              type="password"
+              autoComplete="current-password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="min-h-11"
+            />
+          </div>
+          <p role="alert" aria-live="polite" className="min-h-5 text-sm text-destructive">
+            {error}
+          </p>
+          <Button
+            type="submit"
+            disabled={busy}
+            className="min-h-11 w-full tracking-[0.18em] uppercase"
+          >
+            {busy ? <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" /> : null}
+            Sign in
+          </Button>
+        </fieldset>
         <p className="text-sm">
           New colleague?{" "}
           <Link to="/staff-signup" className="underline underline-offset-4">

@@ -1,12 +1,17 @@
 # FOR DEMO ONLY: Raffles Residences Boston — Resident Intranet
 
-This is a demo project designed and built by Ashley Romano, a resident of Raffles
-Residences Boston, from her own residence unit — an independent portfolio project, not
-an official Raffles product.
+Two years of living at Raffles Residences Boston taught its builder one thing before
+anything else: residents want more community — with each other, with the staff who take
+such good care of them, and with the building itself. So she built a fully working demo
+to find out what software could do about it: a private online home where residents
+reserve amenities, request the concierge, pay condo fees, meet neighbours, shop the
+marketplace, and take part in building governance — all in one place.
 
-A private online home for residents of Raffles Residences Boston: reserve amenities,
-request the concierge, pay condo fees, meet neighbours, shop the marketplace, and take
-part in building governance — all in one place.
+This is an independent portfolio project designed and built by **Ashley Romano**, a
+resident of Raffles Residences Boston, from her own unit — not an official Raffles,
+Accor, or building-management product. For the full, non-technical story of why it
+exists and who built it, run the app and visit **`/about-this-app`** (linked from the
+bottom of every page), or read on below for what it does and how it's built.
 
 > **Demo site only.** Everything shown is simulated — accounts, statements, bookings,
 > messages, and even the property-management/hotel integration. No real residents,
@@ -25,7 +30,7 @@ recommendations engine — all dressed in Raffles' quiet, editorial visual langu
 | --- | --- |
 | **Amenities** (`/amenities`) | Browse the Residents' Lounge (Floor 21), private dining, spa and more, then reserve a time slot on a visual availability grid, place an in-residence dining order, or explore the full directory of hotel venues — La Padrona, the Long Bar, Guerlain Spa, and beyond. |
 | **Hotel Bridge** (`/hotel-bridge`) | A live-feeling bridge into the hotel's property-management system: pull up your folio, reserve a priority table, or order delivery. Built on a genuine circuit-breaker pattern with caching and retry, so it demonstrates *resilient* integration design — flip the "simulate outage" switch and watch the app degrade gracefully instead of breaking. |
-| **Concierge** (`/concierge`) | Lodge a service request and track it through to completion, with live status updates. |
+| **Concierge** (`/concierge`) | Lodge a service request — housekeeping, valet, dry cleaning, a guest arrival, engineering, security, or anything else — and get an on-screen receipt with a reference number the moment it's sent, then track it through to completion with live status updates. Security requests default to priority handling; a standing signpost points Lost & Found reports to their own dedicated page instead of a second, disconnected form. |
 | **Account** (`/account`) | Review monthly statements, pay condo fees, browse payment history, and check a live market-value snapshot for the unit. |
 | **Services** (`/services`) | Call the valet, report a maintenance issue, request parcel delivery, or log a lost & found item — each with its own status tracking. |
 
@@ -52,14 +57,15 @@ recommendations engine — all dressed in Raffles' quiet, editorial visual langu
 
 | Feature | What it does |
 | --- | --- |
-| **For You** (site-wide band + full page at `/for-you`) | A recommendations engine that scores amenities, events, communities, and marketplace listings against your stated interests, bookings, and activity — then, when configured, has an AI pass rewrite the "why this fits you" line for extra polish. The signal behind every pick is shown, not hidden, and the feature works identically with or without the AI enabled. |
+| **For You** (site-wide band + full page at `/for-you`) | A recommendations engine that scores amenities, events, communities, and marketplace listings against your stated interests, bookings, and activity. The signal behind every pick is shown, not hidden — never a black box. |
 
 ### Discover the building
 
-**About**, **Press**, and **Sales & Leasing** round things out with brand heritage, press coverage, and current sale/lease/parking listings — no sign-in required.
+**About**, **Press**, and **Sales & Leasing** round things out with brand heritage, press coverage, and current sale/lease/parking listings — no sign-in required. **About This App** (`/about-this-app`, linked from a slim bar at the bottom of every page) tells the non-technical story of why this demo exists and who built it.
 
 ### Thoughtful details, everywhere
 
+- **"How sign-in & sessions work"** (`/login`) — a dismissible reference covering the passcode, the demo account, profile visibility defaults, household/pet profiles, session length, password reset, which routes require sign-in, and how staff accounts differ — so nothing about the access model is a surprise.
 - **Notification bell** (header, site-wide) — surfaces an in-app alert the moment the concierge desk replies to, assigns, or updates one of your requests.
 - **Explicit consent for "Remember me"** (`/login`) — turning it on opens a plain-language dialog explaining exactly what gets stored and for how long, before anything is written to your device.
 - **One-click "forget me"** (`/directory`) — clears any remembered sign-in details from the browser on demand.
@@ -138,7 +144,11 @@ tap-target size on small screens. Both run in CI on every pull request — see
 
 ## Questions or feedback
 
+Want the full story — why this exists, who built it, and what she's up to otherwise —
+rather than the developer detail below? Visit `/about-this-app` in the running app.
+
 Built with 🤍 in Raffles Residences Boston, Unit 22H by Ashley Romano, 2026 —
+[ashleye.romano@gmail.com](mailto:ashleye.romano@gmail.com) ·
 [978-857-5775](tel:978-857-5775)
 
 ---

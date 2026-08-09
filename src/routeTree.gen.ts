@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRafflesRouteImport } from './routes/about-raffles'
+import { Route as AboutThisAppRouteImport } from './routes/about-this-app'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as AmenitiesRouteImport } from './routes/amenities'
 import { Route as CommunityRouteImport } from './routes/community'
@@ -48,6 +49,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRafflesRoute = AboutRafflesRouteImport.update({
   id: '/about-raffles',
   path: '/about-raffles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutThisAppRoute = AboutThisAppRouteImport.update({
+  id: '/about-this-app',
+  path: '/about-this-app',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AccountRoute = AccountRouteImport.update({
@@ -194,6 +200,7 @@ const HealthReadyRoute = HealthReadyRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about-raffles': typeof AboutRafflesRoute
+  '/about-this-app': typeof AboutThisAppRoute
   '/account': typeof AccountRoute
   '/amenities': typeof AmenitiesRoute
   '/community': typeof CommunityRoute
@@ -226,6 +233,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about-raffles': typeof AboutRafflesRoute
+  '/about-this-app': typeof AboutThisAppRoute
   '/account': typeof AccountRoute
   '/amenities': typeof AmenitiesRoute
   '/community': typeof CommunityRoute
@@ -259,6 +267,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about-raffles': typeof AboutRafflesRoute
+  '/about-this-app': typeof AboutThisAppRoute
   '/account': typeof AccountRoute
   '/amenities': typeof AmenitiesRoute
   '/community': typeof CommunityRoute
@@ -293,6 +302,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about-raffles'
+    | '/about-this-app'
     | '/account'
     | '/amenities'
     | '/community'
@@ -325,6 +335,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about-raffles'
+    | '/about-this-app'
     | '/account'
     | '/amenities'
     | '/community'
@@ -357,6 +368,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about-raffles'
+    | '/about-this-app'
     | '/account'
     | '/amenities'
     | '/community'
@@ -390,6 +402,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRafflesRoute: typeof AboutRafflesRoute
+  AboutThisAppRoute: typeof AboutThisAppRoute
   AccountRoute: typeof AccountRoute
   AmenitiesRoute: typeof AmenitiesRoute
   CommunityRoute: typeof CommunityRoute
@@ -433,6 +446,13 @@ declare module '@tanstack/react-router' {
       path: '/about-raffles'
       fullPath: '/about-raffles'
       preLoaderRoute: typeof AboutRafflesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about-this-app': {
+      id: '/about-this-app'
+      path: '/about-this-app'
+      fullPath: '/about-this-app'
+      preLoaderRoute: typeof AboutThisAppRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/account': {
@@ -648,6 +668,7 @@ const HealthRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRafflesRoute: AboutRafflesRoute,
+  AboutThisAppRoute: AboutThisAppRoute,
   AccountRoute: AccountRoute,
   AmenitiesRoute: AmenitiesRoute,
   CommunityRoute: CommunityRoute,

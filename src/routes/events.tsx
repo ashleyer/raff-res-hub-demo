@@ -127,9 +127,10 @@ function EventsPage() {
         <h1 className="mt-3 text-4xl md:text-5xl">Events & gatherings</h1>
         <div className="gold-rule mt-5" />
         <p className="mt-5 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          Gatherings hosted for deed-holders across the Residents' Lounge on Floor 21, La Padrona
-          and the Guerlain Spa. RSVP below, or propose an occasion of your own to the events
-          committee.
+          Gatherings hosted for Raffles Residents across the Raffles Boston Residences and Hotel
+          property, as well as occasionally at special off-site venues. Check out upcoming Events,
+          RSVP below, or propose an occasion of your own inspiration to be approved by the
+          Management/Board, with your neighbours' upvote if they agree!
         </p>
 
         <div className="mt-10 flex flex-wrap items-end gap-4">

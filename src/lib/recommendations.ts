@@ -17,7 +17,7 @@ export type Recommendation = {
   id: string;
   area: RecommendationArea;
   title: string;
-  /** Deterministic explanation. Replaced by AI-polished copy when available. */
+  /** Deterministic, rule-written explanation shown on the recommendation card. */
   reason: string;
   /** The signals that produced this suggestion, shown for transparency. */
   signals: string[];

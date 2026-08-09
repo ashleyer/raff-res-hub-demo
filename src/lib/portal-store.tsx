@@ -35,10 +35,16 @@ import {
   type ForumTopic,
   type ValetRequest,
 } from "./portal-data";
-import { SEED_REQUESTS, type ConciergeRequest } from "./intranet-data";
+import {
+  MEASURES,
+  SEED_REQUESTS,
+  type ConciergeRequest,
+  type GovernanceMeasure,
+} from "./intranet-data";
 import type { ActivityEvent } from "./recommendations";
 
 type Vote = "up" | "down";
+type Ballot = "for" | "against";
 
 type PortalValue = {
   /* session */
@@ -117,15 +123,21 @@ type PortalValue = {
   castVote: (id: number, vote: Vote) => void;
   addProposal: (p: Omit<Proposal, "id" | "at" | "up" | "down">) => void;
 
+  /* governance — measures and one ballot per residence, shared so it survives navigation */
+  measures: GovernanceMeasure[];
+  ballots: Record<number, Ballot>;
+  castBallot: (measureId: number, choice: Ballot) => void;
+
   /* activity signals for personalisation */
   activity: ActivityEvent[];
   logActivity: (e: Omit<ActivityEvent, "id" | "at">) => void;
 
   /* concierge desk — shared between residents and staff */
   conciergeRequests: ConciergeRequest[];
+  /** Returns the new request's id, so the caller can show an on-screen receipt. */
   addConciergeRequest: (
     r: Omit<ConciergeRequest, "id" | "status" | "placedAt" | "replies">,
-  ) => void;
+  ) => number;
   setConciergeStatus: (id: number, status: ConciergeRequest["status"]) => void;
   assignConciergeRequest: (id: number, staff: string) => void;
   replyToConciergeRequest: (id: number, body: string, author: string) => void;
@@ -279,6 +291,8 @@ export function PortalProvider({ children }: { children: ReactNode }) {
   const [listings, setListings] = useState<Listing[]>(SEED_LISTINGS);
   const [proposals, setProposals] = useState<Proposal[]>(SEED_PROPOSALS);
   const [votes, setVotes] = useState<Record<number, Vote>>({});
+  const [measures, setMeasures] = useState<GovernanceMeasure[]>(MEASURES);
+  const [ballots, setBallots] = useState<Record<number, Ballot>>({});
   const [surveyResponses, setSurveyResponses] = useState<SurveyResponse[]>(SEED_SURVEY_RESPONSES);
   const [answeredSurvey, setAnsweredSurvey] = useState(false);
   const [notifications, setNotifications] = useState<PortalNotification[]>([]);
@@ -784,15 +798,38 @@ export function PortalProvider({ children }: { children: ReactNode }) {
       addProposal: (p) =>
         setProposals((prev) => [{ ...p, id: nextId(), at: "Just now", up: 1, down: 0 }, ...prev]),
 
+      measures,
+      ballots,
+      /* One ballot per residence per measure — matches condo governance rules, so a cast ballot cannot be changed. */
+      castBallot: (measureId, choice) => {
+        const measure = measures.find((m) => m.id === measureId);
+        if (!measure || measure.status !== "Open for ballot" || ballots[measureId]) return;
+        setBallots((prev) => ({ ...prev, [measureId]: choice }));
+        setMeasures((prev) =>
+          prev.map((m) =>
+            m.id === measureId
+              ? {
+                  ...m,
+                  inFavour: m.inFavour + (choice === "for" ? 1 : 0),
+                  against: m.against + (choice === "against" ? 1 : 0),
+                }
+              : m,
+          ),
+        );
+      },
+
       activity,
       logActivity: (e) => setActivity((prev) => [{ ...e, id: nextId(), at: "Just now" }, ...prev]),
       /* Concierge desk queue: residents lodge, staff triage and reply. */
       conciergeRequests,
-      addConciergeRequest: (r) =>
+      addConciergeRequest: (r) => {
+        const id = nextId();
         setConciergeRequests((prev) => [
-          { ...r, id: nextId(), status: "Lodged", placedAt: "Just now", replies: [] },
+          { ...r, id, status: "Lodged", placedAt: "Just now", replies: [] },
           ...prev,
-        ]),
+        ]);
+        return id;
+      },
       setConciergeStatus: (id, status) => {
         const target = conciergeRequests.find((r) => r.id === id);
         if (!target || target.status === status) return;
@@ -893,6 +930,8 @@ export function PortalProvider({ children }: { children: ReactNode }) {
       listings,
       proposals,
       votes,
+      measures,
+      ballots,
       surveyResponses,
       answeredSurvey,
       conciergeRequests,

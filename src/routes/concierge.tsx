@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { BellRing, CheckCircle2, Loader2 } from "lucide-react";
+import { BellRing, CheckCircle2, Loader2, ReceiptText, Search } from "lucide-react";
 import { toast } from "sonner";
 import { CONCIERGE_SERVICES, type ConciergeRequest } from "@/lib/intranet-data";
 import { usePortal } from "@/lib/portal-store";
@@ -12,6 +12,12 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+
+/** Reported lost/found items already have a dedicated flow on the Services page — signpost there
+ * instead of taking a second, disconnected report through the concierge form. */
+const LOST_FOUND_NOTICE =
+  "Lost something, or found someone else's item? Report it directly on the Lost & Found page — it keeps every report in one searchable place.";
 
 export const Route = createFileRoute("/concierge")({
   head: () => ({
@@ -49,10 +55,23 @@ function ConciergePage() {
   const [detail, setDetail] = useState("");
   const [unit, setUnit] = useState("");
   const [priority, setPriority] = useState(false);
+  const [receipt, setReceipt] = useState<{
+    id: number;
+    service: string;
+    unit: string;
+    priority: "Standard" | "Priority";
+  } | null>(null);
   /* Signed-in residents should never retype their own residence number. */
   useEffect(() => {
     if (currentUser?.unit) setUnit((v) => v || currentUser.unit!);
   }, [currentUser]);
+
+  /* A security concern is inherently urgent — default it to priority attendance,
+     but leave the switch adjustable in case a resident disagrees. */
+  const selectService = (next: string) => {
+    setService(next);
+    if (next === "Security") setPriority(true);
+  };
 
   const [filter, setFilter] = useState<"All" | ConciergeRequest["status"]>("All");
 
@@ -64,14 +83,16 @@ function ConciergePage() {
       toast.error("Please describe the request and give a residence number.");
       return;
     }
-    addConciergeRequest({
+    const requestPriority = priority ? "Priority" : "Standard";
+    const id = addConciergeRequest({
       service,
       detail: detail.trim(),
       unit: unit.trim(),
-      priority: priority ? "Priority" : "Standard",
+      priority: requestPriority,
     });
     setDetail("");
     toast.success("Request lodged with the concierge desk.");
+    setReceipt({ id, service, unit: unit.trim(), priority: requestPriority });
   };
 
   const advance = (id: number) => {
@@ -186,13 +207,27 @@ function ConciergePage() {
               <h2 className="mt-3 text-2xl">Lodge a request</h2>
               <div className="gold-rule mt-4" />
 
+              <p className="mt-4 flex items-start gap-1.5 border border-border bg-secondary/30 p-3 text-xs leading-relaxed text-muted-foreground">
+                <Search className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" aria-hidden="true" />
+                <span>
+                  {LOST_FOUND_NOTICE}{" "}
+                  <Link
+                    to="/services"
+                    search={{ tab: "lost" }}
+                    className="text-primary underline-offset-4 hover:underline"
+                  >
+                    Open Lost &amp; Found
+                  </Link>
+                </span>
+              </p>
+
               <div className="mt-6 space-y-5">
                 <div className="space-y-2">
                   <Label htmlFor="service">Service</Label>
                   <select
                     id="service"
                     value={service}
-                    onChange={(e) => setService(e.target.value)}
+                    onChange={(e) => selectService(e.target.value)}
                     className="h-11 w-full border border-input bg-transparent px-3 text-sm"
                   >
                     {CONCIERGE_SERVICES.map((s) => (
@@ -201,6 +236,11 @@ function ConciergePage() {
                       </option>
                     ))}
                   </select>
+                  {service === "Security" && (
+                    <p className="text-xs text-muted-foreground">
+                      Security concerns are sent to the desk as priority and escalated immediately.
+                    </p>
+                  )}
                 </div>
 
                 <div className="space-y-2">
@@ -217,7 +257,9 @@ function ConciergePage() {
                           ? "Guest name, arrival time, and how you would like them received"
                           : service === "Dry Cleaning & Laundry"
                             ? "Number of pieces, any special care, and preferred collection time"
-                            : "Describe the request for the concierge"
+                            : service === "Security"
+                              ? "Describe the security concern — location, time, and anyone involved"
+                              : "Describe the request for the concierge"
                     }
                   />
                   {service === "Other" && (
@@ -252,6 +294,42 @@ function ConciergePage() {
           </aside>
         </div>
       </main>
+
+      <Dialog open={receipt !== null} onOpenChange={(open) => !open && setReceipt(null)}>
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 font-display text-xl font-light">
+              <ReceiptText className="h-5 w-5 text-primary" aria-hidden="true" />
+              Request received
+            </DialogTitle>
+          </DialogHeader>
+          {receipt && (
+            <dl className="space-y-3 text-sm">
+              <div className="flex items-center justify-between border-b border-border pb-2">
+                <dt className="text-muted-foreground">Reference</dt>
+                <dd className="font-medium tracking-wide">REQ-{receipt.id}</dd>
+              </div>
+              <div className="flex items-center justify-between border-b border-border pb-2">
+                <dt className="text-muted-foreground">Service</dt>
+                <dd className="font-medium">{receipt.service}</dd>
+              </div>
+              <div className="flex items-center justify-between border-b border-border pb-2">
+                <dt className="text-muted-foreground">Residence</dt>
+                <dd className="font-medium">{receipt.unit}</dd>
+              </div>
+              <div className="flex items-center justify-between">
+                <dt className="text-muted-foreground">Handling</dt>
+                <dd className="font-medium">{receipt.priority}</dd>
+              </div>
+              <p className="pt-2 text-xs leading-relaxed text-muted-foreground">
+                The concierge desk acknowledges requests within fifteen minutes. Track its status in
+                the request register on this page.
+              </p>
+            </dl>
+          )}
+        </DialogContent>
+      </Dialog>
+
       <SiteFooter />
     </div>
   );
