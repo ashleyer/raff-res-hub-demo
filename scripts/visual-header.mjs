@@ -152,7 +152,8 @@ async function main() {
 
       if (path === "/gratitude") {
         await page
-          .locator("header").first()
+          .locator("header")
+          .first()
           .screenshot({ path: join(OUTPUT_DIR, `header-${bp.name}-${bp.width}.png`) });
       }
     }

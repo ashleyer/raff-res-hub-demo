@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Copy, ExternalLink } from "lucide-react";
-import { toast } from "sonner";
+import { ExternalLink } from "lucide-react";
 import rafflesLogo from "@/assets/raffles-logo.png";
 import { NotifySecurity } from "@/components/NotifySecurity";
 import { ContactLink } from "@/components/ContactLink";
@@ -215,6 +214,7 @@ export function SiteFooter() {
           >
             Ashley Romano
           </button>
+          , 2026
         </p>
       </div>
 
@@ -226,43 +226,28 @@ export function SiteFooter() {
             </DialogTitle>
           </DialogHeader>
           <ul className="space-y-3 text-sm">
-            <li className="flex flex-wrap items-center gap-x-3 gap-y-1">
-              <a className="text-primary underline underline-offset-4" href="tel:+19788575775">
-                Call or text: 978-857-5775
-              </a>
-              <button
-                type="button"
-                onClick={async () => {
-                  const number = "978-857-5775";
-                  const legacyCopy = () => {
-                    const el = document.createElement("textarea");
-                    el.value = number;
-                    el.setAttribute("readonly", "");
-                    el.style.position = "fixed";
-                    el.style.opacity = "0";
-                    document.body.appendChild(el);
-                    el.select();
-                    const ok = document.execCommand("copy");
-                    document.body.removeChild(el);
-                    return ok;
-                  };
-                  try {
-                    await navigator.clipboard.writeText(number);
-                    toast.success(`Copied ${number}`);
-                  } catch {
-                    if (legacyCopy()) {
-                      toast.success(`Copied ${number}`);
-                    } else {
-                      toast.info(`Copy unavailable — the number is ${number}`);
-                    }
-                  }
-                }}
-
-                className="inline-flex min-h-11 items-center gap-1.5 text-xs tracking-[0.12em] text-muted-foreground uppercase transition-colors hover:text-foreground"
+            <li>
+              <a
+                href="https://github.com/ashleyer/raff-res-hub-demo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-primary underline underline-offset-4"
               >
-                <Copy className="h-3.5 w-3.5" aria-hidden="true" />
-                Copy phone number
-              </button>
+                GitHub repo
+                <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                <span className="sr-only">(opens in a new tab)</span>
+              </a>
+            </li>
+            <li>
+              <ContactLink
+                href="mailto:ashleye.romano@gmail.com"
+                value="ashleye.romano@gmail.com"
+                kind="mail"
+                ariaLabel="Email Ashley Romano at ashleye.romano@gmail.com"
+                className="text-primary underline underline-offset-4"
+              >
+                ashleye.romano@gmail.com
+              </ContactLink>
             </li>
           </ul>
         </DialogContent>

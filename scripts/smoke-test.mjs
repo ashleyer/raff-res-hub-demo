@@ -20,6 +20,9 @@ const BASE = (process.argv[2] || process.env.SMOKE_BASE_URL || "http://localhost
 );
 const PASSCODE = process.env.SMOKE_PASSCODE || "raffles2026";
 const EMAIL = process.env.SMOKE_EMAIL || "smoke.test@raffles-boston.demo";
+// Any non-empty value works for a guest passcode sign-in — the sign-in form
+// requires a residence number, but doesn't validate it against a real unit.
+const UNIT = process.env.SMOKE_UNIT || "19C";
 
 const results = [];
 let failed = 0;
@@ -48,10 +51,16 @@ const ROUTES = [
   { path: "/events", expect: "Events" },
   { path: "/concierge", expect: "Concierge" },
   { path: "/services", expect: "Services" },
-  { path: "/account", expect: "Residents Only" },
-  { path: "/directory", expect: "Residents Only" },
-  { path: "/messages", expect: "Residents Only" },
-  { path: "/community", expect: "Community" },
+  // /account, /directory, /messages, and /community opt out of SSR
+  // (`ssr: false`) because their content depends on the client-only,
+  // localStorage-backed session — the server always renders just the
+  // shell. So Stage 1 can only confirm the route resolves with the right
+  // page (via its server-rendered <title>); the actual signed-out gate and
+  // signed-in content are verified for real in the browser stage below.
+  { path: "/account", expect: "House Account" },
+  { path: "/directory", expect: "Residents" },
+  { path: "/messages", expect: "Resident Messaging" },
+  { path: "/community", expect: "Member Forum" },
   { path: "/marketplace", expect: "Marketplace" },
   { path: "/proposals", expect: "Proposals" },
   { path: "/governance", expect: "Governance" },
@@ -185,7 +194,8 @@ async function stageBrowser() {
     await page.waitForTimeout(400);
 
     await page.fill("#email", EMAIL);
-    await page.fill("#passcode", PASSCODE);
+    await page.fill("#signin-unit", UNIT);
+    await page.fill("#password", PASSCODE);
     await page.getByRole("button", { name: /enter the portal/i }).click();
     await page.waitForTimeout(1500);
 
@@ -233,18 +243,21 @@ async function stageBrowser() {
       );
     }
 
-    // A fresh page load has no session, so the gate must come back.
+    // By design the session survives a plain reload for its 12-hour window
+    // (see the comment on rememberSession in src/lib/portal-store.tsx) — so
+    // the gate only returns once the resident explicitly signs out. A fresh,
+    // signed-out visit to a gated route is bounced to /login by that route's
+    // `beforeLoad` guard rather than rendering the inline RequireSession gate.
+    await page.getByRole("button", { name: /sign out/i }).click();
+    await page.waitForTimeout(600);
     await page.goto(`${BASE}/account`, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(1200);
-    const relocked = await page
-      .getByText(/residents only/i)
-      .isVisible()
-      .catch(() => false);
+    const relocked = new URL(page.url()).pathname === "/login";
     record(
       "browser",
-      "resident areas re-lock without a session",
+      "resident areas re-lock after signing out",
       relocked,
-      relocked ? "" : "gate did not return",
+      relocked ? "" : `expected a redirect to /login, landed on ${page.url().replace(BASE, "")}`,
     );
 
     record(

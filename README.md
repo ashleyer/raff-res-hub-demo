@@ -1,5 +1,9 @@
 # FOR DEMO ONLY: Raffles Residences Boston — Resident Intranet
 
+This is a demo project designed and built by Ashley Romano, a resident of Raffles
+Residences Boston, from her own residence unit — an independent portfolio project, not
+an official Raffles product.
+
 A private online home for residents of Raffles Residences Boston: reserve amenities,
 request the concierge, pay condo fees, meet neighbours, shop the marketplace, and take
 part in building governance — all in one place.
@@ -124,14 +128,17 @@ Both use the demo code **`residences-office`**.
 ## Accessibility
 
 The interface is built to WCAG 2.2 AA: keyboard-navigable throughout, visible focus
-outlines, screen-reader labels, and contrast-checked colour throughout. A visual
-regression check (`npm run test:visual`) specifically guards the header's sign-in
-controls against overlapping the logo or shrinking below tap-target size on small
-screens.
+outlines, screen-reader labels, and contrast-checked colour throughout. Two automated
+checks hold that line on every change: an [axe-core](https://github.com/dequelabs/axe-core)
+audit (`npm run test:a11y`) scans every public and resident-only page for WCAG 2.0/2.1/2.2
+A & AA violations, and a visual regression check (`npm run test:visual`) specifically
+guards the header's sign-in controls against overlapping the logo or shrinking below
+tap-target size on small screens. Both run in CI on every pull request — see
+[Testing](#testing) below.
 
 ## Questions or feedback
 
-Built with 🤍 in Raffles Residences Boston, Unit 22H by Ashley Romano —
+Built with 🤍 in Raffles Residences Boston, Unit 22H by Ashley Romano, 2026 —
 [978-857-5775](tel:978-857-5775)
 
 ---
@@ -147,7 +154,9 @@ Built with 🤍 in Raffles Residences Boston, Unit 22H by Ashley Romano —
   (`new-york` style, Radix UI underneath) in `src/components/ui/`
 - **Build tool**: Vite 8, configured through `@lovable.dev/vite-tanstack-config`
 - **Forms/validation**: `react-hook-form` + `zod`
-- **Testing**: Vitest + Testing Library (unit), Playwright (visual regression + smoke test)
+- **Testing**: Vitest + Testing Library (unit/component), Playwright (functional smoke
+  test, visual regression, accessibility audit via axe-core), all automated in CI — see
+  [Testing](#testing) below
 
 ### Architecture notes
 
@@ -217,25 +226,80 @@ on startup may differ if 8080 is in use). Sign in with any resident email + pass
 | `npm run lint` | ESLint (zero warnings allowed) |
 | `npm run format` | Prettier, write mode |
 | `npm run check` | `typecheck` + `lint` (what `build` runs first) |
-| `npm test` | Run the Vitest unit test suite once |
-| `npm run test:visual` | Playwright visual-regression check on the header, across 6 breakpoints |
+| `npm test` | Run the Vitest unit/component test suite once |
+| `npm run test:watch` | Run the Vitest suite in watch mode while you work |
+| `npm run test:smoke` | Functional smoke test — see below (needs a running server) |
+| `npm run test:visual` | Visual-regression check on the header, across 6 breakpoints (needs a running server) |
 | `npm run test:visual:update` | Re-record the visual-regression baseline |
+| `npm run test:a11y` | Accessibility audit via axe-core — see below (needs a running server) |
+| `npm run test:e2e` | Runs `test:smoke`, `test:visual`, and `test:a11y` back to back against the same server |
 
-There's also `node scripts/smoke-test.mjs [url]` — an unwired end-to-end script that
-hits `/health`, `/health/ready`, and the main routes over plain HTTP, then (if
-Playwright is installed) drives a headless browser through the demo sign-in flow and
-checks the primary nav for console errors. Handy after a deploy.
+### Testing
+
+Four layers, from fastest/narrowest to slowest/broadest:
+
+1. **Unit & component tests** — Vitest + React Testing Library, in `src/**/*.test.{ts,tsx}`
+   next to the code they cover. No server required. Component tests favour behaviour a
+   real DOM environment can actually verify (state, focus, ARIA, keyboard flow); anything
+   that depends on CSS breakpoints or real layout is left to visual regression instead
+   (see `src/components/SiteHeader.test.tsx` for the reasoning). Run with `npm test`, or
+   `npm run test:watch` while iterating.
+2. **Functional smoke test** (`scripts/smoke-test.mjs`) — hits `/health`, `/health/ready`,
+   and every main route over plain HTTP, then drives a real headless browser through the
+   demo sign-in flow: unlocking `/account`, `/directory`, and `/messages`; navigating the
+   primary nav; watching for console errors; and confirming sign-out re-locks the resident
+   areas. Run with `npm run test:smoke`.
+3. **Visual regression** (`scripts/visual-header.mjs`) — renders the signed-out header
+   across 6 real mobile/tablet breakpoints and checks its measured geometry against a
+   recorded baseline (`tests/visual/header-baseline.json`): no overlap between the
+   sign-in/sign-up buttons and the logo, no horizontal clipping, and a minimum 40px tap
+   target. Run with `npm run test:visual`; re-record intentional layout changes with
+   `npm run test:visual:update`. Screenshots land in `tests/visual/output/` (git-ignored).
+4. **Accessibility audit** (`scripts/a11y-audit.mjs`) — an [axe-core](https://github.com/dequelabs/axe-core)
+   scan (via `@axe-core/playwright`) of every public route plus the signed-in resident
+   areas, checked against WCAG 2.0/2.1/2.2 A & AA rules. `serious`/`critical` violations
+   fail the run; `moderate`/`minor` findings are printed but don't block. Run with
+   `npm run test:a11y`.
+
+Layers 2–4 drive a real browser via Playwright and need the app already running. In one
+terminal:
+
+```sh
+npm run dev          # or: npm run build && npm run preview
+```
+
+...then in another:
+
+```sh
+npm run test:e2e                                    # all three, against http://localhost:8080
+SMOKE_BASE_URL=https://your-staging-url npm run test:e2e   # or against a deployed build
+```
+
+(`test:visual` and `test:a11y` read `VISUAL_BASE_URL` / `A11Y_BASE_URL` respectively if
+you'd rather point them at different URLs individually.) The first run of any Playwright
+script downloads Chromium if it isn't already cached: `npx playwright install chromium`.
+
+#### Continuous integration
+
+[`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs on every push to `main` and
+every pull request: one job for `check` + the unit suite, then a second job that builds
+the app, boots a preview server, and runs the smoke, visual, and accessibility suites
+against it — uploading the visual-regression screenshots as a build artifact either way.
+Node is pinned to the 22.x line in CI; see the comment in `src/test/setup.ts` if you hit
+storage-related test failures on a different local Node version.
 
 ### Project structure
 
 ```text
+.github/workflows/ CI pipeline (typecheck/lint/unit, then smoke/visual/a11y against a preview build)
 src/
   routes/         File-based routes (TanStack Router) — one file per URL, see src/routes/README.md
   components/     Page-level components; src/components/ui/ holds shadcn primitives
   lib/             Data models, business logic, and server functions (portal store, PMS, recommendations, auth, etc.)
   integrations/    Supabase client setup (scaffolded, not actively used)
+  test/            Vitest setup (jsdom polyfills — see src/test/setup.ts)
   assets/          Images
-scripts/           Smoke test and visual-regression tooling
+scripts/           Smoke test, visual-regression, and accessibility-audit tooling
 tests/visual/      Visual-regression baseline and output
 ```
 
@@ -249,15 +313,23 @@ I welcome contributions! Please:
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/your-feature`)
-3. Run `npm run check` and `npm test` before pushing
+3. Run `npm run check` and `npm test` before pushing — and if your change touches
+   layout, navigation, or an authenticated flow, run `npm run test:e2e` against a local
+   dev server too (see [Testing](#testing))
 4. Commit your changes (`git commit -am 'Add feature'`)
 5. Push to the branch (`git push origin feature/your-feature`)
-6. Open a Pull Request with a clear description
+6. Open a Pull Request with a clear description — CI runs the full suite automatically
 
 ### Report bugs or suggest features
 
-Found an issue or have a suggestion? Please contact Ashley:
+Found an issue or have a suggestion? Please contact Ashley, or open an issue on GitHub:
 
+- **Email**: [ashleye.romano@gmail.com](mailto:ashleye.romano@gmail.com)
 - **Phone**: [978-857-5775](tel:978-857-5775)
+- **GitHub**: [github.com/ashleyer/raff-res-hub-demo](https://github.com/ashleyer/raff-res-hub-demo)
 
 Include as much detail as possible about the bug or feature request.
+
+---
+
+built with 🤍 in Raffles Residences Boston, Unit 22H by Ashley Romano, 2026

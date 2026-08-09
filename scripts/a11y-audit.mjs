@@ -26,6 +26,9 @@ const BASE = (process.argv[2] || process.env.A11Y_BASE_URL || "http://localhost:
 );
 const PASSCODE = process.env.SMOKE_PASSCODE || "raffles2026";
 const EMAIL = process.env.SMOKE_EMAIL || "a11y.audit@raffles-boston.demo";
+// Any non-empty value works for a guest passcode sign-in — the sign-in form
+// requires a residence number, but doesn't validate it against a real unit.
+const UNIT = process.env.SMOKE_UNIT || "19C";
 
 const WCAG_TAGS = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"];
 const FAILING_IMPACT = new Set(["serious", "critical"]);
@@ -106,7 +109,8 @@ async function signIn(page) {
   await page.keyboard.press("Escape"); // dismiss the demo-mode notice
   await page.waitForTimeout(300);
   await page.fill("#email", EMAIL);
-  await page.fill("#passcode", PASSCODE);
+  await page.fill("#signin-unit", UNIT);
+  await page.fill("#password", PASSCODE);
   await page.getByRole("button", { name: /enter the portal/i }).click();
   await page.waitForTimeout(1500);
   return !page.url().endsWith("/login");
@@ -122,7 +126,11 @@ async function main() {
 
   try {
     console.log("\nPublic pages");
-    const page = await browser.newPage({ viewport: { width: 1280, height: 1000 } });
+    // @axe-core/playwright needs a page from an explicit context — the
+    // browser.newPage() shorthand creates a single-owner context that
+    // AxeBuilder's internals can't share, and throws when it tries to.
+    const context = await browser.newContext({ viewport: { width: 1280, height: 1000 } });
+    const page = await context.newPage();
     for (const path of PUBLIC_PAGES) {
       try {
         await scan(page, path);
