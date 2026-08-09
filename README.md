@@ -1,5 +1,7 @@
 # FOR DEMO ONLY: Raffles Residences Boston — Resident Intranet
 
+**Live demo: [raff-bos-res-demo.vercel.app](https://raff-bos-res-demo.vercel.app/)**
+
 Two years of living at Raffles Residences Boston taught its builder one thing before
 anything else: residents want more community — with each other, with the staff who take
 such good care of them, and with the building itself. So she built a fully working demo
