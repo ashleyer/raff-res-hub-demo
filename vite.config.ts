@@ -12,4 +12,10 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // Pinned so a Vercel-triggered build always emits Vercel's Build Output API
+  // format (server functions + SSR intact) instead of falling back to this
+  // package's Cloudflare default. Vercel's "Application Preset: Vite" in its
+  // dashboard has no bearing on this — it only affects suggested build/output
+  // settings, and gets overridden the moment `.vercel/output/` exists.
+  nitro: { preset: "vercel" },
 });
