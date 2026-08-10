@@ -49,3 +49,4 @@ tests/visual/output
 .vscode/
 
 .claude/
+.env*
