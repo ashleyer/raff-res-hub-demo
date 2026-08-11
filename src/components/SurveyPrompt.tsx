@@ -55,7 +55,7 @@ export function SurveyPrompt() {
           <DialogTitle className="text-2xl">{SURVEY_NAME}</DialogTitle>
           <DialogDescription>
             It is the last day of {month}. Five quick ratings tell the Residences Office how the
-            month felt — answers are anonymous and go to management only.
+            month felt · answers are anonymous and go to management only.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="gap-2 sm:justify-start">

@@ -2,7 +2,7 @@ import "@testing-library/jest-dom/vitest";
 
 // Node 22+ ships its own native, file-backed `localStorage`/`sessionStorage`
 // globals. That native accessor wins over jsdom's the moment Vitest projects
-// jsdom's `window` onto the global object — by the time this file runs,
+// jsdom's `window` onto the global object · by the time this file runs,
 // `window.localStorage` *is* `globalThis.localStorage`, already pointing at
 // Node's unconfigured (non-functional) implementation, not jsdom's. There's
 // no way to recover jsdom's real Storage instance at this point, so swap in

@@ -1,4 +1,4 @@
-// @lovable.dev/vite-tanstack-config already includes the following — do NOT add them manually
+// @lovable.dev/vite-tanstack-config already includes the following · do NOT add them manually
 // or the app will break with duplicate plugins:
 //   - TanStack devtools (dev-only, first), tanstackStart, viteReact, tailwindcss, tsConfigPaths,
 //     nitro (build-only using cloudflare as a default target), VITE_* env injection, @ path alias,
@@ -15,7 +15,7 @@ export default defineConfig({
   // Pinned so a Vercel-triggered build always emits Vercel's Build Output API
   // format (server functions + SSR intact) instead of falling back to this
   // package's Cloudflare default. Vercel's "Application Preset: Vite" in its
-  // dashboard has no bearing on this — it only affects suggested build/output
+  // dashboard has no bearing on this · it only affects suggested build/output
   // settings, and gets overridden the moment `.vercel/output/` exists.
   nitro: { preset: "vercel" },
 });

@@ -43,7 +43,7 @@ export function SavedDetailsControl() {
             Remember me on this browser
           </Label>
           <p id="remember-me-help" className="mt-1 text-sm text-muted-foreground">
-            When off, nothing is kept between sign-ins — anything already saved is erased the moment
+            When off, nothing is kept between sign-ins · anything already saved is erased the moment
             you switch it off.
           </p>
         </div>
@@ -56,7 +56,7 @@ export function SavedDetailsControl() {
             toast.success(
               next
                 ? "Remember me is on for this browser."
-                : "Remember me is off — saved details cleared from this browser.",
+                : "Remember me is off · saved details cleared from this browser.",
             );
           }}
         />
@@ -100,7 +100,7 @@ export function SavedDetailsControl() {
             <AlertDialogTitle>Clear saved residence details?</AlertDialogTitle>
             <AlertDialogDescription>
               The remembered email address and residence number will be erased from this browser
-              immediately. Your account, household profile and current session are untouched — you
+              immediately. Your account, household profile and current session are untouched · you
               will simply need to type your details the next time you sign in.
             </AlertDialogDescription>
           </AlertDialogHeader>

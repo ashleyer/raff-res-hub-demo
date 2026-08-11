@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 /**
- * Accessibility smoke test — automated WCAG 2.2 AA audit via axe-core.
+ * Accessibility smoke test · automated WCAG 2.2 AA audit via axe-core.
  *
  *   node scripts/a11y-audit.mjs                      # against http://localhost:8080
  *   node scripts/a11y-audit.mjs https://staging-url  # against a deployed build
  *
  * Loads every main public route plus the signed-in resident areas (via the
  * demo passcode, same as scripts/smoke-test.mjs) and runs an axe-core scan
- * scoped to WCAG 2.0/2.1/2.2 A & AA rules on each one — the same bar the
+ * scoped to WCAG 2.0/2.1/2.2 A & AA rules on each one · the same bar the
  * README claims the app meets.
  *
  * "serious"/"critical" violations fail the run (exit 1). "moderate"/"minor"
- * findings are printed but don't fail the build — they're worth a look but
+ * findings are printed but don't fail the build · they're worth a look but
  * are frequently subjective or content-driven in a demo dataset.
  *
  * Exit code 0 = no serious/critical accessibility violations found.
@@ -26,7 +26,7 @@ const BASE = (process.argv[2] || process.env.A11Y_BASE_URL || "http://localhost:
 );
 const PASSCODE = process.env.SMOKE_PASSCODE || "raffles2026";
 const EMAIL = process.env.SMOKE_EMAIL || "a11y.audit@raffles-boston.demo";
-// Any non-empty value works for a guest passcode sign-in — the sign-in form
+// Any non-empty value works for a guest passcode sign-in · the sign-in form
 // requires a residence number, but doesn't validate it against a real unit.
 const UNIT = process.env.SMOKE_UNIT || "19C";
 
@@ -40,10 +40,10 @@ function record(page, ok, detail) {
   results.push({ page, ok, detail });
   if (ok === false) failed += 1;
   const mark = ok === true ? "PASS" : ok === null ? "WARN" : "FAIL";
-  console.log(`  [${mark}] ${page}${detail ? ` — ${detail}` : ""}`);
+  console.log(`  [${mark}] ${page}${detail ? ` · ${detail}` : ""}`);
 }
 
-/** Signed-out pages — no session required. */
+/** Signed-out pages · no session required. */
 const PUBLIC_PAGES = [
   "/",
   "/login",
@@ -93,7 +93,7 @@ async function scan(page, path) {
     record(
       path,
       null,
-      `clean at serious/critical — ${advisory.length} moderate/minor advisory finding(s)`,
+      `clean at serious/critical · ${advisory.length} moderate/minor advisory finding(s)`,
     );
     for (const v of advisory) {
       console.log(`      · [${v.impact}] ${v.id}: ${v.help} (${v.nodes.length} node(s))`);
@@ -126,7 +126,7 @@ async function main() {
 
   try {
     console.log("\nPublic pages");
-    // @axe-core/playwright needs a page from an explicit context — the
+    // @axe-core/playwright needs a page from an explicit context · the
     // browser.newPage() shorthand creates a single-owner context that
     // AxeBuilder's internals can't share, and throws when it tries to.
     const context = await browser.newContext({ viewport: { width: 1280, height: 1000 } });
@@ -142,7 +142,7 @@ async function main() {
     console.log("\nResident areas (signed in with the demo passcode)");
     const signedIn = await signIn(page).catch(() => false);
     if (!signedIn) {
-      record("sign-in", false, "could not sign in with the demo passcode — gated pages skipped");
+      record("sign-in", false, "could not sign in with the demo passcode · gated pages skipped");
     } else {
       for (const path of GATED_PAGES) {
         try {
@@ -160,7 +160,7 @@ async function main() {
   const warned = results.filter((r) => r.ok === null).length;
   console.log(`\n${passed} clean · ${failed} failed · ${warned} advisory-only`);
   if (failed > 0) {
-    console.log("Serious/critical accessibility violations found — fix before shipping.");
+    console.log("Serious/critical accessibility violations found · fix before shipping.");
     process.exit(1);
   }
   console.log("No serious/critical accessibility violations found.");

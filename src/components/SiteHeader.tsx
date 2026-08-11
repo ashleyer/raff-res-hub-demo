@@ -114,7 +114,7 @@ export function SiteHeader({ variant = "solid" }: { variant?: "solid" | "overlay
           <Link
             to="/"
             className="justify-self-center"
-            aria-label="The Raffles Residences Boston — home"
+            aria-label="The Raffles Residences Boston · home"
           >
             <img
               src={rafflesLogo}
@@ -141,7 +141,7 @@ export function SiteHeader({ variant = "solid" }: { variant?: "solid" | "overlay
                   type="button"
                   onClick={() => {
                     signOut();
-                    toast.success("Signed out. Your details are saved — just sign in next time.");
+                    toast.success("Signed out. Your details are saved · just sign in next time.");
                   }}
                   className="btn-outline shrink-0 whitespace-nowrap"
                 >

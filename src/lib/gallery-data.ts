@@ -52,7 +52,7 @@ export const SEED_GALLERY_POSTS: GalleryPost[] = [
     image: pastOne,
     alt: "Residents seated at a candlelit table during a wine salon",
     caption:
-      "The Burgundy salon in the Secret Garden Room — twelve of us, three hours, no one wanted to leave.",
+      "The Burgundy salon in the Secret Garden Room · twelve of us, three hours, no one wanted to leave.",
     place: "Secret Garden Room",
     author: "Residence 18C",
     at: "Last week",

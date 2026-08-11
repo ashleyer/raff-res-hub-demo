@@ -7,13 +7,13 @@ export type HouseholdMember = {
   relation: string;
   email?: string;
   phone?: string;
-  /** Free text — dietary notes, arrival preferences, anything the desk should know. */
+  /** Free text · dietary notes, arrival preferences, anything the desk should know. */
   notes?: string;
   /** Exactly one resident per residence is the main profile for the unit. */
   primary?: boolean;
 };
 
-/** A pet registered to the residence — useful for the concierge and for neighbours. */
+/** A pet registered to the residence · useful for the concierge and for neighbours. */
 export type HouseholdPet = {
   id: string;
   name: string;
@@ -40,7 +40,7 @@ export type Person = {
   name: string;
   role: string;
   bio: string;
-  /** Portraits are intentionally blank in this demo — a monogram is shown instead. */
+  /** Portraits are intentionally blank in this demo · a monogram is shown instead. */
   photo?: string;
 };
 
@@ -75,7 +75,7 @@ export const RESIDENTS: Resident[] = [
         id: "p-34b-1",
         name: "Bartholomew",
         kind: "Cat",
-        note: "Indoor only — please do not hold the lift door open on 34.",
+        note: "Indoor only · please do not hold the lift door open on 34.",
       },
     ],
   },
@@ -182,7 +182,7 @@ export const RESIDENTS: Resident[] = [
   },
 ];
 
-/** Demo credentials — passcode is the same for every account in this preview. */
+/** Demo credentials · passcode is the same for every account in this preview. */
 export const DEMO_PASSCODE = "raffles2026";
 
 /** Open demonstration login shown on the sign-in page. */
@@ -345,7 +345,7 @@ export const ANNOUNCEMENTS: Announcement[] = [
   },
   {
     id: 2,
-    title: "Elevator 3 modernisation — 11–15 August",
+    title: "Elevator 3 modernisation · 11–15 August",
     body: "Car three will be out of service for controller replacement. Service lifts remain available for move-ins and deliveries throughout.",
     author: "Chief Engineer",
     date: "July 30, 2026",
@@ -383,7 +383,7 @@ export const STATEMENTS: Statement[] = [
     status: "Due",
     lines: [
       { label: "Condominium fee", amount: 4150 },
-      { label: "Valet parking — two bays", amount: 450 },
+      { label: "Valet parking · two bays", amount: 450 },
       { label: "In-residence dining (July)", amount: 186.5 },
       { label: "Floristry programme", amount: 34 },
     ],
@@ -397,7 +397,7 @@ export const STATEMENTS: Statement[] = [
     status: "Paid",
     lines: [
       { label: "Condominium fee", amount: 4150 },
-      { label: "Valet parking — two bays", amount: 450 },
+      { label: "Valet parking · two bays", amount: 450 },
       { label: "Long Bar house account", amount: 12.75 },
     ],
   },
@@ -418,7 +418,7 @@ export const STATEMENTS: Statement[] = [
 export type PaymentMethod = { id: string; label: string };
 
 export const PAYMENT_METHODS: PaymentMethod[] = [
-  { id: "ach", label: "Bank transfer — Cambridge Trust ••4417" },
+  { id: "ach", label: "Bank transfer · Cambridge Trust ••4417" },
   { id: "visa", label: "Visa ••2019" },
   { id: "amex", label: "American Express ••1006" },
 ];
@@ -495,7 +495,7 @@ export const SEED_MAINTENANCE: MaintenanceTicket[] = [
   {
     id: 2,
     category: "Common area issue",
-    detail: "Scuffed panelling by the Floor 21 lounge entry — likely from a delivery trolley.",
+    detail: "Scuffed panelling by the Floor 21 lounge entry · likely from a delivery trolley.",
     unit: "Residence 28D",
     urgency: "Routine",
     status: "Reported",
@@ -533,7 +533,7 @@ export const SEED_PARCELS: Parcel[] = [
   {
     id: 3,
     carrier: "USPS",
-    description: "Registered letter — Residences Office",
+    description: "Registered letter · Residences Office",
     arrived: "Yesterday",
     unit: "Residence 34B",
     status: "Delivered to residence",
@@ -646,7 +646,7 @@ export const SEED_TOPICS: ForumTopic[] = [
       {
         id: 1,
         author: "Marcus Chen · Residence 21A",
-        body: "Count me in — I can bring glassware for twenty.",
+        body: "Count me in · I can bring glassware for twenty.",
         at: "August 2",
       },
     ],
@@ -663,7 +663,7 @@ export const SEED_TOPICS: ForumTopic[] = [
   {
     id: 3,
     community: "families",
-    title: "Holiday afternoon in the lounge — helpers wanted",
+    title: "Holiday afternoon in the lounge · helpers wanted",
     body: "We'd like two or three households to help organise the December afternoon on Floor 21.",
     author: "James & Odile Whitfield · Residence 41C",
     at: "July 24",
@@ -705,7 +705,7 @@ export const SEED_LISTINGS: Listing[] = [
       {
         id: 1,
         author: "Eleanor Vance · Residence 34B",
-        body: "We use Clara through the concierge desk — excellent, and she is already cleared by security.",
+        body: "We use Clara through the concierge desk · excellent, and she is already cleared by security.",
         at: "August 3",
       },
     ],
@@ -808,7 +808,7 @@ export const SEED_THREADS: Thread[] = [
       {
         id: 1,
         author: "Priya Raman",
-        body: "September's title is settled — we're reading the Ferrante.",
+        body: "September's title is settled · we're reading the Ferrante.",
         at: "August 2, 4:12 PM",
       },
       {
@@ -828,7 +828,7 @@ export const SEED_THREADS: Thread[] = [
       {
         id: 1,
         author: "Marcus Chen",
-        body: "Thank you for the sitter recommendation — she starts on the 9th.",
+        body: "Thank you for the sitter recommendation · she starts on the 9th.",
         at: "August 3, 9:05 AM",
       },
     ],
@@ -842,7 +842,7 @@ export const SEED_THREADS: Thread[] = [
       {
         id: 1,
         author: "Eleanor Vance",
-        body: "Terrace is back — shall we hold the September tasting outdoors?",
+        body: "Terrace is back · shall we hold the September tasting outdoors?",
         at: "August 1, 6:40 PM",
       },
     ],
@@ -879,7 +879,7 @@ export function monthLabel(date: Date = new Date()) {
 }
 
 /** True on the final calendar day of the month, and on any later day of a month
- *  that has already rolled over — the prompt keeps appearing until completed. */
+ *  that has already rolled over · the prompt keeps appearing until completed. */
 export function isSurveyWindowOpen(date: Date = new Date()) {
   const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
   return date.getDate() >= lastDay;

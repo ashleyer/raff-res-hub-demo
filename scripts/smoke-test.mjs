@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * MVP smoke test — run before any staging deployment.
+ * MVP smoke test · run before any staging deployment.
  *
  * Stage 1 (always runs, no dependencies): HTTP checks against every main route,
  *   the /health probe, and the /health/ready readiness probe (API + database +
@@ -20,7 +20,7 @@ const BASE = (process.argv[2] || process.env.SMOKE_BASE_URL || "http://localhost
 );
 const PASSCODE = process.env.SMOKE_PASSCODE || "raffles2026";
 const EMAIL = process.env.SMOKE_EMAIL || "smoke.test@raffles-boston.demo";
-// Any non-empty value works for a guest passcode sign-in — the sign-in form
+// Any non-empty value works for a guest passcode sign-in · the sign-in form
 // requires a residence number, but doesn't validate it against a real unit.
 const UNIT = process.env.SMOKE_UNIT || "19C";
 
@@ -31,7 +31,7 @@ function record(stage, name, ok, detail) {
   results.push({ stage, name, ok, detail });
   if (ok === false) failed += 1;
   const mark = ok === true ? "PASS" : ok === null ? "SKIP" : "FAIL";
-  console.log(`  [${mark}] ${name}${detail ? ` — ${detail}` : ""}`);
+  console.log(`  [${mark}] ${name}${detail ? ` · ${detail}` : ""}`);
 }
 
 async function get(path) {
@@ -40,7 +40,7 @@ async function get(path) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Stage 1 — routes and probes over plain HTTP                        */
+/* Stage 1 · routes and probes over plain HTTP                        */
 /* ------------------------------------------------------------------ */
 
 const ROUTES = [
@@ -53,7 +53,7 @@ const ROUTES = [
   { path: "/services", expect: "Services" },
   // /account, /directory, /messages, and /community opt out of SSR
   // (`ssr: false`) because their content depends on the client-only,
-  // localStorage-backed session — the server always renders just the
+  // localStorage-backed session · the server always renders just the
   // shell. So Stage 1 can only confirm the route resolves with the right
   // page (via its server-rendered <title>); the actual signed-out gate and
   // signed-in content are verified for real in the browser stage below.
@@ -110,10 +110,9 @@ async function stageHealth() {
     }
     record("health", "readiness overall", payload.ready === true, `status=${payload.status}`);
     for (const check of payload.checks ?? []) {
-      // "skipped" means the dependency is not provisioned for this deployment —
-      // that is a pass for the smoke test, but it is reported explicitly.
+      // "skipped" means the dependency is not provisioned for this deployment · // that is a pass for the smoke test, but it is reported explicitly.
       const ok = check.status === "ok" ? true : check.status === "skipped" ? null : false;
-      record("health", `dependency: ${check.name}`, ok, `${check.status} — ${check.detail}`);
+      record("health", `dependency: ${check.name}`, ok, `${check.status} · ${check.detail}`);
     }
     const names = (payload.checks ?? []).map((c) => c.name);
     for (const required of ["api", "database", "graphql"]) {
@@ -126,7 +125,7 @@ async function stageHealth() {
 }
 
 /* ------------------------------------------------------------------ */
-/* Stage 2 — browser: login + navigation                              */
+/* Stage 2 · browser: login + navigation                              */
 /* ------------------------------------------------------------------ */
 
 const GATED_PAGES = [
@@ -145,7 +144,7 @@ async function stageBrowser() {
       "browser",
       "browser stage",
       null,
-      "Playwright not installed — run `npm i -D playwright && npx playwright install chromium` for full end-to-end coverage",
+      "Playwright not installed · run `npm i -D playwright && npx playwright install chromium` for full end-to-end coverage",
     );
     return;
   }
@@ -164,7 +163,7 @@ async function stageBrowser() {
       "browser",
       "browser stage",
       null,
-      `chromium unavailable — ${error.message.split("\n")[0]}`,
+      `chromium unavailable · ${error.message.split("\n")[0]}`,
     );
     return;
   }
@@ -174,7 +173,7 @@ async function stageBrowser() {
     if (msg.type() === "error" && !msg.text().includes("hydrat")) consoleErrors.push(msg.text());
   });
 
-  // Navigate through the app the way a resident does — in-app links. The demo
+  // Navigate through the app the way a resident does · in-app links. The demo
   // session lives in memory, so a hard page load intentionally signs you out.
   async function navigateTo(label) {
     await page.getByRole("button", { name: /^menu$/i }).click();
@@ -244,7 +243,7 @@ async function stageBrowser() {
     }
 
     // By design the session survives a plain reload for its 12-hour window
-    // (see the comment on rememberSession in src/lib/portal-store.tsx) — so
+    // (see the comment on rememberSession in src/lib/portal-store.tsx) · so
     // the gate only returns once the resident explicitly signs out. A fresh,
     // signed-out visit to a gated route is bounced to /login by that route's
     // `beforeLoad` guard rather than rendering the inline RequireSession gate.
@@ -287,4 +286,4 @@ if (failed > 0) {
   console.log("Not safe to deploy to staging.");
   process.exit(1);
 }
-console.log("All checks green — safe to deploy to staging.");
+console.log("All checks green · safe to deploy to staging.");

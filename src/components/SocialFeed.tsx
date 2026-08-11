@@ -41,7 +41,7 @@ const POSTS: Post[] = [
     id: 3,
     image: social3,
     alt: "Candlelit treatment room at the Guerlain Spa",
-    caption: "Quiet hours at the Guerlain Spa — residents book through the concierge.",
+    caption: "Quiet hours at the Guerlain Spa · residents book through the concierge.",
     posted: "2 days ago",
     likes: 296,
     comments: 9,

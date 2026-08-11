@@ -16,7 +16,7 @@ dist-ssr
 .nitro
 *.local
 
-# Environment secrets — see README's "Environment variables" table for what
+# Environment secrets · see README's "Environment variables" table for what
 # these are; copy .env.example (or the README table) to a local .env.
 .env
 .env.local

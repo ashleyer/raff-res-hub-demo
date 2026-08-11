@@ -12,13 +12,13 @@ import {
 export const Route = createFileRoute("/sales-and-leasing")({
   head: () => ({
     meta: [
-      { title: "Residences for Sale & Lease — Raffles Boston Residences" },
+      { title: "Residences for Sale & Lease · Raffles Boston Residences" },
       {
         name: "description",
         content:
           "Availability at 40 Trinity Place: residences for sale, pending and recently sold, homes available to lease, and deeded or licensed parking spaces.",
       },
-      { property: "og:title", content: "Residences for Sale & Lease — Raffles Boston" },
+      { property: "og:title", content: "Residences for Sale & Lease · Raffles Boston" },
       {
         property: "og:description",
         content: "Current sale, pending, sold and leasing availability, including parking spaces.",
@@ -46,7 +46,7 @@ function SalesAndLeasingPage() {
     <PageShell
       eyebrow="Availability"
       title="Sales & leasing"
-      intro="What is on the market within the building, what is under agreement and what has recently closed — together with parking spaces available by deed or licence. Figures in this demonstration are illustrative."
+      intro="What is on the market within the building, what is under agreement and what has recently closed · together with parking spaces available by deed or licence. Figures in this demonstration are illustrative."
     >
       <TabBar tabs={TABS} active={tab} onChange={setTab} label="Availability categories" />
 

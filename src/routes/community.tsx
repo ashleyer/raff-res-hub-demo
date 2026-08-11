@@ -21,13 +21,13 @@ export const Route = createFileRoute("/community")({
   beforeLoad: requireResidentSession,
   head: () => ({
     meta: [
-      { title: "Member Forum & Interest Groups — Raffles Boston Residences" },
+      { title: "Member Forum & Interest Groups · Raffles Boston Residences" },
       {
         name: "description",
         content:
-          "Discuss community topics and join interest groups — wine, dogs, books, wellness and families — at The Raffles Residences Boston.",
+          "Discuss community topics and join interest groups · wine, dogs, books, wellness and families · at The Raffles Residences Boston.",
       },
-      { property: "og:title", content: "Member Forum — Raffles Boston Residences" },
+      { property: "og:title", content: "Member Forum · Raffles Boston Residences" },
       {
         property: "og:description",
         content: "Resident discussion and sub-communities built around shared interests.",

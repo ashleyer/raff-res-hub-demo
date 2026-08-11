@@ -13,7 +13,7 @@ import { SiteHeader } from "./SiteHeader";
 
 /**
  * The header's mobile/desktop layout switch is pure CSS (Tailwind breakpoint
- * classes) — jsdom doesn't evaluate @media queries, so that's covered by the
+ * classes) · jsdom doesn't evaluate @media queries, so that's covered by the
  * real-browser geometry checks in scripts/visual-header.mjs instead. What
  * belongs here is behavior jsdom *can* verify: the nav overlay's open/close
  * state, focus management, and keyboard/UX flow.

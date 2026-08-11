@@ -5,7 +5,7 @@ type Props = { children: React.ReactNode };
 type State = { error: Error | null };
 
 /** Global React error boundary. Catches render-time failures anywhere in the
- *  tree — including providers and undefined components — so residents see a
+ *  tree · including providers and undefined components · so residents see a
  *  courteous fallback instead of a blank page. */
 export class AppErrorBoundary extends React.Component<Props, State> {
   override state: State = { error: null };
@@ -39,7 +39,7 @@ export class AppErrorBoundary extends React.Component<Props, State> {
           </p>
           <h1 className="mt-4 text-2xl text-foreground">Something didn’t load</h1>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            An unexpected issue interrupted this page. Nothing you have saved is affected — please
+            An unexpected issue interrupted this page. Nothing you have saved is affected · please
             try again, or return to the residence home page.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">

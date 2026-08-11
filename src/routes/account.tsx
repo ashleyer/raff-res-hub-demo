@@ -15,13 +15,13 @@ export const Route = createFileRoute("/account")({
   beforeLoad: requireResidentSession,
   head: () => ({
     meta: [
-      { title: "House Account & Condominium Fees — Raffles Boston Residences" },
+      { title: "House Account & Condominium Fees · Raffles Boston Residences" },
       {
         name: "description",
         content:
           "View statements, house account charges and condominium fees for your residence at 40 Trinity Place, and settle balances online.",
       },
-      { property: "og:title", content: "House Account — Raffles Boston Residences" },
+      { property: "og:title", content: "House Account · Raffles Boston Residences" },
       {
         property: "og:description",
         content: "Statements, condominium fees and payments for your residence.",
@@ -67,7 +67,7 @@ function AccountBody() {
         <p className="mt-2 text-sm text-muted-foreground">{currentUser?.unit}</p>
         <p className="mt-4 font-display text-5xl">{money(balance)}</p>
         <p className="mt-2 text-sm text-muted-foreground" aria-live="polite">
-          {balance > 0 ? "Due by the 15th of the month." : "No outstanding balance — thank you."}
+          {balance > 0 ? "Due by the 15th of the month." : "No outstanding balance · thank you."}
         </p>
 
         <div className="mt-6 max-w-md space-y-2">
@@ -212,7 +212,7 @@ function MarketSnapshot({ unit }: { unit: string }) {
       <div className="gold-rule mt-4" />
       <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
         Illustrative valuation for {unit} based on recent activity in the building. Demonstration
-        figures only — not an appraisal.
+        figures only · not an appraisal.
       </p>
 
       <dl className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

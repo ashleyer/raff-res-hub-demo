@@ -10,7 +10,7 @@ const EXTENSIONS = [
     hours: "24 hours",
   },
   {
-    name: "Front desk — Raffles Boston Hotel",
+    name: "Front desk · Raffles Boston Hotel",
     detail: "Hotel operator",
     ext: "1000",
     hours: "24 hours",
@@ -95,7 +95,7 @@ export function HouseDirectory() {
               key={e.ext}
               className="relative flex items-start justify-between gap-4 bg-card p-5 pt-8"
             >
-              <DemoTag label="Demo extension" title="Simulated extension — does not connect" />
+              <DemoTag label="Demo extension" title="Simulated extension · does not connect" />
               <div className="min-w-0">
                 <h3 className="text-base leading-snug">{e.name}</h3>
                 <p className="mt-1 text-sm text-muted-foreground">{e.detail}</p>
@@ -116,7 +116,7 @@ export function HouseDirectory() {
         </ul>
 
         <p className="mt-6 text-center text-xs text-muted-foreground">
-          Demo directory — extensions and the house line are simulated and do not connect. For
+          Demo directory · extensions and the house line are simulated and do not connect. For
           emergencies, dial 911.
         </p>
       </div>

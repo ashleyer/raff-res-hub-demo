@@ -63,7 +63,7 @@
 :root {
   --radius: 0px;
 
-  /* Spacing / rhythm — the brand sites run on generous, airy bands. */
+  /* Spacing / rhythm · the brand sites run on generous, airy bands. */
   --space-band: clamp(4rem, 9vw, 9rem);
   --space-gutter: clamp(1.25rem, 5vw, 4.5rem);
 
@@ -88,7 +88,7 @@
   --input: oklch(0.845 0.009 82);
   --ring: oklch(0.7 0.062 78);
   --gold: oklch(0.72 0.068 78);
-  /* Darkened from 0.545 — that measured 4.31:1 against bg-secondary/40 panels
+  /* Darkened from 0.545 · that measured 4.31:1 against bg-secondary/40 panels
      (e.g. .eyebrow labels), short of WCAG AA's 4.5:1. Caught by `npm run test:a11y`. */
   --gold-ink: oklch(0.5 0.062 74);
   --gold-soft: oklch(0.845 0.04 82);
@@ -115,7 +115,6 @@
   --foreground: oklch(0.265 0.011 62);
 }
 
-
 @layer base {
   * {
     border-color: var(--color-border);
@@ -131,7 +130,6 @@
     letter-spacing: 0.012em;
     -webkit-font-smoothing: antialiased;
   }
-
 
   h1,
   h2,
@@ -236,7 +234,6 @@
   &.is-active::after {
     transform: scaleX(1);
   }
-
 }
 
 @utility btn-outline {
@@ -265,7 +262,7 @@
   }
 }
 
-/* Distinct from btn-outline on purpose — reserved for the security alert
+/* Distinct from btn-outline on purpose · reserved for the security alert
    trigger, so it doesn't read as just another nav-style action button.
    Solid fill (not just outlined) mirrors the destructive Button variant
    already defined in ui/button.tsx, for a consistent "alert" treatment. */
@@ -294,7 +291,6 @@
     background-color: color-mix(in oklab, var(--destructive) 85%, black);
   }
 }
-
 
 /* Fluid editorial display sizes */
 @utility display-hero {

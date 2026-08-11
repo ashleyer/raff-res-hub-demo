@@ -1,13 +1,12 @@
 import { cn } from "@/lib/utils";
 
 /**
- * Small top-right corner marker placed over invented content — portraits of
- * fictional people, placeholder photography and simulated phone extensions —
- * so nothing on screen can be mistaken for real information.
+ * Small top-right corner marker placed over invented content · portraits of
+ * fictional people, placeholder photography and simulated phone extensions · * so nothing on screen can be mistaken for real information.
  */
 export function DemoTag({
   label = "Demo",
-  title = "Not real — demonstration content only",
+  title = "Not real · demonstration content only",
   className,
 }: {
   label?: string;

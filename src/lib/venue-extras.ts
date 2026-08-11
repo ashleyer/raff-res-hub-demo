@@ -26,7 +26,7 @@ export const HOUSE_AMENITIES: HouseAmenity[] = [
     name: "The Patisserie",
     location: "Ground floor · Trinity Place",
     description:
-      "The hotel's pastry counter — viennoiserie, entremets, chocolates and coffee, prepared each morning by the Raffles pastry kitchen. Residents may charge to the house account or send an order up through the concierge.",
+      "The hotel's pastry counter · viennoiserie, entremets, chocolates and coffee, prepared each morning by the Raffles pastry kitchen. Residents may charge to the house account or send an order up through the concierge.",
     hours: ["Daily · 7:00 AM – 6:00 PM"],
     note: "Walk-in only. Whole cakes and celebration orders take forty-eight hours' notice.",
     image: patisserieImg,

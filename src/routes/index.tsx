@@ -19,13 +19,13 @@ import { RouteErrorFallback, RouteNotFound } from "@/components/RouteErrorFallba
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Raffles Boston Residences — Residents' Intranet" },
+      { title: "Raffles Boston Residences · Residents' Intranet" },
       {
         name: "description",
         content:
           "Private portal for Raffles Boston Residences: board broadcasts, amenity reservations, house account, concierge services, directory and the member forum.",
       },
-      { property: "og:title", content: "Raffles Boston Residences — Residents' Intranet" },
+      { property: "og:title", content: "Raffles Boston Residences · Residents' Intranet" },
       {
         property: "og:description",
         content:
@@ -179,7 +179,7 @@ function Index() {
               Contact the concierge
             </h2>
             <p className="mt-3 text-pretty text-sm leading-relaxed text-muted-foreground">
-              Reservations, deliveries, transport or anything else — the desk replies daily.
+              Reservations, deliveries, transport or anything else · the desk replies daily.
             </p>
             <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <ContactLink
@@ -206,7 +206,7 @@ function Index() {
           <div className="flex flex-col border border-border bg-card px-5 py-8 text-center sm:px-10 md:col-span-2">
             <p className="eyebrow">Resident benefit</p>
             <h2 id="accor-loyalty" className="mt-3 text-balance text-xl sm:text-2xl">
-              ALL — Accor Live Limitless
+              ALL · Accor Live Limitless
             </h2>
             <p className="mt-3 text-pretty text-sm leading-relaxed text-muted-foreground">
               Live a rewarding life while exploring the world. Residents may enrol in Accor&rsquo;s

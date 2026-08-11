@@ -66,8 +66,8 @@ export function NotificationBell() {
         aria-expanded={open}
         aria-label={
           unreadNotifications > 0
-            ? `Notifications — ${unreadNotifications} unread`
-            : "Notifications — none unread"
+            ? `Notifications · ${unreadNotifications} unread`
+            : "Notifications · none unread"
         }
         className="nav-link relative inline-flex min-h-11 min-w-11 items-center justify-center"
       >
