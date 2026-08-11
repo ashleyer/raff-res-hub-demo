@@ -9,8 +9,8 @@ const SECTIONS: { title: string; body: string }[] = [
     body: `Every listed resident email works with the same preview passcode, "${DEMO_PASSCODE}". There is also a fully open demo account (${DEMO_ACCOUNT.email} / ${DEMO_ACCOUNT.password}) that needs no residence number at all.`,
   },
   {
-    title: "Your profile is required — being listed isn't",
-    body: "Creating an account needs a name, residence and contact detail, but appearing in the Directory — and letting neighbours message you — defaults to off. Nothing about you is shown to anyone until you switch it on yourself.",
+    title: "Your profile is required, being listed isn't",
+    body: "Creating an account needs a name, residence and contact detail, but appearing in the Directory, and letting neighbours message you, defaults to off. Nothing about you is shown to anyone until you switch it on yourself.",
   },
   {
     title: "One household, many people",
@@ -18,7 +18,7 @@ const SECTIONS: { title: string; body: string }[] = [
   },
   {
     title: "Staying signed in",
-    body: "A session lasts 12 hours. Checking “Remember me” keeps your email and residence pre-filled on this device for 30 days — after that, or after 12 hours idle, you'll just sign in again.",
+    body: "A session lasts 12 hours. Checking “Remember me” keeps your email and residence pre-filled on this device for 30 days, after that, or after 12 hours idle, you'll just sign in again.",
   },
   {
     title: "Forgot your password",
@@ -26,11 +26,11 @@ const SECTIONS: { title: string; body: string }[] = [
   },
   {
     title: "What's behind sign-in",
-    body: "Eleven areas of the portal — Account, Community, Directory, For You, Gallery, Thank You Notes, Hotel Bridge, Marketplace, Messages, Proposals and Services — are only reachable once you're signed in as a resident.",
+    body: "Eleven areas of the portal, Account, Community, Directory, For You, Gallery, Thank You Notes, Hotel Bridge, Marketplace, Messages, Proposals and Services, are only reachable once you're signed in as a resident.",
   },
   {
     title: "Raffles personnel is a separate system",
-    body: "Staff and building-personnel accounts are entirely independent of resident accounts — reached via the Personnel Sign Up / Sign In links in the site footer, and gated separately from anything above.",
+    body: "Staff and building-personnel accounts are entirely independent of resident accounts, reached via the Personnel Sign Up / Sign In links in the site footer, and gated separately from anything above.",
   },
 ];
 

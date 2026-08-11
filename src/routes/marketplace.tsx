@@ -18,13 +18,13 @@ export const Route = createFileRoute("/marketplace")({
   beforeLoad: requireResidentSession,
   head: () => ({
     meta: [
-      { title: "Residents' Marketplace — Raffles Boston Residences" },
+      { title: "Residents' Marketplace, Raffles Boston Residences" },
       {
         name: "description",
         content:
-          "Ask neighbours for service recommendations — dog sitters, cleaners, tutors — and buy, sell or give away household items.",
+          "Ask neighbours for service recommendations, dog sitters, cleaners, tutors, and buy, sell or give away household items.",
       },
-      { property: "og:title", content: "Residents' Marketplace — Raffles Boston Residences" },
+      { property: "og:title", content: "Residents' Marketplace, Raffles Boston Residences" },
       {
         property: "og:description",
         content: "Service recommendations and resident-to-resident listings at 40 Trinity Place.",

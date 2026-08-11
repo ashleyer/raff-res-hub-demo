@@ -2,7 +2,7 @@ import { Check, X } from "lucide-react";
 import { scorePassword } from "@/lib/password-strength";
 
 /* Visual strength indicator with an accessible text summary. Colour alone never
-   conveys the result — the label, hints and per-rule reasons are always readable. */
+   conveys the result, the label, hints and per-rule reasons are always readable. */
 export function PasswordStrengthMeter({ value, id }: { value: string; id?: string }) {
   const { score, label, suggestions, criteria } = scorePassword(value);
   const tone = [

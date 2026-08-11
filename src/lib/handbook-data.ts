@@ -1,5 +1,5 @@
 /**
- * Dummy Residence Handbook — invented content for the demo only.
+ * Dummy Residence Handbook, invented content for the demo only.
  * Surfaced on the Management page and alongside the Board's governing documents.
  */
 export type HandbookClause = {
@@ -19,7 +19,7 @@ export type HandbookChapter = {
   clauses: HandbookClause[];
 };
 
-export const HANDBOOK_EDITION = "Third Edition — Revised February 2026";
+export const HANDBOOK_EDITION = "Third Edition, Revised February 2026";
 export const HANDBOOK_TITLE = "The Residence Handbook";
 
 export const HANDBOOK: HandbookChapter[] = [
@@ -97,12 +97,12 @@ export const HANDBOOK: HandbookChapter[] = [
         id: "3-1",
         number: "3.1",
         title: "Residents' Lounge, Floor 21",
-        body: "The Residents' Lounge — including the Nantucket Kitchen, Secret Garden Room, sports lounge and simulator — is open to residents at all hours. The kitchen and its amenity spaces may be reserved through the portal, and catering may be arranged from the hotel.",
+        body: "The Residents' Lounge, including the Nantucket Kitchen, Secret Garden Room, sports lounge and simulator, is open to residents at all hours. The kitchen and its amenity spaces may be reserved through the portal, and catering may be arranged from the hotel.",
       },
       {
         id: "3-2",
         number: "3.2",
-        title: "Private Dining — In-Residence",
+        title: "Private Dining, In-Residence",
         body: "In-residence dining is served by Raffles hotel staff around the clock. Orders are placed from the menu in the portal; a service charge is posted to the house account.",
       },
       {
@@ -155,7 +155,7 @@ export const HANDBOOK: HandbookChapter[] = [
         id: "5-1",
         number: "5.1",
         title: "Maintenance requests",
-        body: "Faults inside a residence are lodged through the portal and triaged by building engineering. Emergencies — water ingress, loss of power, smoke — should be telephoned to the concierge desk immediately rather than logged.",
+        body: "Faults inside a residence are lodged through the portal and triaged by building engineering. Emergencies, water ingress, loss of power, smoke, should be telephoned to the concierge desk immediately rather than logged.",
       },
       {
         id: "5-2",

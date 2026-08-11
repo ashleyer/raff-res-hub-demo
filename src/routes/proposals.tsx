@@ -18,13 +18,13 @@ export const Route = createFileRoute("/proposals")({
   beforeLoad: requireResidentSession,
   head: () => ({
     meta: [
-      { title: "Resident Proposals & Voting — Raffles Boston Residences" },
+      { title: "Resident Proposals & Voting, Raffles Boston Residences" },
       {
         name: "description",
         content:
           "Proposed requests from residents of The Raffles Residences Boston, where neighbours vote for or against before the Board takes them up.",
       },
-      { property: "og:title", content: "Resident Proposals — Raffles Boston Residences" },
+      { property: "og:title", content: "Resident Proposals, Raffles Boston Residences" },
       {
         property: "og:description",
         content: "Up and down voting on resident requests before they reach the Board.",

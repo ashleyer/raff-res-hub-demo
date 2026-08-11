@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import {
   SEED_EVENTS,
   SEED_EVENT_IDEAS,
+  SEED_PRIVATE_BOOKINGS,
   type EventIdea,
   type ResidentEvent,
 } from "@/lib/intranet-data";
@@ -22,13 +23,13 @@ import { SocialFeed } from "@/components/SocialFeed";
 export const Route = createFileRoute("/events")({
   head: () => ({
     meta: [
-      { title: "Resident Events & RSVP — Raffles Boston Residences" },
+      { title: "Resident Events & RSVP, Raffles Boston Residences" },
       {
         name: "description",
         content:
           "The residents' calendar at 40 Trinity Place: wine salons, chef's tables and wellness mornings, with RSVP and a register for proposing new events.",
       },
-      { property: "og:title", content: "Resident Events & RSVP — Raffles Boston Residences" },
+      { property: "og:title", content: "Resident Events & RSVP, Raffles Boston Residences" },
       {
         property: "og:description",
         content:
@@ -293,6 +294,56 @@ function EventsPage() {
               </div>
             </form>
           </aside>
+        </section>
+
+        <section
+          aria-labelledby="private-bookings-heading"
+          className="mt-20 border-t border-border pt-14"
+        >
+          <p className="eyebrow">The spaces, privately held</p>
+          <h2 id="private-bookings-heading" className="mt-3 text-3xl">
+            Private bookings over the next month
+          </h2>
+          <div className="gold-rule mt-4" />
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            When the Residents' Lounge, Nantucket Kitchen, Secret Garden Room, sports simulator,
+            sports lounge or Emerald Lounge are privately reserved, the sitting is listed here so
+            neighbours can plan around it. To hold a space yourself, lodge a request through the{" "}
+            <a href="/amenities" className="text-primary underline underline-offset-4">
+              amenities booking desk
+            </a>
+            .
+          </p>
+          <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {SEED_PRIVATE_BOOKINGS.map((b) => (
+              <li key={b.id} className="flex flex-col border border-border bg-card p-5">
+                <h3 className="flex items-center gap-2 text-lg leading-snug">
+                  <MapPin className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                  {b.space}
+                </h3>
+                <p className="mt-2 text-sm text-muted-foreground">{b.occasion}</p>
+                <dl className="mt-4 space-y-1.5 border-t border-border pt-3 text-xs text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <CalendarDays className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
+                    <dt className="sr-only">Date</dt>
+                    <dd>{b.date}</dd>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
+                    <dt className="sr-only">Time</dt>
+                    <dd>{b.time}</dd>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Users className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
+                    <dt className="sr-only">Party</dt>
+                    <dd>
+                      {b.guests} guests · held by {b.unit}
+                    </dd>
+                  </div>
+                </dl>
+              </li>
+            ))}
+          </ul>
         </section>
 
         <PastEventsCarousel />

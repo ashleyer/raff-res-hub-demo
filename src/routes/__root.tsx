@@ -79,7 +79,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Raffles Boston Residences — Residents' Intranet" },
+      { title: "Raffles Boston Residences, Residents' Intranet" },
       {
         name: "description",
         content: "Private residents' portal for Raffles Boston Residences.",
@@ -92,7 +92,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image:height", content: "630" },
       {
         property: "og:image:alt",
-        content: "Raffles Boston Residences — Residents' Intranet",
+        content: "Raffles Boston Residences, Residents' Intranet",
       },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: "https://raff-bos-res-demo.vercel.app/og.png" },

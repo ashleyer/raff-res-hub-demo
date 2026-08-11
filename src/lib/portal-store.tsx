@@ -123,7 +123,7 @@ type PortalValue = {
   castVote: (id: number, vote: Vote) => void;
   addProposal: (p: Omit<Proposal, "id" | "at" | "up" | "down">) => void;
 
-  /* governance — measures and one ballot per residence, shared so it survives navigation */
+  /* governance, measures and one ballot per residence, shared so it survives navigation */
   measures: GovernanceMeasure[];
   ballots: Record<number, Ballot>;
   castBallot: (measureId: number, choice: Ballot) => void;
@@ -132,7 +132,7 @@ type PortalValue = {
   activity: ActivityEvent[];
   logActivity: (e: Omit<ActivityEvent, "id" | "at">) => void;
 
-  /* concierge desk — shared between residents and staff */
+  /* concierge desk, shared between residents and staff */
   conciergeRequests: ConciergeRequest[];
   /** Returns the new request's id, so the caller can show an on-screen receipt. */
   addConciergeRequest: (
@@ -233,7 +233,7 @@ function writeStore(key: string, value: unknown) {
   try {
     window.localStorage.setItem(key, JSON.stringify(value));
   } catch {
-    /* storage unavailable — the session simply will not be remembered */
+    /* storage unavailable, the session simply will not be remembered */
   }
 }
 
@@ -418,7 +418,7 @@ export function PortalProvider({ children }: { children: ReactNode }) {
       const residence = formatUnit(unit ?? "");
       if (!address.includes("@")) return { ok: false, error: "Enter a valid email address." };
 
-      /* Open demonstration account — no residence number required. A password
+      /* Open demonstration account, no residence number required. A password
          reset on this address stores an account row, which then takes over. */
       const storedForAddress = accounts.find((a) => a.email === address);
       if (
@@ -800,7 +800,7 @@ export function PortalProvider({ children }: { children: ReactNode }) {
 
       measures,
       ballots,
-      /* One ballot per residence per measure — matches condo governance rules, so a cast ballot cannot be changed. */
+      /* One ballot per residence per measure, matches condo governance rules, so a cast ballot cannot be changed. */
       castBallot: (measureId, choice) => {
         const measure = measures.find((m) => m.id === measureId);
         if (!measure || measure.status !== "Open for ballot" || ballots[measureId]) return;
@@ -838,7 +838,7 @@ export function PortalProvider({ children }: { children: ReactNode }) {
           unit: target.unit,
           requestId: id,
           kind: "status",
-          title: `${target.service} — ${status.toLowerCase()}`,
+          title: `${target.service}, ${status.toLowerCase()}`,
           body:
             status === "Completed"
               ? "The concierge desk has marked your request complete."
@@ -855,7 +855,7 @@ export function PortalProvider({ children }: { children: ReactNode }) {
           unit: target.unit,
           requestId: id,
           kind: "assigned",
-          title: `${target.service} — assigned`,
+          title: `${target.service}, assigned`,
           body: `${staff} is now looking after your request.`,
         });
       },
@@ -872,7 +872,7 @@ export function PortalProvider({ children }: { children: ReactNode }) {
               : r,
           ),
         );
-        /* Only desk replies alert the residence — not the resident's own. */
+        /* Only desk replies alert the residence, not the resident's own. */
         if (target && unitKey(author) !== unitKey(target.unit)) {
           raiseNotification({
             unit: target.unit,

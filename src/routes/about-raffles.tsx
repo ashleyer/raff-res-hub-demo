@@ -7,13 +7,13 @@ import heritageImg from "@/assets/raffles-heritage.jpg";
 export const Route = createFileRoute("/about-raffles")({
   head: () => ({
     meta: [
-      { title: "About Raffles — Heritage, Houses & Openings" },
+      { title: "About Raffles, Heritage, Houses & Openings" },
       {
         name: "description",
         content:
           "The Raffles story from 1887 Singapore to Boston's Back Bay, plus openings and news from Raffles hotels and residences worldwide.",
       },
-      { property: "og:title", content: "About Raffles — Heritage, Houses & Openings" },
+      { property: "og:title", content: "About Raffles, Heritage, Houses & Openings" },
       {
         property: "og:description",
         content:

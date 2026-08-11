@@ -29,13 +29,13 @@ export const Route = createFileRoute("/hotel-bridge")({
   beforeLoad: requireResidentSession,
   head: () => ({
     meta: [
-      { title: "Hotel Bridge — Raffles Boston Residences" },
+      { title: "Hotel Bridge, Raffles Boston Residences" },
       {
         name: "description",
         content:
           "Priority tables, in-residence delivery and a single house-account folio across La Padrona, Emerald Lounge, Blind Duck and Café Pastel.",
       },
-      { property: "og:title", content: "Hotel Bridge — Raffles Boston Residences" },
+      { property: "og:title", content: "Hotel Bridge, Raffles Boston Residences" },
       {
         property: "og:description",
         content:
@@ -62,8 +62,8 @@ function HotelBridgePage() {
         <p className="mt-5 max-w-2xl text-sm leading-relaxed text-muted-foreground">
           Your residence is connected to the hotel's property-management and point-of-sale systems.
           Reserve a priority table, send an order up to your residence, and see every outlet charge
-          consolidated on one house account. In this demonstration the bridge is simulated — with
-          the same response cache and fault tolerance the live integration uses.
+          consolidated on one house account. In this demonstration the bridge is simulated, with the
+          same response cache and fault tolerance the live integration uses.
         </p>
 
         <RequireSession area="the hotel bridge">
@@ -155,7 +155,7 @@ function BridgeConsole() {
         setDelivery(result.delivery);
         setItems("");
         setFolio(null);
-        toast.success(`Order placed — arriving in about ${result.delivery.etaMinutes} minutes.`);
+        toast.success(`Order placed, arriving in about ${result.delivery.etaMinutes} minutes.`);
       } else {
         toast.error(result.message);
       }

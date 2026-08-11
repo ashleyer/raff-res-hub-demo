@@ -7,12 +7,12 @@ import { currentStaff, signOutStaff, type StaffAccount } from "@/lib/staff-store
 export const Route = createFileRoute("/staff-dashboard")({
   head: () => ({
     meta: [
-      { title: "Personnel Dashboard — Raffles Residences Boston" },
+      { title: "Personnel Dashboard, Raffles Residences Boston" },
       {
         name: "description",
         content: "Internal dashboard for Raffles Boston personnel at the Residences.",
       },
-      { property: "og:title", content: "Personnel Dashboard — Raffles Residences Boston" },
+      { property: "og:title", content: "Personnel Dashboard, Raffles Residences Boston" },
       {
         property: "og:description",
         content: "Internal staff workspace for Raffles Residences Boston.",

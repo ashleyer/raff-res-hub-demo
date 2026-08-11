@@ -52,7 +52,7 @@ export function checkDatabase(): Promise<CheckResult> {
       return { status: "skipped", detail: "no database configured for this deployment" };
     }
     // The Data API root rejects anonymous introspection, so probe the platform
-    // health endpoint instead — it proves the project is reachable and awake.
+    // health endpoint instead, it proves the project is reachable and awake.
     const response = await fetch(`${url}/auth/v1/health`, { headers: { apikey: key } });
     if (!response.ok) {
       return { status: "down", detail: `backend responded ${response.status}` };

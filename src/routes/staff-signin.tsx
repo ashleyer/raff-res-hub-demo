@@ -11,13 +11,13 @@ import { currentStaff, signInStaff } from "@/lib/staff-store";
 export const Route = createFileRoute("/staff-signin")({
   head: () => ({
     meta: [
-      { title: "Raffles Personnel Sign In — Residences Boston" },
+      { title: "Raffles Personnel Sign In, Residences Boston" },
       {
         name: "description",
         content:
           "Internal sign in for Raffles Boston personnel to reach the residences staff dashboard.",
       },
-      { property: "og:title", content: "Raffles Personnel Sign In — Residences Boston" },
+      { property: "og:title", content: "Raffles Personnel Sign In, Residences Boston" },
       {
         property: "og:description",
         content: "Sign in to the Raffles Residences Boston personnel dashboard.",

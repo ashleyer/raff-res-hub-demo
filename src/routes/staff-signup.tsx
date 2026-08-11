@@ -12,13 +12,13 @@ import { currentStaff, registerStaff, STAFF_DEPARTMENTS } from "@/lib/staff-stor
 export const Route = createFileRoute("/staff-signup")({
   head: () => ({
     meta: [
-      { title: "Raffles Personnel Sign Up — Residences Boston" },
+      { title: "Raffles Personnel Sign Up, Residences Boston" },
       {
         name: "description",
         content:
           "Registration for Raffles Boston personnel to create an internal residences portal account.",
       },
-      { property: "og:title", content: "Raffles Personnel Sign Up — Residences Boston" },
+      { property: "og:title", content: "Raffles Personnel Sign Up, Residences Boston" },
       {
         property: "og:description",
         content: "Create an internal account for the Raffles Residences Boston staff dashboard.",
@@ -66,7 +66,7 @@ function StaffSignUpPage() {
     <PageShell
       eyebrow="Raffles Personnel"
       title="Raffles Personnel Sign Up"
-      intro="For internal Raffles Boston colleagues. Register a personnel account to reach the staff dashboard. Demonstration only — accounts are kept in this browser."
+      intro="For internal Raffles Boston colleagues. Register a personnel account to reach the staff dashboard. Demonstration only, accounts are kept in this browser."
     >
       <form
         onSubmit={(e) => void submit(e)}

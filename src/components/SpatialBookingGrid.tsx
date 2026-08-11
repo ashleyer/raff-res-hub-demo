@@ -55,9 +55,7 @@ export function SpatialBookingGrid({
 
       <div
         role="group"
-        aria-label={
-          date ? `Sittings for ${date}` : "Sittings — choose a date for live availability"
-        }
+        aria-label={date ? `Sittings for ${date}` : "Sittings, choose a date for live availability"}
         className="mt-3 grid gap-2 sm:grid-cols-2"
       >
         {slots.map((slot) => {

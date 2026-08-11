@@ -34,13 +34,13 @@ import {
 export const Route = createFileRoute("/management")({
   head: () => ({
     meta: [
-      { title: "Management, Board & Announcements — Raffles Boston Residences" },
+      { title: "Management, Board & Announcements, Raffles Boston Residences" },
       {
         name: "description",
         content:
           "Meet the Board of Trustees and the residences team, read announcements from management, and complete the Monthly Residence Happiness Survey.",
       },
-      { property: "og:title", content: "Management & Board — Raffles Boston Residences" },
+      { property: "og:title", content: "Management & Board, Raffles Boston Residences" },
       {
         property: "og:description",
         content:
@@ -242,7 +242,7 @@ function SurveySection() {
     <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr]">
       <section aria-labelledby="survey-heading">
         <h2 id="survey-heading" className="text-2xl">
-          {SURVEY_NAME} — {month}
+          {SURVEY_NAME}, {month}
         </h2>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
           Five questions, rated one (poor) to five (excellent). The survey opens automatically on
@@ -252,7 +252,7 @@ function SurveySection() {
 
         {hasAnsweredSurvey ? (
           <p className="mt-8 border border-primary/50 bg-secondary/40 p-8 text-sm">
-            Thank you — your response for {month} has been recorded.
+            Thank you, your response for {month} has been recorded.
           </p>
         ) : (
           <form
@@ -472,7 +472,7 @@ function ManagementResults({
                 </th>
                 {SURVEY_QUESTIONS.map((q) => (
                   <td key={q.id} className="p-2">
-                    {r.ratings[q.id] ?? "—"}
+                    {r.ratings[q.id] ?? ", "}
                   </td>
                 ))}
               </tr>

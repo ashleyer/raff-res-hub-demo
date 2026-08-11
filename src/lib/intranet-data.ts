@@ -129,7 +129,7 @@ export const BROADCASTS: Broadcast[] = [
   },
   {
     id: 2,
-    title: "Annual Trustee Assembly — Notice of Quorum",
+    title: "Annual Trustee Assembly, Notice of Quorum",
     summary:
       "Deed-holders are asked to register attendance with the Residences Office no later than the 20th. Proxy instruments may be lodged with the concierge desk.",
     badge: "Governance",
@@ -182,10 +182,10 @@ export const AMENITIES: Amenity[] = [
     name: "Residents' Lounge",
     location: "Floor 21 · Deed-holders and their guests",
     description:
-      "The private heart of the residences on the twenty-first floor: a panelled salon with skyline outlook over Back Bay, fireside seating and adjoining amenity rooms — the Nantucket Kitchen, Secret Garden Room, sports simulator and sports lounge.",
+      "The private heart of the residences on the twenty-first floor: a panelled salon with skyline outlook over Back Bay, fireside seating and adjoining amenity rooms, the Nantucket Kitchen, Secret Garden Room, sports simulator and sports lounge.",
     hours: "Open 24 hours",
     service:
-      "The lounge and its amenity rooms may be reserved through this desk. Catering is provided by the hotel kitchen — attach a selection to any request.",
+      "The lounge and its amenity rooms may be reserved through this desk. Catering is provided by the hotel kitchen, attach a selection to any request.",
     slots: ["Morning · 09:00", "Afternoon · 15:00", "Evening · 18:30", "Late · 21:30"],
     image: residentsLoungeImg,
   },
@@ -226,7 +226,7 @@ export const AMENITIES: Amenity[] = [
     name: "Sports Lounge",
     location: "Floor 21 · Residents' Lounge",
     description:
-      "Club seating and screens beside the simulator — reservable for match evenings, with catering from the hotel on request.",
+      "Club seating and screens beside the simulator, reservable for match evenings, with catering from the hotel on request.",
     hours: "Open 24 hours",
     service: "Catering from the hotel kitchen may be attached to any sitting.",
     slots: ["Afternoon · 14:00", "Evening · 18:00", "Late · 21:00"],
@@ -263,7 +263,7 @@ export const VENUES: Venue[] = [
     name: "Long Bar & Terrace",
     location: "Perched above Back Bay · Raffles Boston",
     description:
-      "All-day dining with New England classics — lobster rolls, oysters on the half shell — legendary Raffles cocktails including the Singapore Sling and Boston Sling, and afternoon tea Thursday to Sunday, 2:00–4:30 PM.",
+      "All-day dining with New England classics, lobster rolls, oysters on the half shell, legendary Raffles cocktails including the Singapore Sling and Boston Sling, and afternoon tea Thursday to Sunday, 2:00–4:30 PM.",
     hours: [
       "Monday – Friday · 6:30 AM – 12:00 AM",
       "Saturday & Sunday · 7:00 AM – 12:00 AM",
@@ -285,7 +285,7 @@ export const VENUES: Venue[] = [
     name: "La Padrona",
     location: "38 Trinity Place · Michelin Guide recommended Italian",
     description:
-      "Chef Jody Adams' Italian dining room beside the residences — an ode to exquisite cuisine, cherished company and the pleasure of breaking bread together.",
+      "Chef Jody Adams' Italian dining room beside the residences, an ode to exquisite cuisine, cherished company and the pleasure of breaking bread together.",
     hours: ["Sunday – Thursday · 5:00 PM – 10:00 PM", "Friday & Saturday · 5:00 PM – 11:00 PM"],
     note: "Reservations open on Resy at 9:00 AM on a rolling fourteen-day basis.",
     image: laPadronaImg,
@@ -319,7 +319,7 @@ export const VENUES: Venue[] = [
     description:
       "Treatment suites and private relaxation pods, his and hers sauna and steam rooms, a contemporary fitness centre and a twenty-metre pool.",
     hours: ["Daily · 7:00 AM – 8:00 PM"],
-    note: "Treatment rooms are not reservable here — book directly with the spa.",
+    note: "Treatment rooms are not reservable here, book directly with the spa.",
     image: guerlainSpaImg,
     links: [
       { label: "Spa services", href: "https://www.raffles.com/boston/wellness/" },
@@ -333,7 +333,7 @@ export type MenuItem = { id: string; name: string; detail: string; price: number
 export type MenuSection = { id: string; label: string; hours: string; items: MenuItem[] };
 
 export const IN_RESIDENCE_DINING = {
-  name: "Private Dining — In-Residence",
+  name: "Private Dining, In-Residence",
   location: "Served in your residence by Raffles Hotel Staff, In-Room Dining",
   hours: "Open 24 hours",
   note: "Table dressing, glassware and clearing are included. A 20% service charge and delivery fee apply to every order.",
@@ -465,7 +465,7 @@ export const IN_RESIDENCE_MENU: MenuSection[] = [
 ];
 
 export const CATERING_OPTIONS = [
-  "No catering — room only",
+  "No catering, room only",
   "Hotel continental breakfast service",
   "Coffee, tea & pastries",
   "Canapés & Champagne reception",
@@ -508,6 +508,129 @@ export const SEED_BOOKINGS: Booking[] = [
   },
 ];
 
+/** A private reservation of a reservable space, as shown on the residents' calendar. */
+export type PrivateBooking = {
+  id: number;
+  space: string;
+  date: string;
+  time: string;
+  occasion: string;
+  guests: number;
+  unit: string;
+};
+
+/** The coming month's private holds on the reservable spaces, so residents can plan around them. */
+export const SEED_PRIVATE_BOOKINGS: PrivateBooking[] = [
+  {
+    id: 1,
+    space: "Residents' Lounge, Floor 21",
+    date: "August 14, 2026",
+    time: "3:00 PM – 6:00 PM",
+    occasion: "Private afternoon reception",
+    guests: 18,
+    unit: "Residence 28D",
+  },
+  {
+    id: 2,
+    space: "Nantucket Kitchen",
+    date: "August 15, 2026",
+    time: "6:30 PM – 10:00 PM",
+    occasion: "Chef-led family dinner",
+    guests: 10,
+    unit: "Residence 21A",
+  },
+  {
+    id: 3,
+    space: "Emerald Lounge",
+    date: "August 16, 2026",
+    time: "7:00 PM – 11:00 PM",
+    occasion: "Full buy-out, birthday celebration",
+    guests: 34,
+    unit: "Residence 34B",
+  },
+  {
+    id: 4,
+    space: "Secret Garden Room",
+    date: "August 18, 2026",
+    time: "9:00 AM – 12:00 PM",
+    occasion: "Morning bridge group",
+    guests: 8,
+    unit: "Residence 12B",
+  },
+  {
+    id: 5,
+    space: "Sports Simulator",
+    date: "August 19, 2026",
+    time: "4:00 PM – 6:00 PM",
+    occasion: "Junior golf lesson",
+    guests: 4,
+    unit: "Residence 27F",
+  },
+  {
+    id: 6,
+    space: "Sports Lounge",
+    date: "August 23, 2026",
+    time: "6:00 PM – 10:00 PM",
+    occasion: "Match evening with catering",
+    guests: 14,
+    unit: "Residence 18D",
+  },
+  {
+    id: 7,
+    space: "Nantucket Kitchen",
+    date: "August 27, 2026",
+    time: "12:30 PM – 3:00 PM",
+    occasion: "Cooking afternoon, two households",
+    guests: 9,
+    unit: "Residence 31A",
+  },
+  {
+    id: 8,
+    space: "Residents' Lounge, Floor 21",
+    date: "August 29, 2026",
+    time: "6:30 PM – 9:30 PM",
+    occasion: "Private fireside salon",
+    guests: 22,
+    unit: "Residence 41C",
+  },
+  {
+    id: 9,
+    space: "Secret Garden Room",
+    date: "September 2, 2026",
+    time: "3:00 PM – 5:00 PM",
+    occasion: "Afternoon tea for six",
+    guests: 6,
+    unit: "Residence 18C",
+  },
+  {
+    id: 10,
+    space: "Emerald Lounge",
+    date: "September 5, 2026",
+    time: "5:00 PM – 9:00 PM",
+    occasion: "Full buy-out, anniversary dinner",
+    guests: 26,
+    unit: "Residence 22H",
+  },
+  {
+    id: 11,
+    space: "Sports Simulator",
+    date: "September 8, 2026",
+    time: "7:00 PM – 9:00 PM",
+    occasion: "Simulator league, week three",
+    guests: 8,
+    unit: "Residence 27A",
+  },
+  {
+    id: 12,
+    space: "Nantucket Kitchen",
+    date: "September 11, 2026",
+    time: "6:30 PM – 10:00 PM",
+    occasion: "Harvest supper with the hotel kitchen",
+    guests: 12,
+    unit: "Residence 34B",
+  },
+];
+
 export const SEED_EVENTS: ResidentEvent[] = [
   {
     id: 1,
@@ -523,7 +646,7 @@ export const SEED_EVENTS: ResidentEvent[] = [
   },
   {
     id: 2,
-    title: "Chef's Table — Late Summer Menu",
+    title: "Chef's Table, Late Summer Menu",
     detail:
       "Five courses composed by the La Padrona kitchen, served at the private table for residences.",
     location: "La Padrona",
@@ -591,7 +714,7 @@ export const SEED_REQUESTS: ConciergeRequest[] = [
   {
     id: 2,
     service: "Floristry",
-    detail: "Weekly arrangement for the entry console — white peony and eucalyptus.",
+    detail: "Weekly arrangement for the entry console, white peony and eucalyptus.",
     unit: "Residence 28D",
     priority: "Standard",
     status: "Lodged",
@@ -652,7 +775,7 @@ export const GOVERNANCE_DOCUMENTS: GovernanceDocument[] = [
     issued: "Revised January 2026",
   },
   { id: 2, title: "Operating Budget & Reserve Study", kind: "Financial", issued: "February 2026" },
-  { id: 3, title: "Minutes — February Trustee Sitting", kind: "Minutes", issued: "March 1, 2026" },
+  { id: 3, title: "Minutes, February Trustee Sitting", kind: "Minutes", issued: "March 1, 2026" },
   {
     id: 4,
     title: "Proxy Instrument for the Annual Assembly",

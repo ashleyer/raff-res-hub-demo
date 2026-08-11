@@ -1,5 +1,5 @@
 /* Raffles personnel accounts. Like the resident portal, this demonstration keeps
-   everything in the browser — no staff details leave this device. */
+   everything in the browser, no staff details leave this device. */
 
 export interface StaffAccount {
   id: string;
@@ -40,7 +40,7 @@ function write(key: string, value: unknown) {
   try {
     window.localStorage.setItem(key, JSON.stringify(value));
   } catch {
-    /* storage unavailable — the session simply will not persist */
+    /* storage unavailable, the session simply will not persist */
   }
 }
 

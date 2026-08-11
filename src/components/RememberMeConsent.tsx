@@ -69,11 +69,11 @@ export function RememberMeConsent({ id, checked, onChange }: Props) {
                     <strong className="text-foreground">
                       Your email address and residence number
                     </strong>{" "}
-                    — used to pre-fill the sign-in form. Kept for up to 30 days, then deleted
+                    , used to pre-fill the sign-in form. Kept for up to 30 days, then deleted
                     automatically.
                   </li>
                   <li>
-                    <strong className="text-foreground">Your signed-in session</strong> — so you are
+                    <strong className="text-foreground">Your signed-in session</strong>, so you are
                     not asked to sign in again on every visit. It lapses after 12 hours without
                     activity, and the stored record is deleted the moment it lapses.
                   </li>
@@ -89,7 +89,7 @@ export function RememberMeConsent({ id, checked, onChange }: Props) {
           <AlertDialogFooter>
             <AlertDialogCancel className="min-h-11">Keep it off</AlertDialogCancel>
             <AlertDialogAction className="min-h-11" onClick={() => onChange(true)}>
-              I understand — remember me
+              I understand, remember me
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

@@ -6,6 +6,14 @@ import { PageShell } from "@/components/PageShell";
 import { usePortal } from "@/lib/portal-store";
 import { DEMO_ACCOUNT, DEMO_PASSCODE, RESIDENTS } from "@/lib/portal-data";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RememberMeConsent } from "@/components/RememberMeConsent";
@@ -26,13 +34,13 @@ function FieldError({ id, message }: { id: string; message?: string | undefined 
 export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [
-      { title: "Resident Sign In — Raffles Boston Residences" },
+      { title: "Resident Sign In, Raffles Boston Residences" },
       {
         name: "description",
         content:
           "Sign in or register for the private residents' portal of The Raffles Residences Boston at 40 Trinity Place.",
       },
-      { property: "og:title", content: "Resident Sign In — Raffles Boston Residences" },
+      { property: "og:title", content: "Resident Sign In, Raffles Boston Residences" },
       {
         property: "og:description",
         content: "Private portal access for registered residences at 40 Trinity Place.",
@@ -58,125 +66,192 @@ function LoginPage() {
   const { currentUser } = usePortal();
   const { mode: initialMode, redirect } = Route.useSearch();
   const [mode, setMode] = useState<"signin" | "signup">(initialMode ?? "signin");
+  /* The root layout shows its own demo-notice modal on a visitor's first page of the
+     session. Defer to that modal: the orientation dialog appears only once no other
+     dialog is on screen, so the two never stack on top of each other. */
+  const [anotherDialogOpen, setAnotherDialogOpen] = useState(true);
+  const [welcomeDismissed, setWelcomeDismissed] = useState(false);
+  useEffect(() => {
+    const check = () => {
+      const open = [...document.querySelectorAll('[role="dialog"]')].some(
+        (d) => d.getAttribute("data-state") === "open",
+      );
+      setAnotherDialogOpen(open);
+    };
+    check();
+    const interval = window.setInterval(check, 400);
+    return () => window.clearInterval(interval);
+  }, []);
+  const showWelcome = !anotherDialogOpen && !welcomeDismissed;
 
   return (
-    <PageShell
-      eyebrow="Private Access"
-      title={
-        currentUser
-          ? "Your account"
-          : mode === "signin"
-            ? "Resident sign in"
-            : "Create your account"
-      }
-      intro={
-        <>
-          Registered deed-holders and approved leaseholders can sign up with their residence address
-          here, or if previously registered,{" "}
-          <Link
-            to="/login"
-            search={{ mode: "signin" }}
-            onClick={() => setMode("signin")}
-            className="underline underline-offset-4"
-          >
-            sign in by clicking here
-          </Link>
-          . Internal Raffles Persons can use the{" "}
-          <Link to="/staff-signup" className="underline underline-offset-4">
-            Raffles Personnel Sign Up
-          </Link>{" "}
-          and/or the{" "}
-          <Link to="/staff-signin" className="underline underline-offset-4">
-            Raffles Personnel Sign In
-          </Link>{" "}
-          found by scrolling down to the bottom.
-          <strong className="mt-3 block text-foreground">
-            For Demo purposes, login with "{DEMO_ACCOUNT.email}" with password "
-            {DEMO_ACCOUNT.password}" to explore the site without signing up (not all features
-            available in Demo Login).
-          </strong>
-        </>
-      }
-    >
-      {currentUser ? (
-        <SignedIn />
-      ) : (
-        <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_1fr]">
-          <div>
-            <div role="tablist" aria-label="Account" className="flex gap-2">
-              {(
-                [
-                  { id: "signin", label: "Sign in" },
-                  { id: "signup", label: "Create account" },
-                ] as const
-              ).map((t) => (
-                <button
-                  key={t.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={mode === t.id}
-                  onClick={() => setMode(t.id)}
-                  className={`min-h-11 border px-5 text-xs tracking-[0.16em] uppercase transition-colors ${
-                    mode === t.id
-                      ? "border-primary bg-primary text-primary-foreground"
-                      : "border-border text-muted-foreground hover:border-primary hover:text-primary"
-                  }`}
+    <>
+      <Dialog open={showWelcome} onOpenChange={(open) => !open && setWelcomeDismissed(true)}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle className="font-display text-xl font-light">
+              New here? Two-minute orientation
+            </DialogTitle>
+            <DialogDescription className="text-sm leading-relaxed">
+              <span className="mt-2 block">
+                Fastest way in: the open demo account, email{" "}
+                <span className="font-medium text-foreground">{DEMO_ACCOUNT.email}</span> with
+                password{" "}
+                <span className="font-medium text-foreground">{DEMO_ACCOUNT.password}</span>, and no
+                residence number required.
+              </span>
+              <span className="mt-2 block">
+                For the full experience, create your own account below with any details you like.
+                Everything stays in your browser and resets on reload.
+              </span>
+              <span className="mt-2 block">
+                The{" "}
+                <Link
+                  to="/how-to-use"
+                  onClick={() => setWelcomeDismissed(true)}
+                  className="text-primary underline underline-offset-4"
                 >
-                  {t.label}
-                </button>
-              ))}
+                  How to use this site
+                </Link>{" "}
+                page walks through sign-in, sessions, and what each area of the portal does.
+              </span>
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="flex-col gap-2 sm:flex-row sm:justify-end">
+            <Button
+              variant="outline"
+              className="min-h-11"
+              onClick={() => setWelcomeDismissed(true)}
+              autoFocus
+            >
+              Got it, let me sign in
+            </Button>
+            <Button asChild className="min-h-11">
+              <Link to="/how-to-use" onClick={() => setWelcomeDismissed(true)}>
+                Read how to use this site
+              </Link>
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      <PageShell
+        eyebrow="Private Access"
+        title={
+          currentUser
+            ? "Your account"
+            : mode === "signin"
+              ? "Resident sign in"
+              : "Create your account"
+        }
+        intro={
+          <>
+            Registered deed-holders and approved leaseholders can sign up with their residence
+            address here, or if previously registered,{" "}
+            <Link
+              to="/login"
+              search={{ mode: "signin" }}
+              onClick={() => setMode("signin")}
+              className="underline underline-offset-4"
+            >
+              sign in by clicking here
+            </Link>
+            . Internal Raffles Persons can use the{" "}
+            <Link to="/staff-signup" className="underline underline-offset-4">
+              Raffles Personnel Sign Up
+            </Link>{" "}
+            and/or the{" "}
+            <Link to="/staff-signin" className="underline underline-offset-4">
+              Raffles Personnel Sign In
+            </Link>{" "}
+            found by scrolling down to the bottom.
+            <strong className="mt-3 block text-foreground">
+              For Demo purposes, login with "{DEMO_ACCOUNT.email}" with password "
+              {DEMO_ACCOUNT.password}" to explore the site without signing up (not all features
+              available in Demo Login).
+            </strong>
+          </>
+        }
+      >
+        {currentUser ? (
+          <SignedIn />
+        ) : (
+          <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_1fr]">
+            <div>
+              <div role="tablist" aria-label="Account" className="flex gap-2">
+                {(
+                  [
+                    { id: "signin", label: "Sign in" },
+                    { id: "signup", label: "Create account" },
+                  ] as const
+                ).map((t) => (
+                  <button
+                    key={t.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={mode === t.id}
+                    onClick={() => setMode(t.id)}
+                    className={`min-h-11 border px-5 text-xs tracking-[0.16em] uppercase transition-colors ${
+                      mode === t.id
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border text-muted-foreground hover:border-primary hover:text-primary"
+                    }`}
+                  >
+                    {t.label}
+                  </button>
+                ))}
+              </div>
+              <div className="mt-4">
+                {mode === "signin" ? (
+                  <SignInForm {...(redirect ? { redirectTo: redirect } : {})} />
+                ) : (
+                  <SignUpForm {...(redirect ? { redirectTo: redirect } : {})} />
+                )}
+              </div>
             </div>
-            <div className="mt-4">
-              {mode === "signin" ? (
-                <SignInForm {...(redirect ? { redirectTo: redirect } : {})} />
-              ) : (
-                <SignUpForm {...(redirect ? { redirectTo: redirect } : {})} />
-              )}
-            </div>
+
+            <aside className="border border-border bg-secondary/40 p-8">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="h-4 w-4 text-primary" aria-hidden="true" />
+                <p className="eyebrow">Demonstration accounts</p>
+              </div>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                This preview keeps everything in your browser. Any residence below may be used with
+                the preview passcode, or register your own account, it will be remembered on this
+                device until you sign out.
+              </p>
+              <p className="mt-3 text-xs font-medium tracking-[0.08em] text-destructive uppercase">
+                Fictional demo profiles, not real residents of the building.
+              </p>
+              <div className="mt-4">
+                <HowAccessWorksModal />
+              </div>
+              <p className="mt-4 border border-border bg-background p-4 text-sm leading-relaxed">
+                Demo login, email <span className="text-foreground">{DEMO_ACCOUNT.email}</span>,
+                password <span className="text-foreground">{DEMO_ACCOUNT.password}</span>. No
+                residence number required; not all features are available.
+              </p>
+
+              <ul className="mt-6 space-y-4">
+                {RESIDENTS.slice(0, 4).map((r) => (
+                  <li key={r.id} className="border-t border-border pt-4 text-sm">
+                    <p className="flex items-center gap-2">
+                      {r.name}
+                      <span className="text-[0.625rem] font-medium tracking-[0.1em] text-destructive uppercase">
+                        Fictional
+                      </span>
+                    </p>
+                    <p className="text-muted-foreground">{r.unit}</p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      {r.email} · passcode {DEMO_PASSCODE}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </aside>
           </div>
-
-          <aside className="border border-border bg-secondary/40 p-8">
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="h-4 w-4 text-primary" aria-hidden="true" />
-              <p className="eyebrow">Demonstration accounts</p>
-            </div>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              This preview keeps everything in your browser. Any residence below may be used with
-              the preview passcode, or register your own account — it will be remembered on this
-              device until you sign out.
-            </p>
-            <p className="mt-3 text-xs font-medium tracking-[0.08em] text-destructive uppercase">
-              Fictional demo profiles — not real residents of the building.
-            </p>
-            <div className="mt-4">
-              <HowAccessWorksModal />
-            </div>
-            <p className="mt-4 border border-border bg-background p-4 text-sm leading-relaxed">
-              Demo login — email <span className="text-foreground">{DEMO_ACCOUNT.email}</span>,
-              password <span className="text-foreground">{DEMO_ACCOUNT.password}</span>. No
-              residence number required; not all features are available.
-            </p>
-
-            <ul className="mt-6 space-y-4">
-              {RESIDENTS.slice(0, 4).map((r) => (
-                <li key={r.id} className="border-t border-border pt-4 text-sm">
-                  <p className="flex items-center gap-2">
-                    {r.name}
-                    <span className="text-[0.625rem] font-medium tracking-[0.1em] text-destructive uppercase">
-                      Fictional
-                    </span>
-                  </p>
-                  <p className="text-muted-foreground">{r.unit}</p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    {r.email} · passcode {DEMO_PASSCODE}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </aside>
-        </div>
-      )}
-    </PageShell>
+        )}
+      </PageShell>
+    </>
   );
 }
 
@@ -325,8 +400,8 @@ function SignInForm({ redirectTo = "/directory" }: { redirectTo?: string }) {
           <FieldError id="signin-unit-error" message={errorFor("unit")} />
           <p id="signin-unit-hint" className="text-xs text-muted-foreground">
             {isDemo
-              ? "Not required for the demo login — leave blank."
-              : "The residence on file for your address — for example 22H."}
+              ? "Not required for the demo login, leave blank."
+              : "The residence on file for your address, for example 22H."}
           </p>
         </div>
         <div className="space-y-2">
@@ -530,7 +605,7 @@ function SignUpForm({ redirectTo = "/directory" }: { redirectTo?: string }) {
           <FieldError id="su-phone-error" message={errorFor("phone")} />
           <p id="su-phone-hint" className="text-xs text-muted-foreground">
             Every household keeps a profile with contact details on file. Listing in the directory
-            and letting neighbours contact you both stay optional — you choose in your profile
+            and letting neighbours contact you both stay optional, you choose in your profile
             settings.
           </p>
         </div>
@@ -549,7 +624,7 @@ function SignUpForm({ redirectTo = "/directory" }: { redirectTo?: string }) {
           />
           <FieldError id="su-password-error" message={errorFor("password")} />
           <p id="su-password-hint" className="text-xs text-muted-foreground">
-            At least eight characters. Never use a real password — this demo stores it in your
+            At least eight characters. Never use a real password, this demo stores it in your
             browser.
           </p>
         </div>

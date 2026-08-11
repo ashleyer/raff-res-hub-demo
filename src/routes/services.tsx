@@ -27,13 +27,13 @@ export const Route = createFileRoute("/services")({
   },
   head: () => ({
     meta: [
-      { title: "Resident Services — Valet, Maintenance, Mail & Lost Property" },
+      { title: "Resident Services, Valet, Maintenance, Mail & Lost Property" },
       {
         name: "description",
         content:
           "Request your car from valet, report a maintenance issue, track parcel deliveries and search lost property at The Raffles Residences Boston.",
       },
-      { property: "og:title", content: "Resident Services — Raffles Boston Residences" },
+      { property: "og:title", content: "Resident Services, Raffles Boston Residences" },
       {
         property: "og:description",
         content: "Valet, maintenance, mail and package handling, and the lost-and-found register.",
@@ -58,7 +58,7 @@ function ServicesPage() {
     <PageShell
       eyebrow="Resident Services"
       title="Valet, maintenance & delivery"
-      intro="Everything the building does for your household in one place — vehicle requests, engineering work, parcel handling and lost property."
+      intro="Everything the building does for your household in one place, vehicle requests, engineering work, parcel handling and lost property."
     >
       <RequireSession area="resident services">
         <TabBar tabs={TABS} active={tab} onChange={setTab} label="Resident service sections" />

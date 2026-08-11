@@ -34,13 +34,13 @@ import { SpatialBookingGrid } from "@/components/SpatialBookingGrid";
 export const Route = createFileRoute("/amenities")({
   head: () => ({
     meta: [
-      { title: "Amenity Reservations — Raffles Boston Residences" },
+      { title: "Amenity Reservations, Raffles Boston Residences" },
       {
         name: "description",
         content:
           "Reserve the Residents' Lounge on Floor 21, Nantucket Kitchen, Secret Garden Room, sports simulator and Emerald Lounge, order in-residence dining, and find hotel venue menus and hours.",
       },
-      { property: "og:title", content: "Amenity Reservations — Raffles Boston Residences" },
+      { property: "og:title", content: "Amenity Reservations, Raffles Boston Residences" },
       {
         property: "og:description",
         content:
@@ -120,8 +120,8 @@ function AmenitiesPage() {
         <h1 className="mt-3 text-4xl md:text-5xl">Reservation requests</h1>
         <div className="gold-rule mt-5" />
         <p className="mt-5 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          The Residents' Lounge on Floor 21 and its amenity rooms — the Nantucket Kitchen, Secret
-          Garden Room, sports simulator and sports lounge — along with the Emerald Lounge may be
+          The Residents' Lounge on Floor 21 and its amenity rooms, the Nantucket Kitchen, Secret
+          Garden Room, sports simulator and sports lounge, along with the Emerald Lounge may be
           reserved here, with catering supplied by the hotel kitchen. Hotel venues below are open to
           residents but are not reservable through this desk.
         </p>

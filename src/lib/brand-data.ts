@@ -11,7 +11,7 @@ export const RAFFLES_STORY: BrandMilestone[] = [
     year: "1915",
     title: "The Singapore Sling is poured",
     detail:
-      "Bartender Ngiam Tong Boon mixes gin, cherry liqueur and pineapple at the Long Bar — a drink now served in every Raffles house, Boston included.",
+      "Bartender Ngiam Tong Boon mixes gin, cherry liqueur and pineapple at the Long Bar, a drink now served in every Raffles house, Boston included.",
   },
   {
     year: "1987",
@@ -29,7 +29,7 @@ export const RAFFLES_STORY: BrandMilestone[] = [
     year: "2019",
     title: "The Singapore restoration",
     detail:
-      "A three-year restoration returns the flagship to its 1920s proportions, with the butler tradition — the personal service model Raffles pioneered — retained on every floor.",
+      "A three-year restoration returns the flagship to its 1920s proportions, with the butler tradition, the personal service model Raffles pioneered, retained on every floor.",
   },
   {
     year: "2023",
@@ -55,7 +55,7 @@ export const RAFFLES_NEWS: BrandNews[] = [
     headline: "Raffles Boston earns its place on the world stay lists",
     where: "Boston, United States",
     detail:
-      "The Back Bay house — the brand's North American debut and the only property in the city combining a Raffles hotel with branded residences — continues to collect national recognition for its dining and Guerlain Spa.",
+      "The Back Bay house, the brand's North American debut and the only property in the city combining a Raffles hotel with branded residences, continues to collect national recognition for its dining and Guerlain Spa.",
     when: "Ongoing",
     href: "https://www.raffles.com/boston/",
   },
@@ -73,7 +73,7 @@ export const RAFFLES_NEWS: BrandNews[] = [
     headline: "Raffles Sentosa Singapore",
     where: "Sentosa, Singapore",
     detail:
-      "An all-villa resort on the island's western ridge — the brand's second house in its birthplace, each villa with a private pool and dedicated butler.",
+      "An all-villa resort on the island's western ridge, the brand's second house in its birthplace, each villa with a private pool and dedicated butler.",
     when: "Open",
     href: "https://www.raffles.com/sentosa/",
   },
@@ -91,7 +91,7 @@ export const RAFFLES_NEWS: BrandNews[] = [
     headline: "Raffles Residences expand across the collection",
     where: "Global",
     detail:
-      "Branded residences now sit alongside Raffles houses in Singapore, London, Boston, Bali, Phnom Penh and Jeddah, each with hotel service, private amenities and access to the ALL — Accor Live Limitless programme.",
+      "Branded residences now sit alongside Raffles houses in Singapore, London, Boston, Bali, Phnom Penh and Jeddah, each with hotel service, private amenities and access to the ALL, Accor Live Limitless programme.",
     when: "Ongoing",
     href: "https://all.accor.com/loyalty-program/index.en.shtml",
   },

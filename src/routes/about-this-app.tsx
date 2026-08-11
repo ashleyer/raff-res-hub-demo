@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Sparkles,
   Heart,
@@ -18,13 +18,13 @@ import ashleyPortrait from "@/assets/aero_headshot.png";
 export const Route = createFileRoute("/about-this-app")({
   head: () => ({
     meta: [
-      { title: "About This App — Why Raffles Boston Residences Hub Exists" },
+      { title: "About This App, Why Raffles Boston Residences Hub Exists" },
       {
         name: "description",
         content:
-          "The story behind this demo: a resident, a coder, and two years of neighbours saying the same thing — they want more community. Meet Ashley Romano and what she built.",
+          "The story behind this demo: a resident, a coder, and two years of neighbours saying the same thing, they want more community. Meet Ashley Romano and what she built.",
       },
-      { property: "og:title", content: "About This App — Why It Exists" },
+      { property: "og:title", content: "About This App, Why It Exists" },
       {
         property: "og:description",
         content: "A resident-built demo exploring whether software can make a building happier.",
@@ -40,32 +40,32 @@ const FEATURES: { icon: typeof Sparkles; title: string; body: string }[] = [
   {
     icon: Bell,
     title: "Ask for anything, and know it landed",
-    body: "Housekeeping, valet, a guest arrival, a security concern — lodge it with the concierge desk and get an on-screen receipt, not just a hope that an email went through. A dedicated security-alert button, styled to stand apart from ordinary navigation, sits in the footer of every page for anything that can't wait.",
+    body: "Housekeeping, valet, a guest arrival, a security concern, lodge it with the concierge desk and get an on-screen receipt, not just a hope that an email went through. A dedicated security-alert button, styled to stand apart from ordinary navigation, sits in the footer of every page for anything that can't wait.",
   },
   {
     icon: Users,
     title: "A directory that asks first",
-    body: "Every resident decides, room by room, whether to be listed and whether neighbours can reach them directly. Nothing is visible by default — community should never come at the cost of privacy.",
+    body: "Every resident decides, room by room, whether to be listed and whether neighbours can reach them directly. Nothing is visible by default, community should never come at the cost of privacy.",
   },
   {
     icon: Heart,
     title: "Community, on purpose",
-    body: "Interest circles, a marketplace for favours and recommendations, a gratitude board for the staff who make the place feel like home — the small threads that turn a building into neighbours.",
+    body: "Interest circles, a marketplace for favours and recommendations, a gratitude board for the staff who make the place feel like home, the small threads that turn a building into neighbours.",
   },
   {
     icon: Vote,
     title: "A real voice in how the building runs",
-    body: "Board measures, live ballots, and the governing documents in one place — one vote per residence, counted transparently.",
+    body: "Board measures, live ballots, and the governing documents in one place: one vote per residence, counted transparently.",
   },
   {
     icon: Wrench,
     title: "The hotel side, simplified",
-    body: "A simulated bridge into the hotel's systems — folios, priority tables, in-residence delivery — showing what a genuinely connected residence-hotel experience could feel like.",
+    body: "A simulated bridge into the hotel's systems, folios, priority tables, in-residence delivery, showing what a genuinely connected residence-hotel experience could feel like.",
   },
   {
     icon: ShieldCheck,
     title: "Built to hold up, not just look nice",
-    body: "Session handling, accessibility (WCAG 2.2 AA) — including type weight tuned for legibility against the site's quiet, thin editorial display font — and automated visual, unit and accessibility checks run against this codebase the same way they would for a production product.",
+    body: "Session handling, accessibility (WCAG 2.2 AA), including type weight tuned for legibility against the site's quiet, thin editorial display font, and automated visual, unit and accessibility checks run against this codebase the same way they would for a production product.",
   },
 ];
 
@@ -91,7 +91,7 @@ function AboutThisAppPage() {
         <div className="measure mt-8 space-y-6">
           <p className="text-pretty text-xl leading-relaxed text-foreground sm:text-2xl">
             I've lived here for two years. At dinners, in the elevator, at events in the Residents'
-            Lounge — one topic keeps coming back no matter who I'm talking to:{" "}
+            Lounge, one topic keeps coming back no matter who I'm talking to:{" "}
             <span className="text-primary">residents want to feel more connected</span> to each
             other, to the staff who take such good care of us, and to the building itself. I want
             that too.
@@ -100,7 +100,7 @@ function AboutThisAppPage() {
             I'm also, by nature and by trade, a{" "}
             <span className="font-medium text-foreground">nerd who codes for fun</span>. So instead
             of just agreeing over another glass of wine, I built this: a fully working demo of what
-            an intranet for a residence like ours could look like — concierge requests, amenity
+            an intranet for a residence like ours could look like, concierge requests, amenity
             bookings, a resident directory, governance ballots, a marketplace, a gratitude board for
             staff, even a simulated bridge into the hotel's own systems.{" "}
             <span className="font-medium text-foreground">
@@ -108,10 +108,10 @@ function AboutThisAppPage() {
             </span>
           </p>
           <p className="text-base leading-relaxed text-foreground/90 sm:text-lg">
-            It's not affiliated with Raffles, Accor, or the real building's management — it's an
+            It's not affiliated with Raffles, Accor, or the real building's management, it's an
             independent, self-funded side project, built and paid for on my own time, to explore one
-            question honestly: could a well-built app make everyone here — staff, residents, and the
-            community around them — a little happier?{" "}
+            question honestly: could a well-built app make everyone here, staff, residents, and the
+            community around them, a little happier?{" "}
             <span className="text-primary">
               I think the answer is yes, and I'd love the chance to build it for real.
             </span>
@@ -179,6 +179,44 @@ function AboutThisAppPage() {
 
             <div className="measure space-y-5 text-base leading-relaxed text-foreground/90 sm:text-lg">
               <p>
+                My journey here is anything but conventional. I explored a string of passions before
+                tech ever entered the picture: designing jewelry for fun until my men's fashion
+                accessories found their way into Nordstrom; drawing on an equestrian-centric
+                childhood to drive a horse and carriage in downtown Boston, right up until I took
+                out a valeted car on Broad Street; teaching and tutoring for the SAT; and
+                proofreading and editing in Harvard's Adaptive Technology Department. My first
+                career, writing and publishing, soared as the North American lead for a tech-driven
+                journal and academic publishing services firm, followed by work as a freelance
+                academic writer and then a copywriter, crafting website content for everything from
+                a pawn shop in Davis Square, written on a pawned computer, to every single job title
+                description listed on Indeed.com.
+              </p>
+              <p>
+                Boston is home, and with its high cost of living, my early-career tiny income always
+                needed supplementing with gigs. And what a range they were: restaurant and bar
+                hospitality, cashiering at a liquor store, dog walking and sitting, a real estate
+                sales license I was frankly not good at, several fashion-aligned roles with local
+                designers across their branding, events and retail operations, then biz dev selling
+                a small natural foods company's products to places like Whole Foods and TJX. I even
+                managed an antique china shop on Charles Street, until I broke stuff. My all-time
+                favorite? Being the designated key-cutter and paint mixer at Economy Hardware, the
+                beloved, now-closed network of local shops.
+              </p>
+              <p>
+                To my surprise, that odd array of jobs turned out to be my biggest asset. Those
+                adventures fostered a bona fide shedding of ego, cemented a die-hard resilience
+                toward obstacles, and culminated in a robust adaptability: the very qualities that
+                carried me from fullstack coding bootcamper to a recognized leader in AI governance
+                and moderation in just eight years. I credit the diverse path, the lessons from my
+                countless mistakes along the way, a dedication to core personal values like staying
+                curious, the close-family support and character traits they helped me develop, and
+                the teamwork skills I honed as a{" "}
+                <span className="font-medium text-foreground">
+                  USRowing National Champion and later an NCAA Division I rower
+                </span>
+                .
+              </p>
+              <p>
                 By day, I'm{" "}
                 <span className="font-medium text-foreground">
                   Co-Founder (Technical) and President of StayRele
@@ -189,19 +227,16 @@ function AboutThisAppPage() {
                 React Native, and C#/.NET most weeks.
               </p>
               <p>
-                I didn't take the usual road here. After years of entrepreneurial pursuits and
-                studies at Harvard and Boston University, I landed in General Assembly's full-stack
-                immersive, which led to Liberty Mutual's FAANG-competitive TechStart engineering
-                apprenticeship — and to shipping real production code in its Investments and Legal
-                Strategic Services business units. The legal work stuck: I went on to design four
-                proprietary access-to-justice algorithms for a legaltech startup,{" "}
+                The road into software ran through years of entrepreneurial pursuits and studies at
+                Harvard and Boston University, then General Assembly's full-stack immersive, then
+                Liberty Mutual's FAANG-competitive TechStart engineering apprenticeship, shipping
+                real production code in its Investments and Legal Strategic Services business units.
+                The legal work stuck: I went on to design four proprietary access-to-justice
+                algorithms for a legaltech startup,{" "}
                 <span className="font-medium text-primary">
                   three of which are now under provisional patent
                 </span>
-                .
-              </p>
-              <p>
-                Curiosity about AI pulled me into the Boston Google Developer Group and Gemini
+                . Curiosity about AI pulled me into the Boston Google Developer Group and Gemini
                 certifications, then IBM and Anthropic AI certifications, alongside an MIT
                 Innovation and Technology certificate. On the side, I do AI benchmarking task work
                 for a Stanford-backed startup, which keeps my skills sharp and my humility sharper.
@@ -209,7 +244,7 @@ function AboutThisAppPage() {
               <p className="border-l-2 border-primary/50 pl-5 text-foreground italic">
                 I mentor women and anyone entering tech, and I run my team on a fail-forward rule I
                 apply to myself first: break things, admit it, laugh, learn. In coding, there's no
-                room for egos — there's always room for a laugh. My mistakes are the only reason I
+                room for egos; there's always room for a laugh. My mistakes are the only reason I
                 know anything.
               </p>
               <p>
@@ -219,7 +254,7 @@ function AboutThisAppPage() {
                   open-source developer community with 15,000+ members
                 </span>
                 . In enterprise engineering, I was consistently chosen to cross-functionally present
-                sprint reviews to 100+ stakeholders — making sure engineers and executives were
+                sprint reviews to 100+ stakeholders, making sure engineers and executives were
                 actually speaking the same language. I've spoken at Liberty Mutual's Women in Tech
                 and TechStart programs about my path into software, in a style I'd describe as
                 practical, energetic, and just funny enough to keep a room of engineers awake after
@@ -227,9 +262,11 @@ function AboutThisAppPage() {
                 organizations across Boston, Paradise Valley, Concord, and Nantucket.
               </p>
               <p>
-                And, evenings and weekends, I live at Raffles Residences Boston in{" "}
-                <span className="font-medium text-primary">Unit 22H</span> — which is where this
-                particular idea came from.
+                Today I'm equally shocked and excited that all those "errs" have culminated in
+                turning a previous Wearer of Too Many Hats into an industrious, impactful female AI
+                tech leader. Who would have guessed? And, evenings and weekends, I live at Raffles
+                Residences Boston in <span className="font-medium text-primary">Unit 22H</span>,
+                which is where this particular idea came from.
               </p>
             </div>
           </div>
@@ -237,15 +274,15 @@ function AboutThisAppPage() {
       </section>
 
       <section aria-labelledby="motto-heading" className="mt-20 border-t border-border pt-14">
-        <p className="eyebrow text-center sm:text-left">The philosophy behind the build</p>
+        <p className="eyebrow text-center sm:text-left">Ashley's Personal Mantra</p>
         <h2 id="motto-heading" className="sr-only">
-          Ashley's motto
+          Ashley's personal mantra
         </h2>
         <blockquote className="chrome-dark mt-6 border border-primary/40 p-8 text-center sm:p-14">
           <Sparkles className="mx-auto h-7 w-7 text-primary" aria-hidden="true" />
           <p className="measure mx-auto mt-6 text-pretty font-display text-2xl leading-relaxed sm:text-3xl">
             "AI + Tech are one of humanity's greatest advances; let's learn it, experiment with it,
-            + apply it so we change what's going on right now — until it helps over harms humans +
+            + apply it so we change what's going on right now, until it helps over harms humans +
             their communities, and so it loses its currently bad rap, and instead gives way to even
             greater emotional, physical, spiritual, + financial gain for Earth's inhabitants."
           </p>
@@ -253,6 +290,27 @@ function AboutThisAppPage() {
             Just Say No to the Status Quo!
           </p>
         </blockquote>
+      </section>
+
+      <section aria-labelledby="howto-heading" className="mt-20 border-t border-border pt-14">
+        <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+          <div>
+            <p className="eyebrow">One more thing</p>
+            <h2 id="howto-heading" className="mt-3 font-display text-3xl sm:text-4xl">
+              New here? Start with how to use this site
+            </h2>
+            <p className="measure mt-4 text-base leading-relaxed text-foreground/90 sm:text-lg">
+              Login directions, demo accounts and a two-minute tour of everything this demo can do,
+              all on one page.
+            </p>
+          </div>
+          <Link
+            to="/how-to-use"
+            className="btn-outline inline-flex min-h-12 shrink-0 items-center justify-center px-8"
+          >
+            How to use this site
+          </Link>
+        </div>
       </section>
 
       <section
@@ -263,7 +321,7 @@ function AboutThisAppPage() {
           Say hello, ask a question, or file a bug
         </h2>
         <p className="measure mx-auto mt-4 text-base leading-relaxed text-foreground/90 sm:text-lg">
-          I built this alone, on my own time — I'd genuinely love to hear what you think of it.
+          I built this alone, on my own time, I'd genuinely love to hear what you think of it.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-8">
           <ContactLink
