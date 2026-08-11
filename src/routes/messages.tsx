@@ -15,13 +15,13 @@ export const Route = createFileRoute("/messages")({
   beforeLoad: requireResidentSession,
   head: () => ({
     meta: [
-      { title: "Resident Messaging — Raffles Boston Residences" },
+      { title: "Resident Messaging · Raffles Boston Residences" },
       {
         name: "description",
         content:
           "Private and group messaging between residences at The Raffles Residences Boston, including interest groups and committees.",
       },
-      { property: "og:title", content: "Resident Messaging — Raffles Boston Residences" },
+      { property: "og:title", content: "Resident Messaging · Raffles Boston Residences" },
       {
         property: "og:description",
         content: "Group and private conversations between neighbours at 40 Trinity Place.",
@@ -169,7 +169,7 @@ function MessagesBody() {
               ))}
               {active.messages.length === 0 && (
                 <li className="text-sm text-muted-foreground">
-                  No messages yet — open the conversation below.
+                  No messages yet · open the conversation below.
                 </li>
               )}
             </ul>

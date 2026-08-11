@@ -14,13 +14,13 @@ import { usePortal } from "@/lib/portal-store";
 export const Route = createFileRoute("/concierge-desk")({
   head: () => ({
     meta: [
-      { title: "Concierge Desk Queue — Raffles Boston Residences" },
+      { title: "Concierge Desk Queue · Raffles Boston Residences" },
       {
         name: "description",
         content:
           "Internal concierge management view for the residences team: queue, filter and respond to resident requests by category.",
       },
-      { property: "og:title", content: "Concierge Desk Queue — Raffles Boston Residences" },
+      { property: "og:title", content: "Concierge Desk Queue · Raffles Boston Residences" },
       {
         property: "og:description",
         content:
@@ -42,7 +42,7 @@ function DeskPage() {
     <PageShell
       eyebrow="Residences Team"
       title="Concierge desk queue"
-      intro="Internal triage board. Every request lodged by a residence arrives here — filter by category, priority or state, assign an attendant, and reply to the residence in the same place."
+      intro="Internal triage board. Every request lodged by a residence arrives here · filter by category, priority or state, assign an attendant, and reply to the residence in the same place."
     >
       <DeskGate />
     </PageShell>

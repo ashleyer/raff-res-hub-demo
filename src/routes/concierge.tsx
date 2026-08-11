@@ -14,21 +14,21 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
-/** Reported lost/found items already have a dedicated flow on the Services page — signpost there
+/** Reported lost/found items already have a dedicated flow on the Services page · signpost there
  * instead of taking a second, disconnected report through the concierge form. */
 const LOST_FOUND_NOTICE =
-  "Lost something, or found someone else's item? Report it directly on the Lost & Found page — it keeps every report in one searchable place.";
+  "Lost something, or found someone else's item? Report it directly on the Lost & Found page · it keeps every report in one searchable place.";
 
 export const Route = createFileRoute("/concierge")({
   head: () => ({
     meta: [
-      { title: "Concierge Requests — Raffles Boston Residences" },
+      { title: "Concierge Requests · Raffles Boston Residences" },
       {
         name: "description",
         content:
           "Lodge housekeeping, valet, dining, floristry and engineering requests with the Raffles Boston Residences concierge desk.",
       },
-      { property: "og:title", content: "Concierge Requests — Raffles Boston Residences" },
+      { property: "og:title", content: "Concierge Requests · Raffles Boston Residences" },
       {
         property: "og:description",
         content: "Round-the-clock concierge service requests for residents of Raffles Boston.",
@@ -66,7 +66,7 @@ function ConciergePage() {
     if (currentUser?.unit) setUnit((v) => v || currentUser.unit!);
   }, [currentUser]);
 
-  /* A security concern is inherently urgent — default it to priority attendance,
+  /* A security concern is inherently urgent · default it to priority attendance,
      but leave the switch adjustable in case a resident disagrees. */
   const selectService = (next: string) => {
     setService(next);
@@ -252,13 +252,13 @@ function ConciergePage() {
                     onChange={(e) => setDetail(e.target.value)}
                     placeholder={
                       service === "Other"
-                        ? "Tell the desk what you need — anything not listed above"
+                        ? "Tell the desk what you need · anything not listed above"
                         : service === "Guest Arrival Greeting"
                           ? "Guest name, arrival time, and how you would like them received"
                           : service === "Dry Cleaning & Laundry"
                             ? "Number of pieces, any special care, and preferred collection time"
                             : service === "Security"
-                              ? "Describe the security concern — location, time, and anyone involved"
+                              ? "Describe the security concern · location, time, and anyone involved"
                               : "Describe the request for the concierge"
                     }
                   />

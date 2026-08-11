@@ -129,7 +129,7 @@ export const BROADCASTS: Broadcast[] = [
   },
   {
     id: 2,
-    title: "Annual Trustee Assembly — Notice of Quorum",
+    title: "Annual Trustee Assembly · Notice of Quorum",
     summary:
       "Deed-holders are asked to register attendance with the Residences Office no later than the 20th. Proxy instruments may be lodged with the concierge desk.",
     badge: "Governance",
@@ -182,10 +182,10 @@ export const AMENITIES: Amenity[] = [
     name: "Residents' Lounge",
     location: "Floor 21 · Deed-holders and their guests",
     description:
-      "The private heart of the residences on the twenty-first floor: a panelled salon with skyline outlook over Back Bay, fireside seating and adjoining amenity rooms — the Nantucket Kitchen, Secret Garden Room, sports simulator and sports lounge.",
+      "The private heart of the residences on the twenty-first floor: a panelled salon with skyline outlook over Back Bay, fireside seating and adjoining amenity rooms · the Nantucket Kitchen, Secret Garden Room, sports simulator and sports lounge.",
     hours: "Open 24 hours",
     service:
-      "The lounge and its amenity rooms may be reserved through this desk. Catering is provided by the hotel kitchen — attach a selection to any request.",
+      "The lounge and its amenity rooms may be reserved through this desk. Catering is provided by the hotel kitchen · attach a selection to any request.",
     slots: ["Morning · 09:00", "Afternoon · 15:00", "Evening · 18:30", "Late · 21:30"],
     image: residentsLoungeImg,
   },
@@ -226,7 +226,7 @@ export const AMENITIES: Amenity[] = [
     name: "Sports Lounge",
     location: "Floor 21 · Residents' Lounge",
     description:
-      "Club seating and screens beside the simulator — reservable for match evenings, with catering from the hotel on request.",
+      "Club seating and screens beside the simulator · reservable for match evenings, with catering from the hotel on request.",
     hours: "Open 24 hours",
     service: "Catering from the hotel kitchen may be attached to any sitting.",
     slots: ["Afternoon · 14:00", "Evening · 18:00", "Late · 21:00"],
@@ -263,7 +263,7 @@ export const VENUES: Venue[] = [
     name: "Long Bar & Terrace",
     location: "Perched above Back Bay · Raffles Boston",
     description:
-      "All-day dining with New England classics — lobster rolls, oysters on the half shell — legendary Raffles cocktails including the Singapore Sling and Boston Sling, and afternoon tea Thursday to Sunday, 2:00–4:30 PM.",
+      "All-day dining with New England classics · lobster rolls, oysters on the half shell · legendary Raffles cocktails including the Singapore Sling and Boston Sling, and afternoon tea Thursday to Sunday, 2:00–4:30 PM.",
     hours: [
       "Monday – Friday · 6:30 AM – 12:00 AM",
       "Saturday & Sunday · 7:00 AM – 12:00 AM",
@@ -285,7 +285,7 @@ export const VENUES: Venue[] = [
     name: "La Padrona",
     location: "38 Trinity Place · Michelin Guide recommended Italian",
     description:
-      "Chef Jody Adams' Italian dining room beside the residences — an ode to exquisite cuisine, cherished company and the pleasure of breaking bread together.",
+      "Chef Jody Adams' Italian dining room beside the residences · an ode to exquisite cuisine, cherished company and the pleasure of breaking bread together.",
     hours: ["Sunday – Thursday · 5:00 PM – 10:00 PM", "Friday & Saturday · 5:00 PM – 11:00 PM"],
     note: "Reservations open on Resy at 9:00 AM on a rolling fourteen-day basis.",
     image: laPadronaImg,
@@ -319,7 +319,7 @@ export const VENUES: Venue[] = [
     description:
       "Treatment suites and private relaxation pods, his and hers sauna and steam rooms, a contemporary fitness centre and a twenty-metre pool.",
     hours: ["Daily · 7:00 AM – 8:00 PM"],
-    note: "Treatment rooms are not reservable here — book directly with the spa.",
+    note: "Treatment rooms are not reservable here · book directly with the spa.",
     image: guerlainSpaImg,
     links: [
       { label: "Spa services", href: "https://www.raffles.com/boston/wellness/" },
@@ -333,7 +333,7 @@ export type MenuItem = { id: string; name: string; detail: string; price: number
 export type MenuSection = { id: string; label: string; hours: string; items: MenuItem[] };
 
 export const IN_RESIDENCE_DINING = {
-  name: "Private Dining — In-Residence",
+  name: "Private Dining · In-Residence",
   location: "Served in your residence by Raffles Hotel Staff, In-Room Dining",
   hours: "Open 24 hours",
   note: "Table dressing, glassware and clearing are included. A 20% service charge and delivery fee apply to every order.",
@@ -465,7 +465,7 @@ export const IN_RESIDENCE_MENU: MenuSection[] = [
 ];
 
 export const CATERING_OPTIONS = [
-  "No catering — room only",
+  "No catering · room only",
   "Hotel continental breakfast service",
   "Coffee, tea & pastries",
   "Canapés & Champagne reception",
@@ -523,7 +523,7 @@ export const SEED_EVENTS: ResidentEvent[] = [
   },
   {
     id: 2,
-    title: "Chef's Table — Late Summer Menu",
+    title: "Chef's Table · Late Summer Menu",
     detail:
       "Five courses composed by the La Padrona kitchen, served at the private table for residences.",
     location: "La Padrona",
@@ -591,7 +591,7 @@ export const SEED_REQUESTS: ConciergeRequest[] = [
   {
     id: 2,
     service: "Floristry",
-    detail: "Weekly arrangement for the entry console — white peony and eucalyptus.",
+    detail: "Weekly arrangement for the entry console · white peony and eucalyptus.",
     unit: "Residence 28D",
     priority: "Standard",
     status: "Lodged",
@@ -652,7 +652,7 @@ export const GOVERNANCE_DOCUMENTS: GovernanceDocument[] = [
     issued: "Revised January 2026",
   },
   { id: 2, title: "Operating Budget & Reserve Study", kind: "Financial", issued: "February 2026" },
-  { id: 3, title: "Minutes — February Trustee Sitting", kind: "Minutes", issued: "March 1, 2026" },
+  { id: 3, title: "Minutes · February Trustee Sitting", kind: "Minutes", issued: "March 1, 2026" },
   {
     id: 4,
     title: "Proxy Instrument for the Annual Assembly",

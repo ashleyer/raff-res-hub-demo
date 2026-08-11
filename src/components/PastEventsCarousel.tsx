@@ -31,7 +31,7 @@ export function PastEventsCarousel() {
           {PAST_EVENT_PHOTOS.map((photo) => (
             <CarouselItem key={photo.id} className="pl-4 sm:basis-1/2 lg:basis-1/3">
               <figure className="relative h-full border border-border bg-card">
-                <DemoTag label="Demo photo" title="Illustrative photo — not a real event" />
+                <DemoTag label="Demo photo" title="Illustrative photo · not a real event" />
                 <img
                   src={photo.image}
                   alt={photo.alt}

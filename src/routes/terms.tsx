@@ -6,13 +6,13 @@ import { LegalDocument, type LegalSection } from "@/components/LegalDocument";
 export const Route = createFileRoute("/terms")({
   head: () => ({
     meta: [
-      { title: "Terms of Use — Raffles Boston Residences" },
+      { title: "Terms of Use · Raffles Boston Residences" },
       {
         name: "description",
         content:
           "Terms of use for the Raffles Boston Residences resident portal: eligibility, resident conduct, bookings and requests, and demo limitations.",
       },
-      { property: "og:title", content: "Terms of Use — Raffles Boston Residences" },
+      { property: "og:title", content: "Terms of Use · Raffles Boston Residences" },
       {
         property: "og:description",
         content:

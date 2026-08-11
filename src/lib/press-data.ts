@@ -1,8 +1,8 @@
 /**
- * Press coverage of Raffles Boston — hotel, residences and venues.
+ * Press coverage of Raffles Boston · hotel, residences and venues.
  *
  * Every entry below is drawn from the official press room published at
- * https://rafflesresidencesboston.com/press/ — outlet, headline, date and
+ * https://rafflesresidencesboston.com/press/ · outlet, headline, date and
  * link are reproduced as published there. Nothing here is invented.
  */
 
@@ -22,13 +22,13 @@ const HOST = "https://rafflesresidencesboston.com";
 
 export const PRESS_ROOM_URL = `${HOST}/press/`;
 export const PRESS_CONTACT =
-  "Lauren Soriano, Director of Public Relations — lauren.soriano@raffles.com";
+  "Lauren Soriano, Director of Public Relations · lauren.soriano@raffles.com";
 
 export const PRESS_ITEMS: PressItem[] = [
   {
     outlet: "Travel + Leisure",
     title:
-      "Raffles Just Opened Its First North American Hotel — and It's One of the Best Places I've Ever Stayed",
+      "Raffles Just Opened Its First North American Hotel · and It's One of the Best Places I've Ever Stayed",
     date: "2024-01-02",
     dateLabel: "January 2, 2024",
     url: `${HOST}/site/assets/files/1391/the-raffles-residences-boston-1704171600_0001.pdf`,

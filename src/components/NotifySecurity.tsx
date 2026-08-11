@@ -22,7 +22,7 @@ function formatLoggedAt(now: Date): string {
  * Security notification trigger. Opens the desk's mail draft (for a production
  * deployment's real inbox) AND lodges a Priority "Security" concierge request,
  * so the click lands in the same staff-reviewed queue as the concierge form's
- * own Security category — one review pipeline behind two front doors, by design.
+ * own Security category · one review pipeline behind two front doors, by design.
  * Confirms with a toast and an on-screen receipt either way.
  */
 export function NotifySecurity({
@@ -47,13 +47,13 @@ export function NotifySecurity({
           const id = addConciergeRequest({
             service: "Security",
             detail:
-              'Submitted via the site-wide "Notify security" button — no further detail given yet. Follow up with the resident directly.',
+              'Submitted via the site-wide "Notify security" button · no further detail given yet. Follow up with the resident directly.',
             unit: currentUser?.unit ?? "Not signed in",
             priority: "Priority",
           });
           setReceipt({ reference: `SEC-${id}`, at: formatLoggedAt(new Date()) });
           toast.success("Security has been notified.", {
-            description: `Reference SEC-${id} — also queued on the concierge desk.`,
+            description: `Reference SEC-${id} · also queued on the concierge desk.`,
           });
         }}
       >
@@ -86,7 +86,7 @@ export function NotifySecurity({
             </div>
           </dl>
           <p className="mt-3 text-xs text-muted-foreground">
-            Demo receipt — the email draft isn't actually delivered, but this request is now on the
+            Demo receipt · the email draft isn't actually delivered, but this request is now on the
             concierge desk queue like any other. For emergencies, dial 911.
           </p>
         </div>

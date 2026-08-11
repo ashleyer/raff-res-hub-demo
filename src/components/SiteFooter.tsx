@@ -152,7 +152,7 @@ export function SiteFooter() {
         />
 
         <p className="measure mx-auto mt-8 text-xs leading-relaxed text-muted-foreground">
-          Preview environment — resident data shown here is illustrative and resets when the page
+          Preview environment · resident data shown here is illustrative and resets when the page
           reloads.
         </p>
 
@@ -170,7 +170,7 @@ export function SiteFooter() {
             onClick={() => setDevOpen(true)}
             aria-haspopup="dialog"
             aria-expanded={devOpen}
-            aria-label="Ashley Romano — contact the developer"
+            aria-label="Ashley Romano · contact the developer"
             className="inline-flex min-h-11 items-center underline underline-offset-4 hover:no-underline"
           >
             Ashley Romano

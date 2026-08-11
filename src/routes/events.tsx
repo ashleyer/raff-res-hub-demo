@@ -22,13 +22,13 @@ import { SocialFeed } from "@/components/SocialFeed";
 export const Route = createFileRoute("/events")({
   head: () => ({
     meta: [
-      { title: "Resident Events & RSVP — Raffles Boston Residences" },
+      { title: "Resident Events & RSVP · Raffles Boston Residences" },
       {
         name: "description",
         content:
           "The residents' calendar at 40 Trinity Place: wine salons, chef's tables and wellness mornings, with RSVP and a register for proposing new events.",
       },
-      { property: "og:title", content: "Resident Events & RSVP — Raffles Boston Residences" },
+      { property: "og:title", content: "Resident Events & RSVP · Raffles Boston Residences" },
       {
         property: "og:description",
         content:

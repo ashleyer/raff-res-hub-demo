@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Visual regression test — site header auth buttons across mobile breakpoints.
+ * Visual regression test · site header auth buttons across mobile breakpoints.
  *
  *   node scripts/visual-header.mjs                 # verify against baseline
  *   node scripts/visual-header.mjs --update        # re-record the baseline
@@ -84,7 +84,7 @@ async function main() {
   try {
     ({ chromium } = await import("playwright"));
   } catch {
-    console.error("Playwright is not installed — run `bun add -d playwright` first.");
+    console.error("Playwright is not installed · run `bun add -d playwright` first.");
     process.exit(1);
   }
 
@@ -92,7 +92,7 @@ async function main() {
   const baseline =
     !UPDATE && existsSync(BASELINE) ? JSON.parse(readFileSync(BASELINE, "utf8")) : null;
   if (!UPDATE && !baseline) {
-    console.error(`No baseline at ${BASELINE} — run with --update once to record it.`);
+    console.error(`No baseline at ${BASELINE} · run with --update once to record it.`);
     process.exit(1);
   }
 
@@ -142,7 +142,7 @@ async function main() {
       if (baseline) {
         const prev = baseline[label];
         if (!prev) {
-          failures.push(`${label}: no baseline entry — re-record with --update`);
+          failures.push(`${label}: no baseline entry · re-record with --update`);
         } else if (JSON.stringify(prev) !== JSON.stringify(snapshot)) {
           failures.push(
             `${label}: layout changed\n    baseline ${JSON.stringify(prev)}\n    current  ${JSON.stringify(snapshot)}`,

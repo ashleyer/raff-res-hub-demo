@@ -34,7 +34,7 @@ export function AccountAccess() {
           <p className="eyebrow">Returning resident</p>
           <h3 className="mt-3 text-balance text-xl sm:text-2xl">Resident sign in</h3>
           <p className="mt-3 text-pretty text-sm leading-relaxed text-muted-foreground">
-            Pick up where you left off — requests, reservations, messages and billing.
+            Pick up where you left off · requests, reservations, messages and billing.
           </p>
           <Link
             to="/login"

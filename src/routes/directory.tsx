@@ -20,13 +20,13 @@ export const Route = createFileRoute("/directory")({
   beforeLoad: requireResidentSession,
   head: () => ({
     meta: [
-      { title: "Residents' Directory — Raffles Boston Residences" },
+      { title: "Residents' Directory · Raffles Boston Residences" },
       {
         name: "description",
         content:
           "Opt-in residents' directory and household profiles for The Raffles Residences Boston: share as much or as little as you wish.",
       },
-      { property: "og:title", content: "Residents' Directory — Raffles Boston Residences" },
+      { property: "og:title", content: "Residents' Directory · Raffles Boston Residences" },
       {
         property: "og:description",
         content: "An opt-in register of neighbours at 40 Trinity Place.",
@@ -41,7 +41,7 @@ function DirectoryPage() {
     <PageShell
       eyebrow="Community"
       title="Residents' directory"
-      intro="Every household creates a profile with contact details when registering. Listing and contactability remain entirely optional — nothing about your household appears here unless you switch it on, and contact details are shown only to neighbours you have opted in to hear from."
+      intro="Every household creates a profile with contact details when registering. Listing and contactability remain entirely optional · nothing about your household appears here unless you switch it on, and contact details are shown only to neighbours you have opted in to hear from."
     >
       <RequireSession area="the residents' directory">
         <DirectoryBody />
@@ -212,7 +212,7 @@ function DirectoryBody() {
                     </>
                   ) : (
                     <span className="text-muted-foreground">
-                      Listed but not accepting direct contact — reach them through the concierge
+                      Listed but not accepting direct contact · reach them through the concierge
                       desk.
                     </span>
                   )}
@@ -367,7 +367,7 @@ function HouseholdProfile() {
   return (
     <SectionCard
       id="household"
-      title={`Household profile — ${currentUser.unit}`}
+      title={`Household profile · ${currentUser.unit}`}
       description="One profile per residence, with individual resident and pet entries you may add or remove at will."
     >
       <form
@@ -448,7 +448,7 @@ function HouseholdProfile() {
         </h3>
         <p className="mt-2 text-sm text-muted-foreground">
           Each resident of the unit may have their own nested profile. One is the main residence
-          profile — with a single profile on file, it is chosen for you.
+          profile · with a single profile on file, it is chosen for you.
         </p>
         <fieldset className="mt-4">
           <legend className="sr-only">Main residence profile</legend>

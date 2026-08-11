@@ -12,13 +12,13 @@ import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/governance")({
   head: () => ({
     meta: [
-      { title: "Governance & Ballots — Raffles Boston Residences" },
+      { title: "Governance & Ballots · Raffles Boston Residences" },
       {
         name: "description",
         content:
           "Board measures, ballot standings and governing documents for deed-holders of Raffles Boston Residences.",
       },
-      { property: "og:title", content: "Governance & Ballots — Raffles Boston Residences" },
+      { property: "og:title", content: "Governance & Ballots · Raffles Boston Residences" },
       {
         property: "og:description",
         content: "Trustee measures, resident ballots and the residence's governing instruments.",
@@ -42,7 +42,7 @@ function GovernancePage() {
     }
     castBallot(m.id, choice);
     toast.success(
-      `Ballot recorded — ${choice === "for" ? "in favour" : "against"} ${m.reference}.`,
+      `Ballot recorded · ${choice === "for" ? "in favour" : "against"} ${m.reference}.`,
     );
   };
 

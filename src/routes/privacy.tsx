@@ -6,13 +6,13 @@ import { LegalDocument, type LegalSection } from "@/components/LegalDocument";
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "Privacy Policy — Raffles Boston Residences" },
+      { title: "Privacy Policy · Raffles Boston Residences" },
       {
         name: "description",
         content:
           "How the Raffles Boston Residences resident portal handles resident information, directory visibility, messaging and demo data.",
       },
-      { property: "og:title", content: "Privacy Policy — Raffles Boston Residences" },
+      { property: "og:title", content: "Privacy Policy · Raffles Boston Residences" },
       {
         property: "og:description",
         content:
