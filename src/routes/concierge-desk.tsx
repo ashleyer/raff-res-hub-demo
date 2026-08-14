@@ -42,7 +42,7 @@ function DeskPage() {
     <PageShell
       eyebrow="Residences Team"
       title="Concierge desk queue"
-      intro="Internal triage board. Every request lodged by a residence arrives here · filter by category, priority or state, assign an attendant, and reply to the residence in the same place."
+      intro="Internal triage board. Every request lodged by a residence arrives here: filter by category, priority or state, assign an attendant, and reply to the residence in the same place."
     >
       <DeskGate />
     </PageShell>

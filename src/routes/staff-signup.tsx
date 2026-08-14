@@ -66,7 +66,7 @@ function StaffSignUpPage() {
     <PageShell
       eyebrow="Raffles Personnel"
       title="Raffles Personnel Sign Up"
-      intro="For internal Raffles Boston colleagues. Register a personnel account to reach the staff dashboard. Demonstration only · accounts are kept in this browser."
+      intro="For internal Raffles Boston colleagues. Register a personnel account to reach the staff dashboard. Demonstration only: accounts are kept in this browser."
     >
       <form
         onSubmit={(e) => void submit(e)}

@@ -22,7 +22,7 @@ export const Route = createFileRoute("/marketplace")({
       {
         name: "description",
         content:
-          "Ask neighbours for service recommendations · dog sitters, cleaners, tutors · and buy, sell or give away household items.",
+          "Ask neighbours for service recommendations (dog sitters, cleaners, tutors) and buy, sell or give away household items.",
       },
       { property: "og:title", content: "Residents' Marketplace · Raffles Boston Residences" },
       {

@@ -2,7 +2,7 @@
  * Rule-based personalisation engine.
  *
  * Every suggestion is derived deterministically from data points the resident
- * has already generated inside the portal · profile interests, amenity
+ * has already generated inside the portal — profile interests, amenity
  * bookings, event RSVPs, community memberships, marketplace and forum
  * activity, house-account status and open service requests.
  */
@@ -157,7 +157,7 @@ export function buildRecommendations(input: RecommendationInput): Recommendation
       title: seen ? `Reserve ${amenity.name} again` : `Try ${amenity.name}`,
       reason: seen
         ? `You have booked ${amenity.name} before and ${entry.signals[0]?.toLowerCase() ?? "it fits your profile"}.`
-        : `Matched to your profile · ${entry.signals.join("; ").toLowerCase()}.`,
+        : `Matched to your profile: ${entry.signals.join("; ").toLowerCase()}.`,
       signals: entry.signals,
       to: "/amenities",
       cta: "Open reservations",
@@ -218,7 +218,7 @@ export function buildRecommendations(input: RecommendationInput): Recommendation
       id: `community-${community.id}`,
       area: "community",
       title: `Join the ${community.name}`,
-      reason: `${community.members} neighbours already belong · ${entry.signals.join("; ").toLowerCase()}.`,
+      reason: `${community.members} neighbours already belong: ${entry.signals.join("; ").toLowerCase()}.`,
       signals: entry.signals,
       to: "/community",
       cta: "Open the forum",
@@ -243,7 +243,7 @@ export function buildRecommendations(input: RecommendationInput): Recommendation
       title: `Answer: ${listing.title}`,
       reason: relevant
         ? "A neighbour is asking about something in your stated interests and nobody has replied yet."
-        : "A neighbour's request is still unanswered · you may know someone.",
+        : "A neighbour's request is still unanswered; you may know someone.",
       signals: relevant ? ["Matches your interests", "No replies yet"] : ["No replies yet"],
       to: "/marketplace",
       cta: "Open the marketplace",

@@ -140,7 +140,7 @@ function ResetPasswordPage() {
         .join(" ")}`
     : "All fields are valid.";
 
-  /* Which fields are failing · used to announce a changed field set at once. */
+  /* Which fields are failing — used to announce a changed field set at once. */
   const invalidFieldKey = visibleIssues.map((issue) => issue.field).join(",");
 
   useEffect(() => {
@@ -262,7 +262,7 @@ function ResetPasswordPage() {
           <form onSubmit={complete} className="mt-6 space-y-5" noValidate aria-busy={busy}>
             {issuedCode ? (
               <p className="border border-border bg-secondary/40 p-4 text-sm text-muted-foreground">
-                Demonstration only · your reset code is{" "}
+                Demonstration only: your reset code is{" "}
                 <span className="text-foreground tracking-[0.2em]">{issuedCode}</span>. It lapses in
                 fifteen minutes.
               </p>
@@ -393,9 +393,9 @@ function ResetPasswordPage() {
               )}
             >
               {busy ? (
-                <p>Working on your request · please wait.</p>
+                <p>Working on your request; please wait.</p>
               ) : canSubmit ? (
-                <p>All required fields are valid · you can submit this form.</p>
+                <p>All required fields are valid; you can submit this form.</p>
               ) : blockingIssues.length === 0 ? (
                 <p>Complete all three fields to enable “Change my password”.</p>
               ) : (

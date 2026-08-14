@@ -58,7 +58,7 @@ function ServicesPage() {
     <PageShell
       eyebrow="Resident Services"
       title="Valet, maintenance & delivery"
-      intro="Everything the building does for your household in one place · vehicle requests, engineering work, parcel handling and lost property."
+      intro="Everything the building does for your household in one place: vehicle requests, engineering work, parcel handling and lost property."
     >
       <RequireSession area="resident services">
         <TabBar tabs={TABS} active={tab} onChange={setTab} label="Resident service sections" />

@@ -142,17 +142,17 @@ function LoginPage() {
             </div>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
               This preview keeps everything in your browser. Any residence below may be used with
-              the preview passcode, or register your own account · it will be remembered on this
+              the preview passcode, or register your own account; it will be remembered on this
               device until you sign out.
             </p>
             <p className="mt-3 text-xs font-medium tracking-[0.08em] text-destructive uppercase">
-              Fictional demo profiles · not real residents of the building.
+              Fictional demo profiles, not real residents of the building.
             </p>
             <div className="mt-4">
               <HowAccessWorksModal />
             </div>
             <p className="mt-4 border border-border bg-background p-4 text-sm leading-relaxed">
-              Demo login · email <span className="text-foreground">{DEMO_ACCOUNT.email}</span>,
+              Demo login: email <span className="text-foreground">{DEMO_ACCOUNT.email}</span>,
               password <span className="text-foreground">{DEMO_ACCOUNT.password}</span>. No
               residence number required; not all features are available.
             </p>
@@ -325,8 +325,8 @@ function SignInForm({ redirectTo = "/directory" }: { redirectTo?: string }) {
           <FieldError id="signin-unit-error" message={errorFor("unit")} />
           <p id="signin-unit-hint" className="text-xs text-muted-foreground">
             {isDemo
-              ? "Not required for the demo login · leave blank."
-              : "The residence on file for your address · for example 22H."}
+              ? "Not required for the demo login; leave blank."
+              : "The residence on file for your address, for example 22H."}
           </p>
         </div>
         <div className="space-y-2">
@@ -530,7 +530,7 @@ function SignUpForm({ redirectTo = "/directory" }: { redirectTo?: string }) {
           <FieldError id="su-phone-error" message={errorFor("phone")} />
           <p id="su-phone-hint" className="text-xs text-muted-foreground">
             Every household keeps a profile with contact details on file. Listing in the directory
-            and letting neighbours contact you both stay optional · you choose in your profile
+            and letting neighbours contact you both stay optional; you choose in your profile
             settings.
           </p>
         </div>
@@ -549,7 +549,7 @@ function SignUpForm({ redirectTo = "/directory" }: { redirectTo?: string }) {
           />
           <FieldError id="su-password-error" message={errorFor("password")} />
           <p id="su-password-hint" className="text-xs text-muted-foreground">
-            At least eight characters. Never use a real password · this demo stores it in your
+            At least eight characters. Never use a real password; this demo stores it in your
             browser.
           </p>
         </div>

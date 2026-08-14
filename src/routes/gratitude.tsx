@@ -21,13 +21,13 @@ export const Route = createFileRoute("/gratitude")({
       {
         name: "description",
         content:
-          "A residents' message board for thanking outstanding members of the house team at 40 Trinity Place · signed or anonymous.",
+          "A residents' message board for thanking outstanding members of the house team at 40 Trinity Place, signed or anonymous.",
       },
       { property: "og:title", content: "Thank You Notes · Raffles Boston Residences" },
       {
         property: "og:description",
         content:
-          "Publicly thank the concierge, engineering, housekeeping and valet teams · anonymously if you prefer.",
+          "Publicly thank the concierge, engineering, housekeeping and valet teams, anonymously if you prefer.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -102,7 +102,7 @@ function NoteForm({ onPost }: { onPost: (note: ThankYouNote) => void }) {
       at: "Just now",
     });
     setBody("");
-    toast.success("Posted to the board · and copied to the residences manager.");
+    toast.success("Posted to the board and copied to the residences manager.");
   };
 
   return (

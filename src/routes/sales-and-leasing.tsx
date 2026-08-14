@@ -46,7 +46,7 @@ function SalesAndLeasingPage() {
     <PageShell
       eyebrow="Availability"
       title="Sales & leasing"
-      intro="What is on the market within the building, what is under agreement and what has recently closed · together with parking spaces available by deed or licence. Figures in this demonstration are illustrative."
+      intro="What is on the market within the building, what is under agreement and what has recently closed, together with parking spaces available by deed or licence. Figures in this demonstration are illustrative."
     >
       <TabBar tabs={TABS} active={tab} onChange={setTab} label="Availability categories" />
 
