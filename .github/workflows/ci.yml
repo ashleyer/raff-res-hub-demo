@@ -45,11 +45,14 @@ jobs:
       - run: npm ci
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
-      - run: npm run build
+      - name: Build for CI preview (node-server preset)
+        run: npm run build
+        env:
+          NITRO_PRESET: node-server
       - name: Start preview server
-        run: npx vite preview --port 4173 --strictPort &
+        run: PORT=4173 node .output/server/index.mjs &
       - name: Wait for preview server
-        run: npx wait-on --timeout 60000 http://localhost:4173
+        run: npx wait-on --timeout 60000 tcp:localhost:4173
       - name: Functional smoke test (routes, health, sign-in flow)
         run: npm run test:smoke
       - name: Visual regression (header layout across breakpoints)
