@@ -252,7 +252,7 @@ function SurveySection() {
 
         {hasAnsweredSurvey ? (
           <p className="mt-8 border border-primary/50 bg-secondary/40 p-8 text-sm">
-            Thank you · your response for {month} has been recorded.
+            Thank you. Your response for {month} has been recorded.
           </p>
         ) : (
           <form
@@ -472,7 +472,7 @@ function ManagementResults({
                 </th>
                 {SURVEY_QUESTIONS.map((q) => (
                   <td key={q.id} className="p-2">
-                    {r.ratings[q.id] ?? " · "}
+                    {r.ratings[q.id] ?? "–"}
                   </td>
                 ))}
               </tr>

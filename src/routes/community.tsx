@@ -25,7 +25,7 @@ export const Route = createFileRoute("/community")({
       {
         name: "description",
         content:
-          "Discuss community topics and join interest groups · wine, dogs, books, wellness and families · at The Raffles Residences Boston.",
+          "Discuss community topics and join interest groups (wine, dogs, books, wellness and families) at The Raffles Residences Boston.",
       },
       { property: "og:title", content: "Member Forum · Raffles Boston Residences" },
       {

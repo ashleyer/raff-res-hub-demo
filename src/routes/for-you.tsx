@@ -33,7 +33,7 @@ function ForYouPage() {
     <PageShell
       eyebrow="Personalised"
       title="Chosen for you"
-      intro="Suggestions assembled from the data points you have already given the portal · your stated interests, amenity reservations, event RSVPs, community circles, marketplace activity and house account. Rules choose what appears; the wording is drafted automatically."
+      intro="Suggestions assembled from the data points you have already given the portal: your stated interests, amenity reservations, event RSVPs, community circles, marketplace activity and house account. Rules choose what appears; the wording is drafted automatically."
     >
       <RequireSession area="your personalised suggestions">
         <ForYou variant="full" showSignals />

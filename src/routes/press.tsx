@@ -18,7 +18,7 @@ export const Route = createFileRoute("/press")({
       {
         name: "description",
         content:
-          "National and international coverage of Raffles Boston · Travel + Leisure, Esquire, Condé Nast Traveler, Forbes, Robb Report, Architectural Digest and more.",
+          "National and international coverage of Raffles Boston: Travel + Leisure, Esquire, Condé Nast Traveler, Forbes, Robb Report, Architectural Digest and more.",
       },
       { property: "og:title", content: "In the Press · Raffles Boston Residences" },
       {
@@ -53,8 +53,8 @@ function PressPage() {
             <p className="eyebrow">40 Trinity Place</p>
             <h1 className="display-section mt-4">In the press</h1>
             <p className="measure mt-6 text-base leading-relaxed text-muted-foreground">
-              Coverage of Raffles Boston · the hotel, the residences, Long Bar, La Padrona, Blind
-              Duck, the Guerlain Spa and the patisserie · as gathered in the building's official
+              Coverage of Raffles Boston (the hotel, the residences, Long Bar, La Padrona, Blind
+              Duck, the Guerlain Spa and the patisserie) as gathered in the building's official
               press room. Each headline links to the article as published.
             </p>
             <p className="mt-4 text-xs leading-relaxed text-muted-foreground">

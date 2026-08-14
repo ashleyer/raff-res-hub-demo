@@ -169,7 +169,7 @@ function MessagesBody() {
               ))}
               {active.messages.length === 0 && (
                 <li className="text-sm text-muted-foreground">
-                  No messages yet · open the conversation below.
+                  No messages yet. Open the conversation below.
                 </li>
               )}
             </ul>

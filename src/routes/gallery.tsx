@@ -22,7 +22,7 @@ export const Route = createFileRoute("/gallery")({
       {
         name: "description",
         content:
-          "A resident-made photo gallery of life at 40 Trinity Place · terraces, salons, the pool and the patisserie, posted by neighbours.",
+          "A resident-made photo gallery of life at 40 Trinity Place: terraces, salons, the pool and the patisserie, posted by neighbours.",
       },
       { property: "og:title", content: "Residence Gallery · Raffles Boston Residences" },
       {
@@ -53,7 +53,7 @@ function GalleryPage() {
     <PageShell
       eyebrow="Residents' Photographs"
       title="Residence gallery"
-      intro="A gallery kept by the house, not the marketing department. Post a photograph from your day in the building · a terrace at dusk, a table in the garden room, the pool before anyone else is up · with a line about it."
+      intro="A gallery kept by the house, not the marketing department. Post a photograph from your day in the building (a terrace at dusk, a table in the garden room, the pool before anyone else is up) with a line about it."
     >
       <RequireSession area="the residence gallery">
         <PostForm onPost={(post) => setPosts((prev) => [post, ...prev])} />
@@ -68,7 +68,7 @@ function GalleryPage() {
         <ul className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
             <li key={post.id} className="relative flex flex-col border border-border bg-card">
-              <DemoTag label="Demo photo" title="Illustrative photo · not a real resident post" />
+              <DemoTag label="Demo photo" title="Illustrative photo; not a real resident post" />
               <img
                 src={post.image}
                 alt={post.alt}
@@ -178,7 +178,7 @@ function PostForm({ onPost }: { onPost: (post: GalleryPost) => void }) {
             aria-describedby="gal-file-hint"
           />
           <p id="gal-file-hint" className="text-xs text-muted-foreground">
-            Images stay in your browser for this demo · nothing is uploaded to a server.
+            Images stay in your browser for this demo; nothing is uploaded to a server.
           </p>
         </div>
 
