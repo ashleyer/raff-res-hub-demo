@@ -185,24 +185,26 @@ function AboutThisAppPage() {
               <p>
                 By day, I'm{" "}
                 <span className="font-medium text-foreground">
-                  a fractional Co-Founder (Technical) + President
+                  a Co-Founder (Technical) + President
                 </span>{" "}
                 of a pre-launch social platform built against the attention economy. I lead a
                 25-person team, wrote the company's founder-adopted AI Governance Playbook and
                 Moderation Governance Policies, thought up an alternative revenue model, came up
                 with platform features to set us apart from legacy social media, direct the Dev
                 team, GTM, and Fundraising strategy, and still ship production code myself in
-                TypeScript, React Native, and C#/.NET most weeks. I also serve as fractional
-                Technical Co-Founder of an Access to Justice Legal Matching Marketplace, and
-                moonlight in AI-Benchmarking tasks for a Stanford-backed AI Lab.
+                TypeScript, React Native, and C#/.NET most weeks.
               </p>
               <p>
-                I didn't take the usual road here. After years of entrepreneurial pursuits and
-                studies at Harvard and Boston University, I landed in General Assembly's full-stack
-                immersive, which led to Liberty Mutual's FAANG-competitive TechStart engineering
-                apprenticeship, and to shipping real production code in its Investments and Legal
-                Strategic Services business units. The legal work stuck: I went on to design four
-                proprietary access-to-justice algorithms for a legaltech startup,{" "}
+                I didn't take the usual road here. After years of Literature + Language studies at
+                Boston and Harvard University, which led to my first career in Proofreading,
+                Editing, and Academic Publishing, my entrepreneurial aspirations eventually landed
+                me in General Assembly's Full-stack Immersive Bootcamp, sparking the start of my
+                second career as a Software Developer. To my shock, I was selected for Liberty
+                Mutual's FAANG-competitive TechStart software engineering apprenticeship, which then
+                led to my first professional coding roles shipping real production code in Liberty's
+                Investments and Legal Strategic Services corporate business units. The legal work
+                stuck: just this year I went on to design four proprietary access-to-justice
+                algorithms for a legaltech startup,{" "}
                 <span className="font-medium text-primary">
                   three of which are now under provisional patent
                 </span>
@@ -216,9 +218,11 @@ function AboutThisAppPage() {
               </p>
               <p className="border-l-2 border-primary/50 pl-5 text-foreground italic">
                 I mentor women and anyone entering tech, and I run my team on a fail-forward rule I
-                apply to myself first: break things, admit it, laugh, learn. In coding, there's no
-                room for egos; there's always room for a laugh. My mistakes are the only reason I
-                know anything.
+                apply to myself first: break things, admit it, laugh, learn. That team-oriented
+                style was ingrained in me long before I ever wrote a line of code: as a USRowing
+                National Champion as a junior rower, and later as an NCAA Division I rower for BU.
+                In coding, there's no room for egos; there's always room for a laugh. My mistakes
+                are the only reason I know anything.
               </p>
               <p>
                 I'm a former SAT teacher, the designated talker for a giant multi-generational
@@ -226,18 +230,22 @@ function AboutThisAppPage() {
                 <span className="font-medium text-foreground">
                   open-source developer community with 15,000+ members
                 </span>
-                . In enterprise engineering, I was consistently chosen to cross-functionally present
+                . In enterprise engineering, I am consistently chosen to cross-functionally present
                 sprint reviews to 100+ stakeholders, making sure engineers and executives were
                 actually speaking the same language. I've spoken at Liberty Mutual's Women in Tech
                 and TechStart programs about my path into software, in a style I'd describe as
                 practical, energetic, and just funny enough to keep a room of engineers awake after
-                lunch. Beyond software, I volunteer with animal, environmental, and neighbourhood
-                organizations across Boston, Paradise Valley, Concord, and Nantucket.
+                lunch. Beyond software, I volunteer with animal, environmental, sports, and
+                neighbourhood organizations across Boston, Paradise Valley, AZ, Concord, MA, and
+                Nantucket. This year, volunteering at the Waste Management Golf Tournament really
+                took the cake! You can find me enjoying time with my family, equestrian activities,
+                nightlife, thrift and antique shopping, exploring, and most probably, learning
+                something new, no matter how obscure.
               </p>
               <p>
-                And, evenings and weekends, I live at Raffles Residences Boston in{" "}
-                <span className="font-medium text-primary">Unit 22H</span>, which is where this
-                particular idea came from.
+                And, most of the time, I live at Raffles Residences Boston in{" "}
+                <span className="font-medium text-primary">Unit 22H</span> with my border collie,
+                Smith, which is where this app's particular idea formed and became reality.
               </p>
             </div>
           </div>
