@@ -99,18 +99,20 @@ function Index() {
         />
         <div className="panel-scrim absolute inset-0 -z-10" />
 
-        <div />
+        <div className="h-20 sm:h-24 md:h-28" aria-hidden="true" />
 
         <div className="mx-auto w-full max-w-5xl px-5 text-center sm:px-8">
           <Reveal>
             <h1 className="font-display text-[clamp(2rem,6.4vw,5rem)] leading-[1.06] tracking-[0.06em] uppercase">
               For Your Home in Boston
             </h1>
-            <p className="mt-5 text-[0.7rem] tracking-[0.34em] uppercase sm:text-xs">
+            <p className="mt-5 text-[0.7rem] leading-relaxed tracking-[0.34em] uppercase sm:text-xs">
               Cultivated around the world
+              <br />
+              Brought to Your Home
             </p>
             <p className="measure mx-auto mt-8 text-sm leading-relaxed text-muted-foreground sm:text-base">
-              The Secure Intra-Resident Portal for Raffles Residences Boston at Forty Trinity Place
+              Your Ultra-Secure Personal Portal for Raffles Residences Boston at Forty Trinity Place
             </p>
           </Reveal>
         </div>
@@ -120,7 +122,7 @@ function Index() {
             href="#select-your-path"
             className="script inline-flex min-h-11 items-center text-xl sm:text-2xl"
           >
-            Select your path
+            Choose Your Experience
           </a>
           <span className="scroll-cue-line" aria-hidden="true" />
         </div>
@@ -128,7 +130,7 @@ function Index() {
 
       <main id="main-content" className="flex-1">
         <h2 id="select-your-path" className="sr-only">
-          Select your path
+          Choose Your Experience
         </h2>
 
         {/* Full-bleed panels, one per portal territory */}
