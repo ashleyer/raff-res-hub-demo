@@ -1,14 +1,6 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  CalendarDays,
-  CalendarOff,
-  Clock,
-  MapPin,
-  Sparkles,
-  ThumbsUp,
-  Users,
-} from "lucide-react";
+import { CalendarDays, CalendarOff, Clock, MapPin, Sparkles, ThumbsUp, Users } from "lucide-react";
 import { toast } from "sonner";
 import { SEED_EVENTS, type ResidentEvent } from "@/lib/intranet-data";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -149,7 +141,10 @@ function EventsPage() {
             {myUpcoming.length > 0 ? (
               <ul className="mt-5 space-y-4">
                 {myUpcoming.map((e) => (
-                  <li key={e.id} className="border-t border-border pt-4 first:border-t-0 first:pt-0">
+                  <li
+                    key={e.id}
+                    className="border-t border-border pt-4 first:border-t-0 first:pt-0"
+                  >
                     <p className="text-base">{e.title}</p>
                     <p className="mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
                       <span className="inline-flex items-center gap-1.5">
@@ -185,7 +180,10 @@ function EventsPage() {
             {loungeUnavailable.length > 0 ? (
               <ul className="mt-5 space-y-4">
                 {loungeUnavailable.map((b) => (
-                  <li key={b.id} className="border-t border-border pt-4 first:border-t-0 first:pt-0">
+                  <li
+                    key={b.id}
+                    className="border-t border-border pt-4 first:border-t-0 first:pt-0"
+                  >
                     <p className="flex items-center gap-2 text-base">
                       <CalendarOff className="h-4 w-4 text-primary" aria-hidden="true" />
                       {b.date} · {b.slot}

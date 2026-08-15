@@ -118,9 +118,7 @@ function AboutThisAppPage() {
             independent, self-funded side project, built and paid for on my own time, to explore one
             question honestly: could a well-built app make everyone here (staff, residents, and the
             community around them) a little happier?{" "}
-            <span className="text-primary">
-              I think the answer is yes.
-            </span>
+            <span className="text-primary">I think the answer is yes.</span>
           </p>
         </div>
       </section>
