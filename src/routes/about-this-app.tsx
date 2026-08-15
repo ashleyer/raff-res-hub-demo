@@ -203,9 +203,9 @@ function AboutThisAppPage() {
                 Mutual's FAANG-competitive TechStart software engineering apprenticeship, which then
                 led to my first professional coding roles shipping real production code in Liberty's
                 Investments and Legal Strategic Services corporate business units. The legal work
-                stuck: just this year I went on to design four proprietary access-to-justice
+                stuck: just this year I went on to author four proprietary access-to-justice
                 algorithms for a legaltech startup,{" "}
-                <span className="font-medium text-primary">
+                <span className="text-primary">
                   three of which are now under provisional patent
                 </span>
                 .
@@ -221,8 +221,9 @@ function AboutThisAppPage() {
                 apply to myself first: break things, admit it, laugh, learn. That team-oriented
                 style was ingrained in me long before I ever wrote a line of code: as a USRowing
                 National Champion as a junior rower, and later as an NCAA Division I rower for BU.
-                In coding, there's no room for egos; there's always room for a laugh. My mistakes
-                are the only reason I know anything.
+                In rowing as in coding, teamwork is everything + there's no room for egos; there's
+                always something to learn, and definitely always time for a laugh. My mistakes are
+                the only reason I know anything, which I find particularly funny.
               </p>
               <p>
                 I'm a former SAT teacher, the designated talker for a giant multi-generational
@@ -238,14 +239,14 @@ function AboutThisAppPage() {
                 lunch. Beyond software, I volunteer with animal, environmental, sports, and
                 neighbourhood organizations across Boston, Paradise Valley, AZ, Concord, MA, and
                 Nantucket. This year, volunteering at the Waste Management Golf Tournament really
-                took the cake! You can find me enjoying time with my family, equestrian activities,
-                nightlife, thrift and antique shopping, exploring, and most probably, learning
-                something new, no matter how obscure.
+                took the cake! Usually, you can find me enjoying time with my family, equestrian
+                activities, nightlife, sports, thrift and antique shopping, socializing, exploring,
+                and most probably, learning something new, no matter how obscure.
               </p>
               <p>
                 And, most of the time, I live at Raffles Residences Boston in{" "}
-                <span className="font-medium text-primary">Unit 22H</span> with my border collie,
-                Smith, which is where this app's particular idea formed and became reality.
+                <span className="text-primary">Unit 22H</span> with my border collie, Smith, which
+                is where this app's particular idea formed and became reality.
               </p>
             </div>
           </div>
