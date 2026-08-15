@@ -34,7 +34,12 @@ export const Route = createFileRoute("/marketplace")({
   component: MarketplacePage,
 });
 
-const KINDS: Listing["kind"][] = ["Recommendation wanted", "For sale", "To give away"];
+const KINDS: Listing["kind"][] = [
+  "Recommendation wanted",
+  "Activity partner",
+  "For sale",
+  "To give away",
+];
 
 function MarketplacePage() {
   return (

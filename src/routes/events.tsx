@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { CalendarDays, Clock, MapPin, Sparkles, ThumbsUp, Users } from "lucide-react";
-import { toast } from "sonner";
 import {
-  SEED_EVENTS,
-  SEED_EVENT_IDEAS,
-  type EventIdea,
-  type ResidentEvent,
-} from "@/lib/intranet-data";
+  CalendarDays,
+  CalendarOff,
+  Clock,
+  MapPin,
+  Sparkles,
+  ThumbsUp,
+  Users,
+} from "lucide-react";
+import { toast } from "sonner";
+import { SEED_EVENTS, type ResidentEvent } from "@/lib/intranet-data";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Button } from "@/components/ui/button";
@@ -39,11 +42,21 @@ export const Route = createFileRoute("/events")({
 });
 
 function EventsPage() {
-  const { logActivity } = usePortal();
+  const { logActivity, bookings, eventIdeas, addEventIdea, supportEventIdea } = usePortal();
   const [events, setEvents] = useState<ResidentEvent[]>(SEED_EVENTS);
   const [rsvped, setRsvped] = useState<Record<number, number>>({});
-  const [ideas, setIdeas] = useState<EventIdea[]>(SEED_EVENT_IDEAS);
   const [supported, setSupported] = useState<number[]>([]);
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const myUpcoming = events
+    .filter((e) => rsvped[e.id] && new Date(e.date) >= today)
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+  const loungeUnavailable = bookings
+    .filter((b) => b.amenityId === "residents-lounge" && new Date(b.date) >= today)
+    .sort((a, b) => a.date.localeCompare(b.date));
 
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -89,21 +102,16 @@ function EventsPage() {
       toast.error("Attributed proposals require a residence number.");
       return;
     }
-    setIdeas((prev) => [
-      {
-        id: Date.now(),
-        title: title.trim().slice(0, 150),
-        body: body.trim().slice(0, 1000),
-        anonymous,
-        interest: 1,
-        ...(anonymous ? {} : { unit: unit.trim() }),
-      },
-      ...prev,
-    ]);
+    addEventIdea({
+      title: title.trim().slice(0, 150),
+      body: body.trim().slice(0, 1000),
+      anonymous,
+      ...(anonymous ? {} : { unit: unit.trim() }),
+    });
     setTitle("");
     setBody("");
     setUnit("");
-    toast.success("Proposal lodged with the events committee.");
+    toast.success("Proposal sent to the events committee.");
   };
 
   const support = (id: number) => {
@@ -112,7 +120,7 @@ function EventsPage() {
       return;
     }
     setSupported((prev) => [...prev, id]);
-    setIdeas((prev) => prev.map((i) => (i.id === id ? { ...i, interest: i.interest + 1 } : i)));
+    supportEventIdea(id);
   };
 
   return (
@@ -131,6 +139,72 @@ function EventsPage() {
           RSVP below, or propose an occasion of your own inspiration to be approved by the
           Management/Board, with your neighbours' upvote if they agree!
         </p>
+
+        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+          <section aria-labelledby="my-events-heading" className="border border-border bg-card p-6">
+            <p className="eyebrow">Your calendar</p>
+            <h2 id="my-events-heading" className="mt-3 text-xl">
+              Your upcoming events
+            </h2>
+            {myUpcoming.length > 0 ? (
+              <ul className="mt-5 space-y-4">
+                {myUpcoming.map((e) => (
+                  <li key={e.id} className="border-t border-border pt-4 first:border-t-0 first:pt-0">
+                    <p className="text-base">{e.title}</p>
+                    <p className="mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
+                      <span className="inline-flex items-center gap-1.5">
+                        <CalendarDays className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
+                        {e.date}
+                      </span>
+                      <span className="inline-flex items-center gap-1.5">
+                        <Clock className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
+                        {e.time}
+                      </span>
+                    </p>
+                    <p className="mt-1.5 text-[0.65rem] tracking-[0.18em] text-primary uppercase">
+                      Party of {rsvped[e.id]}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="mt-4 text-sm text-muted-foreground">
+                You have not RSVPed to any upcoming gathering yet.
+              </p>
+            )}
+          </section>
+
+          <section
+            aria-labelledby="lounge-availability-heading"
+            className="border border-border bg-card p-6"
+          >
+            <p className="eyebrow">Residents' Lounge · Floor 21</p>
+            <h2 id="lounge-availability-heading" className="mt-3 text-xl">
+              Privately reserved & unavailable
+            </h2>
+            {loungeUnavailable.length > 0 ? (
+              <ul className="mt-5 space-y-4">
+                {loungeUnavailable.map((b) => (
+                  <li key={b.id} className="border-t border-border pt-4 first:border-t-0 first:pt-0">
+                    <p className="flex items-center gap-2 text-base">
+                      <CalendarOff className="h-4 w-4 text-primary" aria-hidden="true" />
+                      {b.date} · {b.slot}
+                    </p>
+                    {b.notes && (
+                      <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground italic">
+                        {b.notes}
+                      </p>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="mt-4 text-sm text-muted-foreground">
+                No upcoming private reservations. The lounge is open to residents as usual.
+              </p>
+            )}
+          </section>
+        </div>
 
         <div className="mt-10 flex flex-wrap items-end gap-4">
           <div className="w-40 space-y-2">
@@ -209,7 +283,7 @@ function EventsPage() {
             <h2 className="mt-3 text-3xl">Proposed by residents</h2>
             <div className="gold-rule mt-4" />
             <ul className="mt-6 space-y-4">
-              {ideas.map((i) => (
+              {eventIdeas.map((i) => (
                 <li
                   key={i.id}
                   className="flex flex-wrap items-start justify-between gap-4 border border-border bg-card p-6"
@@ -287,7 +361,7 @@ function EventsPage() {
                   </div>
                 )}
                 <Button type="submit" className="min-h-12 w-full tracking-[0.18em] uppercase">
-                  Lodge proposal
+                  Send proposal
                 </Button>
               </div>
             </form>

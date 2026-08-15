@@ -37,8 +37,12 @@ import {
 } from "./portal-data";
 import {
   MEASURES,
+  SEED_BOOKINGS,
+  SEED_EVENT_IDEAS,
   SEED_REQUESTS,
+  type Booking,
   type ConciergeRequest,
+  type EventIdea,
   type GovernanceMeasure,
 } from "./intranet-data";
 import type { ActivityEvent } from "./recommendations";
@@ -152,6 +156,17 @@ type PortalValue = {
   surveyResponses: SurveyResponse[];
   submitSurvey: (r: Omit<SurveyResponse, "id">) => void;
   hasAnsweredSurvey: boolean;
+
+  /* amenity reservations · shared so a private booking (e.g. the Residents' Lounge) can be
+     surfaced as an unavailability window elsewhere, such as the events calendar */
+  bookings: Booking[];
+  addBooking: (b: Omit<Booking, "id">) => void;
+  releaseBooking: (id: number) => void;
+
+  /* events committee proposals · shared so staff can see what residents are proposing */
+  eventIdeas: EventIdea[];
+  addEventIdea: (i: Omit<EventIdea, "id" | "interest">) => void;
+  supportEventIdea: (id: number) => void;
 };
 
 /** An in-app alert raised for one residence when the desk touches its request. */
@@ -298,6 +313,8 @@ export function PortalProvider({ children }: { children: ReactNode }) {
   const [notifications, setNotifications] = useState<PortalNotification[]>([]);
   const [activity, setActivity] = useState<ActivityEvent[]>([]);
   const [conciergeRequests, setConciergeRequests] = useState<ConciergeRequest[]>(SEED_REQUESTS);
+  const [bookings, setBookings] = useState<Booking[]>(SEED_BOOKINGS);
+  const [eventIdeas, setEventIdeas] = useState<EventIdea[]>(SEED_EVENT_IDEAS);
 
   /* Restore any remembered residences and session after hydration. */
   useEffect(() => {
@@ -908,6 +925,17 @@ export function PortalProvider({ children }: { children: ReactNode }) {
         }
       },
       hasAnsweredSurvey: answeredSurvey,
+
+      bookings,
+      addBooking: (b) => setBookings((prev) => [{ ...b, id: nextId() }, ...prev]),
+      releaseBooking: (id) => setBookings((prev) => prev.filter((b) => b.id !== id)),
+
+      eventIdeas,
+      addEventIdea: (i) => setEventIdeas((prev) => [{ ...i, id: nextId(), interest: 1 }, ...prev]),
+      supportEventIdea: (id) =>
+        setEventIdeas((prev) =>
+          prev.map((i) => (i.id === id ? { ...i, interest: i.interest + 1 } : i)),
+        ),
     }),
     [
       currentUser,
@@ -940,6 +968,8 @@ export function PortalProvider({ children }: { children: ReactNode }) {
       activity,
       requestPasswordReset,
       resetPassword,
+      bookings,
+      eventIdeas,
     ],
   );
 

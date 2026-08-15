@@ -684,7 +684,7 @@ export type MarketReply = { id: number; author: string; body: string; at: string
 
 export type Listing = {
   id: number;
-  kind: "Recommendation wanted" | "For sale" | "To give away";
+  kind: "Recommendation wanted" | "Activity partner" | "For sale" | "To give away";
   title: string;
   body: string;
   price?: number;
@@ -721,6 +721,33 @@ export const SEED_LISTINGS: Listing[] = [
   },
   {
     id: 3,
+    kind: "Activity partner",
+    title: "Early-morning gym partner, weekdays before the market opens",
+    body: "Looking for someone to keep a 6:15 AM lifting schedule honest in the Guerlain Spa fitness centre. Intermediate level, mostly free weights.",
+    author: "Marcus Chen · Residence 21A",
+    at: "August 10",
+    replies: [],
+  },
+  {
+    id: 4,
+    kind: "Activity partner",
+    title: "Golf foursome, needs a fourth for Saturday mornings",
+    body: "Three of us play out of a club in the western suburbs most Saturdays and could use a steady fourth. Any handicap welcome.",
+    author: "James & Odile Whitfield · Residence 41C",
+    at: "August 6",
+    replies: [],
+  },
+  {
+    id: 5,
+    kind: "Activity partner",
+    title: "Travel companion for a long weekend in Nantucket",
+    body: "Planning a September trip out to the island and would enjoy company; happy to coordinate ferry times and a rental with the right neighbour.",
+    author: "Anonymous deed-holder",
+    at: "August 2",
+    replies: [],
+  },
+  {
+    id: 6,
     kind: "For sale",
     title: "Pair of Poltrona Frau lounge chairs, cognac leather",
     body: "Four years old, excellent condition. Available after the September refurbishment.",
@@ -730,7 +757,7 @@ export const SEED_LISTINGS: Listing[] = [
     replies: [],
   },
   {
-    id: 4,
+    id: 7,
     kind: "To give away",
     title: "Child's cot and changing table",
     body: "Both in good order. Collection from Residence 41C at your convenience.",

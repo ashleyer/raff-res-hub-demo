@@ -99,7 +99,7 @@ function Index() {
         />
         <div className="panel-scrim absolute inset-0 -z-10" />
 
-        <div className="h-20 sm:h-24 md:h-28" aria-hidden="true" />
+        <div className="h-24 sm:h-28 md:h-32" aria-hidden="true" />
 
         <div className="mx-auto w-full max-w-5xl px-5 text-center sm:px-8">
           <Reveal>

@@ -506,6 +506,28 @@ export const SEED_BOOKINGS: Booking[] = [
     catering: "Coffee, tea & pastries",
     notes: "Book club sitting by the fireplace.",
   },
+  {
+    id: 4,
+    amenityId: "residents-lounge",
+    amenityName: "Residents' Lounge",
+    date: "2026-08-20",
+    slot: "Evening · 18:30",
+    guests: 24,
+    unit: "Residence 41C",
+    catering: "Canapés & Champagne reception",
+    notes: "Private engagement reception; lounge closed to other residents for the evening.",
+  },
+  {
+    id: 5,
+    amenityId: "residents-lounge",
+    amenityName: "Residents' Lounge",
+    date: "2026-08-27",
+    slot: "Afternoon · 15:00",
+    guests: 10,
+    unit: "Residence 34B",
+    catering: "Coffee, tea & pastries",
+    notes: "Quarterly wine salon, hosted with the hotel sommelier.",
+  },
 ];
 
 export const SEED_EVENTS: ResidentEvent[] = [

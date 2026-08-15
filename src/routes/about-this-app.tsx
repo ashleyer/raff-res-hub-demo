@@ -7,6 +7,7 @@ import {
   Vote,
   ShieldCheck,
   Wrench,
+  LayoutDashboard,
   Mail,
   Phone,
   Github,
@@ -60,7 +61,12 @@ const FEATURES: { icon: typeof Sparkles; title: string; body: string }[] = [
   {
     icon: Wrench,
     title: "The hotel side, simplified",
-    body: "A simulated bridge into the hotel's systems (folios, priority tables, in-residence delivery), showing what a genuinely connected residence-hotel experience could feel like.",
+    body: "A simulated bridge into the hotel's own staff-facing systems (folios, priority tables, in-residence delivery): the same backend hotel operations run on, opened up here so residents can see what a genuinely connected residence-hotel experience could feel like.",
+  },
+  {
+    icon: LayoutDashboard,
+    title: "The management side, made lighter",
+    body: "A private personnel dashboard, a monthly resident-happiness survey scored and charted for the board, and a running record of the thanks residents leave for the staff: three small tools built so whoever is keeping the building running spends less time chasing paper and more of it on the building itself.",
   },
   {
     icon: ShieldCheck,
@@ -104,7 +110,7 @@ function AboutThisAppPage() {
             bookings, a resident directory, governance ballots, a marketplace, a gratitude board for
             staff, even a simulated bridge into the hotel's own systems.{" "}
             <span className="font-medium text-foreground">
-              Everything you can click on this site actually works.
+              Everything you can click on this site actually works (or if it doesn't, tell me!)
             </span>
           </p>
           <p className="text-base leading-relaxed text-foreground/90 sm:text-lg">
@@ -113,7 +119,7 @@ function AboutThisAppPage() {
             question honestly: could a well-built app make everyone here (staff, residents, and the
             community around them) a little happier?{" "}
             <span className="text-primary">
-              I think the answer is yes, and I'd love the chance to build it for real.
+              I think the answer is yes.
             </span>
           </p>
         </div>
@@ -164,7 +170,7 @@ function AboutThisAppPage() {
           <div className="space-y-6">
             <ul className="flex flex-wrap gap-2 text-xs tracking-[0.14em] text-primary uppercase">
               {[
-                "Co-Founder & President, StayRele",
+                "AI + Innovation Leader",
                 "Harvard & Boston University",
                 "Liberty Mutual TechStart alum",
                 "3 patents pending",
@@ -181,12 +187,16 @@ function AboutThisAppPage() {
               <p>
                 By day, I'm{" "}
                 <span className="font-medium text-foreground">
-                  Co-Founder (Technical) and President of StayRele
-                </span>
-                , a pre-launch social platform built against the attention economy. I lead a
-                21-person team, wrote the company's founder-adopted AI Governance Playbook and
-                Moderation Governance Policy, and still ship production code myself in TypeScript,
-                React Native, and C#/.NET most weeks.
+                  a fractional Co-Founder (Technical) + President
+                </span>{" "}
+                of a pre-launch social platform built against the attention economy. I lead a
+                25-person team, wrote the company's founder-adopted AI Governance Playbook and
+                Moderation Governance Policies, thought up an alternative revenue model, came up
+                with platform features to set us apart from legacy social media, direct the Dev
+                team, GTM, and Fundraising strategy, and still ship production code myself in
+                TypeScript, React Native, and C#/.NET most weeks. I also serve as fractional
+                Technical Co-Founder of an Access to Justice Legal Matching Marketplace, and
+                moonlight in AI-Benchmarking tasks for a Stanford-backed AI Lab.
               </p>
               <p>
                 I didn't take the usual road here. After years of entrepreneurial pursuits and

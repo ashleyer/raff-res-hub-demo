@@ -57,8 +57,11 @@ function PressPage() {
               Duck, the Guerlain Spa and the patisserie) as gathered in the building's official
               press room. Each headline links to the article as published.
             </p>
-            <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+            <p className="mt-4 flex flex-wrap items-center gap-2 text-xs leading-relaxed text-muted-foreground">
               Press enquiries: {PRESS_CONTACT}
+              <span className="text-[0.625rem] font-medium tracking-[0.1em] text-destructive uppercase">
+                Demo contact only
+              </span>
             </p>
           </div>
         </section>

@@ -16,9 +16,7 @@ import {
   CATERING_OPTIONS,
   IN_RESIDENCE_DINING,
   IN_RESIDENCE_MENU,
-  SEED_BOOKINGS,
   VENUES,
-  type Booking,
 } from "@/lib/intranet-data";
 import { HOUSE_AMENITIES } from "@/lib/venue-extras";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -52,8 +50,7 @@ export const Route = createFileRoute("/amenities")({
 });
 
 function AmenitiesPage() {
-  const { logActivity } = usePortal();
-  const [bookings, setBookings] = useState<Booking[]>(SEED_BOOKINGS);
+  const { logActivity, bookings, addBooking, releaseBooking } = usePortal();
   const [amenityId, setAmenityId] = useState(AMENITIES[0]!.id);
   const [date, setDate] = useState("");
   const [slot, setSlot] = useState(AMENITIES[0]!.slots[0]!);
@@ -83,20 +80,16 @@ function AmenitiesPage() {
       toast.error("That sitting is already held. Please choose another window.");
       return;
     }
-    setBookings((prev) => [
-      {
-        id: Date.now(),
-        amenityId: amenity.id,
-        amenityName: amenity.name,
-        date,
-        slot,
-        guests: Math.max(1, Number(guests) || 1),
-        unit: unit.trim(),
-        catering,
-        ...(notes.trim() ? { notes: notes.trim() } : {}),
-      },
-      ...prev,
-    ]);
+    addBooking({
+      amenityId: amenity.id,
+      amenityName: amenity.name,
+      date,
+      slot,
+      guests: Math.max(1, Number(guests) || 1),
+      unit: unit.trim(),
+      catering,
+      ...(notes.trim() ? { notes: notes.trim() } : {}),
+    });
     setDate("");
     setUnit("");
     setNotes("");
@@ -105,7 +98,7 @@ function AmenitiesPage() {
   };
 
   const release = (id: number) => {
-    setBookings((prev) => prev.filter((b) => b.id !== id));
+    releaseBooking(id);
     toast.success("Reservation released.");
   };
 

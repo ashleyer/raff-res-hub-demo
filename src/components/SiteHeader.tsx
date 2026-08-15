@@ -122,7 +122,7 @@ export function SiteHeader({ variant = "solid" }: { variant?: "solid" | "overlay
               alt="The Raffles Residences Boston"
               width={1200}
               height={896}
-              className={`h-12 w-auto sm:h-14 md:h-16 ${overlay ? "brightness-0 invert" : ""}`}
+              className={`h-14 w-auto sm:h-16 md:h-20 ${overlay ? "brightness-0 invert" : ""}`}
             />
           </Link>
 
@@ -199,7 +199,7 @@ export function SiteHeader({ variant = "solid" }: { variant?: "solid" | "overlay
         className="fixed inset-0 z-50 overflow-y-auto bg-background"
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 md:py-6">
-          <img src={rafflesLogo} alt="" aria-hidden="true" className="h-12 w-auto sm:h-14" />
+          <img src={rafflesLogo} alt="" aria-hidden="true" className="h-14 w-auto sm:h-16" />
           <button
             ref={closeRef}
             type="button"
