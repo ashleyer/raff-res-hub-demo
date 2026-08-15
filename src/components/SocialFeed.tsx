@@ -77,18 +77,8 @@ const POSTS: Post[] = [
 
 export function SocialFeed() {
   return (
-    <section aria-labelledby="social-heading" className="mt-16 border-t border-border pt-12">
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p className="eyebrow">Social</p>
-          <h2 id="social-heading" className="mt-3 text-2xl">
-            From the residences
-          </h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
-            The latest from the building's social channels. In this demo the posts are illustrative
-            rather than live.
-          </p>
-        </div>
+    <section aria-label="Recent posts" className="mt-12">
+      <div className="flex justify-center sm:justify-end">
         <a
           href={IG_PROFILE}
           target="_blank"

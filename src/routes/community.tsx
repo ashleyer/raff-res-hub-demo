@@ -3,7 +3,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { requireResidentSession } from "@/lib/session-guard";
 import { toast } from "sonner";
 import { PageShell } from "@/components/PageShell";
-import { SocialFeed } from "@/components/SocialFeed";
 import { ThankYouCarousel } from "@/components/ThankYouCarousel";
 import { SEED_THANK_YOU_NOTES } from "@/lib/gratitude-data";
 import { ForYou } from "@/components/ForYou";
@@ -60,7 +59,6 @@ function CommunityPage() {
 
       <RequireSession area="the member forum">
         <CommunityBody />
-        <SocialFeed />
       </RequireSession>
     </PageShell>
   );
