@@ -62,8 +62,8 @@ function HotelBridgePage() {
         <p className="mt-5 max-w-2xl text-sm leading-relaxed text-muted-foreground">
           Your residence is connected to the hotel's property-management and point-of-sale systems.
           Reserve a priority table, send an order up to your residence, and see every outlet charge
-          consolidated on one house account. In this demonstration the bridge is simulated, with
-          the same response cache and fault tolerance the live integration uses.
+          consolidated on one house account. In this demonstration the bridge is simulated, with the
+          same response cache and fault tolerance the live integration uses.
         </p>
 
         <RequireSession area="the hotel bridge">

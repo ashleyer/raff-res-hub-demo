@@ -41,9 +41,7 @@ function GovernancePage() {
       return;
     }
     castBallot(m.id, choice);
-    toast.success(
-      `Ballot recorded: ${choice === "for" ? "in favour" : "against"} ${m.reference}.`,
-    );
+    toast.success(`Ballot recorded: ${choice === "for" ? "in favour" : "against"} ${m.reference}.`);
   };
 
   return (

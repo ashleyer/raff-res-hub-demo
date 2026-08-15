@@ -337,6 +337,8 @@ I welcome contributions! Please:
 
 ### Report bugs or suggest features
 
+![aer motto](IMG_2038.PNG)
+
 Found an issue or have a suggestion? Please contact Ashley, or open an issue on GitHub:
 
 - **Email**: [ashleye.romano@gmail.com](mailto:ashleye.romano@gmail.com)

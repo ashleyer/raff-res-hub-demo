@@ -179,7 +179,8 @@ function Index() {
               Contact the concierge
             </h2>
             <p className="mt-3 text-pretty text-sm leading-relaxed text-muted-foreground">
-              Reservations, deliveries, transport or anything else: the desk is on call around the clock.
+              Reservations, deliveries, transport or anything else: the desk is on call around the
+              clock.
             </p>
             <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <ContactLink
