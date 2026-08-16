@@ -131,7 +131,7 @@ function ConciergePage() {
         </p>
         <p className="mt-4 text-xs tracking-wider text-muted-foreground uppercase">
           Residences team ·{" "}
-          <Link to="/concierge-desk" className="text-primary underline-offset-4 hover:underline">
+          <Link to="/concierge-desk" className="text-primary underline underline-offset-4">
             Open the concierge desk queue
           </Link>
         </p>
@@ -244,7 +244,7 @@ function ConciergePage() {
                   <Link
                     to="/services"
                     search={{ tab: "lost" }}
-                    className="text-primary underline-offset-4 hover:underline"
+                    className="text-primary underline underline-offset-4"
                   >
                     Open Lost &amp; Found
                   </Link>
