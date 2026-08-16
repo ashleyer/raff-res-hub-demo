@@ -104,7 +104,7 @@ function DeskGate() {
             {error}
           </p>
         )}
-        <Button type="submit" className="min-h-12 w-full tracking-[0.18em] uppercase">
+        <Button type="submit" size="cta" className="min-h-12 w-full">
           Open the queue
         </Button>
         <p className="text-xs text-muted-foreground">
@@ -356,7 +356,8 @@ function QueueCard({
                 key={s}
                 variant="ghost"
                 onClick={() => onStatus(s)}
-                className="min-h-11 tracking-[0.18em] uppercase"
+                size="cta"
+                className="min-h-11"
               >
                 {s}
               </Button>
@@ -401,7 +402,7 @@ function QueueCard({
               placeholder="Confirm timing, assignment or next steps"
             />
           </div>
-          <Button type="submit" className="min-h-11 tracking-[0.18em] uppercase">
+          <Button type="submit" size="cta" className="min-h-11">
             Send reply
           </Button>
         </form>

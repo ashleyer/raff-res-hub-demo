@@ -202,7 +202,7 @@ function ProposalsBody() {
               </Label>
               <Switch id="p-anon" checked={anonymous} onCheckedChange={setAnonymous} />
             </div>
-            <Button type="submit" className="min-h-11 w-full tracking-[0.18em] uppercase">
+            <Button type="submit" size="cta" className="min-h-11 w-full">
               Lodge proposal
             </Button>
           </div>

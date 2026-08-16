@@ -22,6 +22,9 @@ const buttonVariants = cva(
         sm: "h-8 rounded-md px-3 text-xs",
         lg: "h-10 rounded-md px-8",
         icon: "h-9 w-9",
+        /** Transactional CTAs (payments, requests, submissions) — legible at a glance,
+         *  unlike the tiny wide-tracked caps the editorial marketing pages use. */
+        cta: "text-base tracking-[0.08em] uppercase",
       },
     },
     defaultVariants: {

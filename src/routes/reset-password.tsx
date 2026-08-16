@@ -243,7 +243,8 @@ function ResetPasswordPage() {
             <Button
               type="submit"
               disabled={busy}
-              className="min-h-11 w-full tracking-[0.18em] uppercase"
+              size="cta"
+              className="min-h-11 w-full"
             >
               {pending === "request" ? (
                 <>
@@ -370,7 +371,8 @@ function ResetPasswordPage() {
               type="submit"
               disabled={!canSubmit || busy}
               aria-describedby="reset-submit-hint"
-              className="min-h-11 w-full tracking-[0.18em] uppercase"
+              size="cta"
+              className="min-h-11 w-full"
             >
               {pending === "reset" ? (
                 <>
@@ -420,7 +422,8 @@ function ResetPasswordPage() {
               variant="outline"
               disabled={cooldown > 0 || busy}
               onClick={() => void issueCode(true)}
-              className="min-h-11 w-full tracking-[0.18em] uppercase"
+              size="cta"
+              className="min-h-11 w-full"
             >
               {pending === "resend" ? (
                 <>

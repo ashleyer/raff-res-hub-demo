@@ -264,7 +264,8 @@ function EventsPage() {
                     <Button
                       variant={mine ? "outline" : "default"}
                       onClick={() => rsvp(e)}
-                      className="mt-6 min-h-11 w-full tracking-[0.18em] uppercase"
+                      size="cta"
+                      className="mt-6 min-h-11 w-full"
                     >
                       {mine ? `Attending · party of ${mine}` : "RSVP"}
                     </Button>
@@ -299,7 +300,7 @@ function EventsPage() {
                   <Button
                     variant="outline"
                     onClick={() => support(i.id)}
-                    className="tracking-[0.18em] uppercase"
+                    size="cta"
                     aria-label={`Register interest in ${i.title}`}
                   >
                     <ThumbsUp className="mr-2 h-4 w-4" aria-hidden="true" />
@@ -358,7 +359,7 @@ function EventsPage() {
                     />
                   </div>
                 )}
-                <Button type="submit" className="min-h-12 w-full tracking-[0.18em] uppercase">
+                <Button type="submit" size="cta" className="min-h-12 w-full">
                   Send proposal
                 </Button>
               </div>

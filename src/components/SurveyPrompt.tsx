@@ -60,7 +60,8 @@ export function SurveyPrompt() {
         </DialogHeader>
         <DialogFooter className="gap-2 sm:justify-start">
           <Button
-            className="min-h-11 tracking-[0.18em] uppercase"
+            size="cta"
+            className="min-h-11"
             onClick={() => {
               setOpen(false);
               navigate({ to: "/management", hash: "survey" });

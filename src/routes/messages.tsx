@@ -137,7 +137,8 @@ function MessagesBody() {
           <Button
             type="submit"
             variant="outline"
-            className="min-h-11 w-full tracking-[0.16em] uppercase"
+            size="cta"
+            className="min-h-11 w-full"
           >
             Create
           </Button>
@@ -193,7 +194,7 @@ function MessagesBody() {
                 value={draft}
                 onChange={(e) => setDraft(e.target.value)}
               />
-              <Button type="submit" className="min-h-11 tracking-[0.18em] uppercase">
+              <Button type="submit" size="cta" className="min-h-11">
                 Send
               </Button>
             </form>

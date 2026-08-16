@@ -11,6 +11,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { formatCurrency } from "@/lib/currency";
+import { DatePicker } from "@/components/ui/date-picker";
+import { TimeChipPicker, timeOptionsFromWindow } from "@/components/TimeChipPicker";
 import {
   getHotelFolio,
   requestInResidenceDelivery,
@@ -164,9 +167,6 @@ function BridgeConsole() {
     }
   };
 
-  const money = (value: number) =>
-    value.toLocaleString("en-US", { style: "currency", currency: "USD" });
-
   return (
     <div className="mt-12 space-y-12">
       <section aria-labelledby="outlets">
@@ -209,7 +209,8 @@ function BridgeConsole() {
             type="button"
             onClick={() => void loadFolio(false)}
             disabled={folioBusy || !unit.trim()}
-            className="min-h-11 tracking-[0.18em] uppercase"
+            size="cta"
+            className="min-h-11"
           >
             {folioBusy && <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />}
             Retrieve folio
@@ -219,7 +220,8 @@ function BridgeConsole() {
             variant="ghost"
             onClick={() => void loadFolio(true)}
             disabled={folioBusy || !unit.trim()}
-            className="min-h-11 tracking-[0.18em] uppercase"
+            size="cta"
+            className="min-h-11"
           >
             Simulate outage
           </Button>
@@ -263,22 +265,22 @@ function BridgeConsole() {
                       {c.outletName} · {c.postedAt}
                     </span>
                   </span>
-                  <span>{money(c.amount)}</span>
+                  <span>{formatCurrency(c.amount)}</span>
                 </li>
               ))}
             </ul>
             <dl className="mt-4 space-y-1 text-sm">
               <div className="flex justify-between">
                 <dt className="text-muted-foreground">Subtotal</dt>
-                <dd>{money(folio.subtotal)}</dd>
+                <dd>{formatCurrency(folio.subtotal)}</dd>
               </div>
               <div className="flex justify-between">
                 <dt className="text-muted-foreground">Service charge (20%)</dt>
-                <dd>{money(folio.serviceCharge)}</dd>
+                <dd>{formatCurrency(folio.serviceCharge)}</dd>
               </div>
               <div className="flex justify-between border-t border-border pt-2 text-base">
                 <dt>Total posted</dt>
-                <dd>{money(folio.total)}</dd>
+                <dd>{formatCurrency(folio.total)}</dd>
               </div>
             </dl>
           </div>
@@ -297,7 +299,15 @@ function BridgeConsole() {
               <select
                 id="pos-outlet"
                 value={outletId}
-                onChange={(e) => setOutletId(e.target.value as OutletId)}
+                onChange={(e) => {
+                  const nextId = e.target.value as OutletId;
+                  setOutletId(nextId);
+                  const nextOutlet = OUTLETS.find((o) => o.id === nextId);
+                  const nextOptions = nextOutlet ? timeOptionsFromWindow(nextOutlet.serviceWindow) : [];
+                  if (nextOptions.length > 0 && !nextOptions.includes(time)) {
+                    setTime(nextOptions[0]!);
+                  }
+                }}
                 className="h-11 w-full border border-input bg-transparent px-3 text-sm"
               >
                 {OUTLETS.map((o) => (
@@ -307,24 +317,10 @@ function BridgeConsole() {
                 ))}
               </select>
             </div>
-            <div className="grid gap-4 sm:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="pos-date">Date</Label>
-                <Input
-                  id="pos-date"
-                  type="date"
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="pos-time">Time</Label>
-                <Input
-                  id="pos-time"
-                  type="time"
-                  value={time}
-                  onChange={(e) => setTime(e.target.value)}
-                />
+                <DatePicker id="pos-date" value={date} onChange={setDate} />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="pos-party">Party</Label>
@@ -338,10 +334,20 @@ function BridgeConsole() {
                 />
               </div>
             </div>
+            <div className="space-y-2">
+              <Label htmlFor="pos-time">Time</Label>
+              <TimeChipPicker
+                window={OUTLETS.find((o) => o.id === outletId)!.serviceWindow}
+                selected={time}
+                onSelect={setTime}
+              />
+              <input type="hidden" id="pos-time" value={time} readOnly />
+            </div>
             <Button
               type="submit"
               disabled={tableBusy}
-              className="min-h-12 w-full tracking-[0.18em] uppercase"
+              size="cta"
+              className="min-h-12 w-full"
             >
               {tableBusy && <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />}
               Request table
@@ -396,7 +402,8 @@ function BridgeConsole() {
             <Button
               type="submit"
               disabled={deliveryBusy}
-              className="min-h-12 w-full tracking-[0.18em] uppercase"
+              size="cta"
+              className="min-h-12 w-full"
             >
               {deliveryBusy && <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />}
               Send to my residence

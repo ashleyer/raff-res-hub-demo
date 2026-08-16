@@ -164,7 +164,7 @@ function PersonaNotice({ active, storageKey }: { active: boolean; storageKey: st
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="sm:justify-start">
-            <Button className="min-h-11 tracking-[0.18em] uppercase" onClick={() => setOpen(false)}>
+            <Button size="cta" className="min-h-11" onClick={() => setOpen(false)}>
               Understood
             </Button>
           </DialogFooter>
@@ -311,7 +311,7 @@ function SurveySection() {
               />
             </div>
 
-            <Button type="submit" className="min-h-11 tracking-[0.18em] uppercase">
+            <Button type="submit" size="cta" className="min-h-11">
               Submit survey
             </Button>
           </form>
@@ -408,7 +408,7 @@ function ManagementResults({
           <p role="alert" aria-live="polite" className="min-h-5 text-sm text-destructive">
             {error}
           </p>
-          <Button type="submit" className="min-h-11 w-full tracking-[0.18em] uppercase">
+          <Button type="submit" size="cta" className="min-h-11 w-full">
             Open dashboard
           </Button>
           <p className="text-xs text-muted-foreground">
@@ -498,7 +498,8 @@ function ManagementResults({
 
       <Button
         variant="outline"
-        className="mt-6 min-h-11 w-full tracking-[0.18em] uppercase"
+        size="cta"
+        className="mt-6 min-h-11 w-full"
         onClick={downloadCsv}
       >
         Download dataset (CSV)

@@ -90,7 +90,8 @@ export function SavedDetailsControl() {
             type="button"
             variant="outline"
             disabled={!hasSaved}
-            className="mt-4 min-h-11 w-full tracking-[0.18em] uppercase sm:w-auto"
+            size="cta"
+            className="mt-4 min-h-11 w-full sm:w-auto"
           >
             Clear saved residence details
           </Button>

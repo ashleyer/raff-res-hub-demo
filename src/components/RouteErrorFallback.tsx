@@ -24,11 +24,12 @@ export function RouteErrorFallback({ error, reset }: Partial<ErrorComponentProps
       <div className="mt-8 flex flex-wrap justify-center gap-3">
         <Button
           onClick={() => (reset ? reset() : window.location.reload())}
-          className="min-h-11 tracking-[0.18em] uppercase"
+          size="cta"
+          className="min-h-11"
         >
           Try again
         </Button>
-        <Button asChild variant="outline" className="min-h-11 tracking-[0.18em] uppercase">
+        <Button asChild variant="outline" size="cta" className="min-h-11">
           <Link to="/">Return to the entrance</Link>
         </Button>
       </div>
@@ -54,7 +55,7 @@ export function RouteNotFound() {
         The page you asked for is not part of the residents' portal.
       </p>
       <div className="mt-8 flex justify-center">
-        <Button asChild className="min-h-11 tracking-[0.18em] uppercase">
+        <Button asChild size="cta" className="min-h-11">
           <Link to="/">Return to the entrance</Link>
         </Button>
       </div>

@@ -433,7 +433,7 @@ function HouseholdProfile() {
             className="min-h-11"
           />
         </div>
-        <Button type="submit" className="min-h-11 w-full tracking-[0.18em] uppercase">
+        <Button type="submit" size="cta" className="min-h-11 w-full">
           Save household profile
         </Button>
       </form>
@@ -562,7 +562,8 @@ function HouseholdProfile() {
           <Button
             type="submit"
             variant="outline"
-            className="min-h-11 w-full tracking-[0.16em] uppercase"
+            size="cta"
+            className="min-h-11 w-full"
           >
             <Plus className="mr-2 h-4 w-4" aria-hidden="true" />
             Add resident profile
@@ -640,7 +641,8 @@ function HouseholdProfile() {
           <Button
             type="submit"
             variant="outline"
-            className="min-h-11 w-full tracking-[0.16em] uppercase"
+            size="cta"
+            className="min-h-11 w-full"
           >
             <Plus className="mr-2 h-4 w-4" aria-hidden="true" />
             Add pet

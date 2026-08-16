@@ -7,6 +7,7 @@ import { PageShell } from "@/components/PageShell";
 import { RequireSession } from "@/components/RequireSession";
 import { usePortal } from "@/lib/portal-store";
 import { PAYMENT_METHODS } from "@/lib/portal-data";
+import { formatCurrency } from "@/lib/currency";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 
@@ -30,8 +31,6 @@ export const Route = createFileRoute("/account")({
   }),
   component: AccountPage,
 });
-
-const money = (n: number) => n.toLocaleString("en-US", { style: "currency", currency: "USD" });
 
 function AccountPage() {
   return (
@@ -65,7 +64,7 @@ function AccountBody() {
           Current balance
         </h2>
         <p className="mt-2 text-sm text-muted-foreground">{currentUser?.unit}</p>
-        <p className="mt-4 font-display text-5xl">{money(balance)}</p>
+        <p className="mt-4 font-display text-5xl">{formatCurrency(balance)}</p>
         <p className="mt-2 text-sm text-muted-foreground" aria-live="polite">
           {balance > 0 ? "Due by the 15th of the month." : "No outstanding balance. Thank you."}
         </p>
@@ -111,7 +110,9 @@ function AccountBody() {
                       </span>
                     </span>
                     <span className="flex shrink-0 flex-col items-end gap-2 sm:flex-row sm:items-center sm:gap-5">
-                      <span className="font-display text-xl sm:text-2xl">{money(s.amount)}</span>
+                      <span className="font-display text-xl sm:text-2xl">
+                        {formatCurrency(s.amount)}
+                      </span>
                       <span
                         className={`border px-2.5 py-1 text-[0.65rem] tracking-[0.16em] uppercase sm:px-3 sm:text-xs ${
                           s.status === "Paid"
@@ -145,19 +146,20 @@ function AccountBody() {
                         {s.lines.map((l) => (
                           <tr key={l.label} className="border-t border-border">
                             <td className="py-2">{l.label}</td>
-                            <td className="py-2 text-right">{money(l.amount)}</td>
+                            <td className="py-2 text-right">{formatCurrency(l.amount)}</td>
                           </tr>
                         ))}
                         <tr className="border-t border-border font-medium">
                           <td className="py-2">Total</td>
-                          <td className="py-2 text-right">{money(s.amount)}</td>
+                          <td className="py-2 text-right">{formatCurrency(s.amount)}</td>
                         </tr>
                       </tbody>
                     </table>
 
                     {s.status !== "Paid" && (
                       <Button
-                        className="mt-5 min-h-11 tracking-[0.18em] uppercase"
+                        size="cta"
+                        className="mt-5 min-h-11"
                         onClick={() => {
                           payStatement(
                             s.id,
@@ -166,7 +168,7 @@ function AccountBody() {
                           toast.success(`${s.period} settled.`);
                         }}
                       >
-                        Pay {money(s.amount)}
+                        Pay {formatCurrency(s.amount)}
                       </Button>
                     )}
                   </div>
@@ -184,7 +186,7 @@ function AccountBody() {
         <ul className="mt-6 space-y-3" aria-live="polite">
           {payments.map((p) => (
             <li key={p.id} className="border border-border bg-card p-5 text-sm">
-              {money(p.amount)} · {p.statementPeriod} · {p.method} · {p.at}
+              {formatCurrency(p.amount)} · {p.statementPeriod} · {p.method} · {p.at}
             </li>
           ))}
           {payments.length === 0 && (
@@ -218,18 +220,22 @@ function MarketSnapshot({ unit }: { unit: string }) {
       <dl className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <Stat
           label="Estimated value"
-          value={money(snap.estimate)}
+          value={formatCurrency(snap.estimate, { whole: true })}
           note={`${snap.sqft.toLocaleString("en-US")} sq ft`}
         />
-        <Stat label="Purchase price" value={money(snap.purchase)} note="Recorded at closing" />
+        <Stat
+          label="Purchase price"
+          value={formatCurrency(snap.purchase, { whole: true })}
+          note="Recorded at closing"
+        />
         <Stat
           label="Unrealised gain"
-          value={`${snap.gain >= 0 ? "+" : ""}${money(snap.gain)}`}
+          value={`${snap.gain >= 0 ? "+" : ""}${formatCurrency(snap.gain, { whole: true })}`}
           note={`${snap.gainPct >= 0 ? "+" : ""}${snap.gainPct}% since purchase`}
         />
         <Stat
           label="Lease potential"
-          value={`${money(snap.rentEstimate)} / mo`}
+          value={`${formatCurrency(snap.rentEstimate, { whole: true })} / mo`}
           note={`${snap.grossYield}% gross yield`}
         />
       </dl>
@@ -238,7 +244,7 @@ function MarketSnapshot({ unit }: { unit: string }) {
       <dl className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <Stat
           label="Median price / sq ft"
-          value={money(facts.medianPricePerSqft)}
+          value={formatCurrency(facts.medianPricePerSqft, { whole: true })}
           note={`${facts.yearOverYear}% year on year`}
         />
         <Stat
@@ -254,7 +260,7 @@ function MarketSnapshot({ unit }: { unit: string }) {
         <Stat
           label="Leased occupancy"
           value={`${facts.leaseOccupancy}%`}
-          note={`Median lease ${money(facts.medianLease)}`}
+          note={`Median lease ${formatCurrency(facts.medianLease, { whole: true })}`}
         />
       </dl>
 

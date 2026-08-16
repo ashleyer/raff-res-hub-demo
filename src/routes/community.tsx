@@ -155,7 +155,8 @@ function CommunityBody() {
                   <Button
                     type="submit"
                     variant="outline"
-                    className="min-h-11 tracking-[0.16em] uppercase"
+                    size="cta"
+                    className="min-h-11"
                   >
                     Post reply
                   </Button>
@@ -188,7 +189,8 @@ function CommunityBody() {
                   </p>
                   <Button
                     variant={isMember ? "default" : "outline"}
-                    className="mt-3 min-h-11 tracking-[0.16em] uppercase"
+                    size="cta"
+                    className="mt-3 min-h-11"
                     onClick={() => {
                       toggleJoin(c.id);
                       toast.success(isMember ? `Left ${c.name}.` : `Joined ${c.name}.`);
@@ -258,7 +260,7 @@ function CommunityBody() {
               </Label>
               <Switch id="t-anon" checked={anonymous} onCheckedChange={setAnonymous} />
             </div>
-            <Button type="submit" className="min-h-11 w-full tracking-[0.18em] uppercase">
+            <Button type="submit" size="cta" className="min-h-11 w-full">
               Post topic
             </Button>
           </div>

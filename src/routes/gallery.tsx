@@ -247,7 +247,7 @@ function PostForm({ onPost }: { onPost: (post: GalleryPost) => void }) {
           />
         </div>
 
-        <Button type="submit" className="min-h-12 w-full tracking-[0.18em] uppercase sm:w-auto">
+        <Button type="submit" size="cta" className="min-h-12 w-full sm:w-auto">
           Post photograph
         </Button>
       </form>

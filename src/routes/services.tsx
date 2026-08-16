@@ -187,7 +187,7 @@ function ValetSection() {
               onChange={(e) => setNotes(e.target.value)}
             />
           </div>
-          <Button type="submit" className="min-h-11 w-full tracking-[0.18em] uppercase">
+          <Button type="submit" size="cta" className="min-h-11 w-full">
             Send to valet
           </Button>
         </div>
@@ -290,7 +290,7 @@ function MaintenanceSection() {
             </Label>
             <Switch id="m-entry" checked={entry} onCheckedChange={setEntry} />
           </div>
-          <Button type="submit" className="min-h-11 w-full tracking-[0.18em] uppercase">
+          <Button type="submit" size="cta" className="min-h-11 w-full">
             Submit report
           </Button>
         </div>
@@ -331,7 +331,8 @@ function MailSection() {
               {p.status === "Awaiting collection" && (
                 <Button
                   variant="outline"
-                  className="min-h-11 tracking-[0.16em] uppercase"
+                  size="cta"
+                  className="min-h-11"
                   onClick={() => {
                     requestParcelDelivery(p.id);
                     toast.success("A concierge will bring it up.");
@@ -463,7 +464,7 @@ function LostFoundSection() {
               className="min-h-11"
             />
           </div>
-          <Button type="submit" className="min-h-11 w-full tracking-[0.18em] uppercase">
+          <Button type="submit" size="cta" className="min-h-11 w-full">
             Log with the concierge
           </Button>
         </div>

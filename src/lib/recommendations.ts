@@ -9,6 +9,7 @@
 
 import { AMENITIES, SEED_EVENTS } from "./intranet-data";
 import { SUB_COMMUNITIES, type Listing, type Resident, type Statement } from "./portal-data";
+import { formatCurrency } from "./currency";
 
 export type RecommendationArea =
   "amenities" | "events" | "community" | "marketplace" | "account" | "services";
@@ -271,7 +272,7 @@ export function buildRecommendations(input: RecommendationInput): Recommendation
       id: `statement-${due.id}`,
       area: "account",
       title: `Settle your ${due.period} statement`,
-      reason: `$${due.amount.toLocaleString("en-US", { minimumFractionDigits: 2 })} is due by ${due.due}.`,
+      reason: `${formatCurrency(due.amount)} is due by ${due.due}.`,
       signals: ["Outstanding balance"],
       to: "/account",
       cta: "Open house account",

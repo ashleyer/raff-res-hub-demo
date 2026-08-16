@@ -100,7 +100,8 @@ function StaffSignInPage() {
           <Button
             type="submit"
             disabled={busy}
-            className="min-h-11 w-full tracking-[0.18em] uppercase"
+            size="cta"
+            className="min-h-11 w-full"
           >
             {busy ? <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" /> : null}
             Sign in

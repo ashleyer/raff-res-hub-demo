@@ -193,7 +193,8 @@ function SignedIn() {
         This device will remember you until you sign out.
       </p>
       <Button
-        className="mt-6 min-h-11 tracking-[0.18em] uppercase"
+        size="cta"
+        className="mt-6 min-h-11"
         variant="outline"
         onClick={() => {
           signOut();
@@ -376,7 +377,8 @@ function SignInForm({ redirectTo = "/directory" }: { redirectTo?: string }) {
         <Button
           type="submit"
           disabled={submitting}
-          className="min-h-11 w-full tracking-[0.18em] uppercase"
+          size="cta"
+          className="min-h-11 w-full"
         >
           {submitting ? (
             <>
@@ -578,7 +580,8 @@ function SignUpForm({ redirectTo = "/directory" }: { redirectTo?: string }) {
         <Button
           type="submit"
           disabled={submitting}
-          className="min-h-11 w-full tracking-[0.18em] uppercase"
+          size="cta"
+          className="min-h-11 w-full"
         >
           {submitting ? (
             <>

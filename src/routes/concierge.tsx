@@ -44,6 +44,20 @@ const STATUS_ICON = {
   Completed: CheckCircle2,
 } as const;
 
+/** A short, human line explaining what the status pill means right now —
+ *  the same "why", not just "what", already shown on /for-you. */
+function statusNote(r: ConciergeRequest): string {
+  if (r.status === "Lodged") {
+    return r.priority === "Priority"
+      ? "Priority request — the desk aims to acknowledge within fifteen minutes."
+      : "The desk aims to acknowledge within fifteen minutes.";
+  }
+  if (r.status === "In progress") {
+    return r.assignedTo ? `Assigned to ${r.assignedTo}.` : "Being reviewed by the desk.";
+  }
+  return "Marked complete by the desk.";
+}
+
 function ConciergePage() {
   const {
     conciergeRequests: requests,
@@ -122,7 +136,7 @@ function ConciergePage() {
           </Link>
         </p>
 
-        <div className="mt-12 grid gap-10 md:gap-12 lg:grid-cols-[1.5fr_1fr]">
+        <div className="mt-12 grid items-start gap-10 md:gap-12 lg:grid-cols-[1.5fr_1fr]">
           <section aria-labelledby="register">
             <h2 id="register" className="text-2xl">
               Request register
@@ -179,11 +193,14 @@ function ConciergePage() {
                           <Icon className="h-3.5 w-3.5" aria-hidden="true" />
                           {r.status}
                         </span>
+                        <p className="max-w-[14rem] text-right text-xs leading-snug text-muted-foreground">
+                          {statusNote(r)}
+                        </p>
                         {r.status !== "Completed" && (
                           <Button
                             variant="ghost"
                             onClick={() => advance(r.id)}
-                            className="tracking-[0.18em] uppercase"
+                            size="cta"
                           >
                             {r.status === "Lodged" ? "Acknowledge" : "Mark complete"}
                           </Button>
@@ -195,10 +212,23 @@ function ConciergePage() {
               })}
               {visible.length === 0 && (
                 <li className="border border-dashed border-border p-10 text-center text-sm text-muted-foreground">
-                  No requests in this state.
+                  <BellRing className="mx-auto h-5 w-5 text-primary" aria-hidden="true" />
+                  <p className="mt-3">No requests in this state.</p>
+                  <p className="mt-2 text-xs leading-relaxed">
+                    Every residence is attended around the clock. Once lodged, a request is
+                    acknowledged within fifteen minutes.
+                  </p>
                 </li>
               )}
             </ul>
+
+            <div className="mt-8 border border-border bg-secondary/30 p-6">
+              <p className="eyebrow">Service standard</p>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                Every residence is attended around the clock. Requests lodged here reach the
+                concierge desk immediately and are acknowledged within fifteen minutes.
+              </p>
+            </div>
           </section>
 
           <aside className="lg:sticky lg:top-8 lg:self-start">
@@ -286,7 +316,7 @@ function ConciergePage() {
                   <Switch id="priority" checked={priority} onCheckedChange={setPriority} />
                 </div>
 
-                <Button type="submit" className="min-h-12 w-full tracking-[0.18em] uppercase">
+                <Button type="submit" size="cta" className="min-h-12 w-full">
                   Send to the desk
                 </Button>
               </div>

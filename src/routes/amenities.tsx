@@ -28,6 +28,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { usePortal } from "@/lib/portal-store";
 import { ForYou } from "@/components/ForYou";
 import { SpatialBookingGrid } from "@/components/SpatialBookingGrid";
+import { DatePicker } from "@/components/ui/date-picker";
 
 export const Route = createFileRoute("/amenities")({
   head: () => ({
@@ -168,7 +169,8 @@ function AmenitiesPage() {
                       <Button
                         variant="outline"
                         onClick={() => selectAmenity(a.id)}
-                        className="mt-5 w-full tracking-[0.18em] uppercase"
+                        size="cta"
+                        className="mt-5 w-full"
                       >
                         {a.id === amenityId ? "Selected" : "Request this room"}
                       </Button>
@@ -205,7 +207,7 @@ function AmenitiesPage() {
                   <Button
                     variant="ghost"
                     onClick={() => release(b.id)}
-                    className="tracking-[0.18em] uppercase"
+                    size="cta"
                   >
                     Release
                   </Button>
@@ -244,12 +246,7 @@ function AmenitiesPage() {
 
                 <div className="space-y-2">
                   <Label htmlFor="date">Date</Label>
-                  <Input
-                    id="date"
-                    type="date"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                  />
+                  <DatePicker id="date" value={date} onChange={setDate} />
                 </div>
 
                 <div className="space-y-2">
@@ -315,7 +312,7 @@ function AmenitiesPage() {
                   />
                 </div>
 
-                <Button type="submit" className="min-h-12 w-full tracking-[0.18em] uppercase">
+                <Button type="submit" size="cta" className="min-h-12 w-full">
                   Submit request
                 </Button>
               </div>
@@ -667,7 +664,7 @@ function InResidenceDining() {
                   placeholder="Allergies, table setting, timing…"
                 />
               </div>
-              <Button type="submit" className="min-h-12 w-full tracking-[0.18em] uppercase">
+              <Button type="submit" size="cta" className="min-h-12 w-full">
                 Place order
               </Button>
             </div>

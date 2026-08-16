@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Sparkles, ThumbsUp } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { Button } from "@/components/ui/button";
@@ -26,6 +26,57 @@ export const Route = createFileRoute("/staff-dashboard")({
   component: StaffDashboardPage,
 });
 
+/** A department-specific module for Concierge staff — the one department every other
+ *  reviewed flow (requests, alerts) actually feeds into. Other departments keep today's
+ *  generic dashboard below unchanged. */
+function ConciergeDeskSummary() {
+  const { conciergeRequests } = usePortal();
+  const lodged = conciergeRequests.filter((r) => r.status === "Lodged").length;
+  const inProgress = conciergeRequests.filter((r) => r.status === "In progress").length;
+  const priority = conciergeRequests.filter(
+    (r) => r.status !== "Completed" && r.priority === "Priority",
+  ).length;
+
+  return (
+    <section aria-labelledby="concierge-desk-summary" className="border border-border bg-card p-8">
+      <p className="eyebrow">Concierge Desk</p>
+      <h2 id="concierge-desk-summary" className="mt-3 text-2xl">
+        Live queue
+      </h2>
+      <div className="gold-rule mt-4" />
+      <dl className="mt-6 grid gap-6 sm:grid-cols-3">
+        <div>
+          <dt className="text-xs tracking-[0.18em] text-muted-foreground uppercase">Lodged</dt>
+          <dd className="mt-2 text-3xl">{lodged}</dd>
+        </div>
+        <div>
+          <dt className="text-xs tracking-[0.18em] text-muted-foreground uppercase">
+            In progress
+          </dt>
+          <dd className="mt-2 text-3xl">{inProgress}</dd>
+        </div>
+        <div>
+          <dt className="text-xs tracking-[0.18em] text-muted-foreground uppercase">
+            Priority waiting
+          </dt>
+          <dd className="mt-2 text-3xl">{priority}</dd>
+        </div>
+      </dl>
+      <p className="mt-6 text-sm text-muted-foreground">
+        Full triage tools — assign attendants, reply to residents, advance status — live on the
+        concierge desk queue.
+      </p>
+      <Link to="/concierge-desk" className="btn-outline mt-5 inline-flex min-h-11 items-center">
+        Open the concierge desk queue
+      </Link>
+      <p className="mt-3 text-xs text-muted-foreground">
+        That queue uses a separate access phrase shown on its own page — it is not the same
+        sign-in as your personnel account.
+      </p>
+    </section>
+  );
+}
+
 function StaffDashboardPage() {
   const navigate = useNavigate();
   const { eventIdeas } = usePortal();
@@ -47,6 +98,7 @@ function StaffDashboardPage() {
     >
       {!checked ? null : account ? (
         <div className="mt-12 space-y-10">
+          {account.department === "Concierge" && <ConciergeDeskSummary />}
           <div className="max-w-xl border border-border bg-card p-8">
             <p className="text-sm text-muted-foreground">Signed in as</p>
             <p className="mt-2 text-2xl">{account.name}</p>
@@ -56,7 +108,8 @@ function StaffDashboardPage() {
             <p className="mt-1 text-sm text-muted-foreground">{account.email}</p>
             <Button
               variant="outline"
-              className="mt-6 min-h-11 tracking-[0.18em] uppercase"
+              size="cta"
+              className="mt-6 min-h-11"
               onClick={() => {
                 signOutStaff();
                 void navigate({ to: "/staff-signin" });

@@ -8,6 +8,7 @@ import {
   type LeaseListing,
   type SaleListing,
 } from "@/lib/market-data";
+import { formatCurrency } from "@/lib/currency";
 
 export const Route = createFileRoute("/sales-and-leasing")({
   head: () => ({
@@ -29,9 +30,6 @@ export const Route = createFileRoute("/sales-and-leasing")({
   }),
   component: SalesAndLeasingPage,
 });
-
-const money = (n: number) =>
-  n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
 const TABS = [
   { id: "sales", label: "For sale & sold" },
@@ -107,7 +105,7 @@ function SalesAndLeasingPage() {
                     <StatusChip status={p.status} />
                   </td>
                   <td className="p-4 text-right whitespace-nowrap">
-                    {money(p.price)}
+                    {formatCurrency(p.price, { whole: true })}
                     {p.kind === "Lease" && (
                       <span className="text-xs text-muted-foreground"> / month</span>
                     )}
@@ -178,10 +176,10 @@ function SaleCard({ listing }: { listing: SaleListing }) {
           </div>
         </dl>
         <p className="mt-5 font-display text-3xl">
-          {money(listing.closedPrice ?? listing.price)}
+          {formatCurrency(listing.closedPrice ?? listing.price, { whole: true })}
           {listing.closedPrice && (
             <span className="ml-2 align-middle text-sm text-muted-foreground">
-              closed · asked {money(listing.price)}
+              closed · asked {formatCurrency(listing.price, { whole: true })}
             </span>
           )}
         </p>
@@ -216,7 +214,7 @@ function LeaseCard({ listing }: { listing: LeaseListing }) {
           {listing.beds} bed · {listing.baths} bath · {listing.sqft.toLocaleString("en-US")} sq ft
         </p>
         <p className="mt-5 font-display text-3xl">
-          {money(listing.monthly)}
+          {formatCurrency(listing.monthly, { whole: true })}
           <span className="ml-2 align-middle text-sm text-muted-foreground">per month</span>
         </p>
         <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">

@@ -4,9 +4,11 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 const SEEN_KEY = "raffles-demo-notice-seen";
 const BANNER_KEY = "raffles-demo-banner-dismissed";
@@ -71,9 +73,15 @@ export function DemoModal() {
         <DialogHeader>
           <DialogTitle className="font-display text-2xl font-light">Demo Mode</DialogTitle>
           <DialogDescription className="text-sm leading-relaxed text-muted-foreground">
-            Content is not real. Everything shown in this residents' portal is illustrative.
+            Every booking, message and payment you make here lives only in this browser's
+            storage — nothing is saved to a real server or shared with anyone.
           </DialogDescription>
         </DialogHeader>
+        <DialogFooter className="sm:justify-center">
+          <Button onClick={() => setOpen(false)} size="cta" className="min-h-11 w-full sm:w-auto">
+            Understood
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

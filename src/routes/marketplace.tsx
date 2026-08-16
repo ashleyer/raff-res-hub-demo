@@ -7,6 +7,7 @@ import { ForYou } from "@/components/ForYou";
 import { RequireSession } from "@/components/RequireSession";
 import { usePortal } from "@/lib/portal-store";
 import type { Listing } from "@/lib/portal-data";
+import { formatCurrency } from "@/lib/currency";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -99,11 +100,7 @@ function MarketplaceBody() {
                 <p className="eyebrow">{l.kind}</p>
                 {typeof l.price === "number" && (
                   <p className="font-display text-2xl">
-                    {l.price.toLocaleString("en-US", {
-                      style: "currency",
-                      currency: "USD",
-                      maximumFractionDigits: 0,
-                    })}
+                    {formatCurrency(l.price, { whole: true })}
                   </p>
                 )}
               </div>
@@ -151,7 +148,7 @@ function MarketplaceBody() {
                 <Button
                   type="submit"
                   variant="outline"
-                  className="min-h-11 tracking-[0.16em] uppercase"
+                  size="cta"
                 >
                   Reply
                 </Button>
@@ -239,7 +236,7 @@ function MarketplaceBody() {
               </Label>
               <Switch id="l-anon" checked={anonymous} onCheckedChange={setAnonymous} />
             </div>
-            <Button type="submit" className="min-h-11 w-full tracking-[0.18em] uppercase">
+            <Button type="submit" size="cta" className="min-h-11 w-full">
               Publish listing
             </Button>
           </div>

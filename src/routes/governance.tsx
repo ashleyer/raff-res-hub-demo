@@ -9,6 +9,22 @@ import { ResidenceHandbook } from "@/components/ResidenceHandbook";
 
 import { Button } from "@/components/ui/button";
 
+/** Narrates the outcome behind a measure's status, not just the bare label —
+ *  the same "why", not just "what", already shown on /for-you. */
+function outcomeNote(m: GovernanceMeasure, pct: number): string {
+  switch (m.status) {
+    case "Carried":
+      return `Carried with ${pct}% in favour (${m.inFavour} for, ${m.against} against).`;
+    case "Withdrawn":
+      return "This measure was withdrawn before a result was reached.";
+    case "In committee":
+      return "Currently under committee review, before going to ballot.";
+    case "Open for ballot":
+    default:
+      return `Currently ${pct}% in favour · a simple majority is needed once quorum is met.`;
+  }
+}
+
 export const Route = createFileRoute("/governance")({
   head: () => ({
     meta: [
@@ -92,13 +108,15 @@ function GovernancePage() {
                       <p className="mt-2 text-xs tracking-wider text-muted-foreground uppercase">
                         {m.inFavour} in favour · {m.against} against · {pct}% · Closes {m.closes}
                       </p>
+                      <p className="mt-2 text-sm text-muted-foreground">{outcomeNote(m, pct)}</p>
                     </div>
 
                     <div className="mt-5 flex flex-wrap gap-3">
                       <Button
                         onClick={() => cast(m, "for")}
                         disabled={!open || Boolean(ballots[m.id])}
-                        className="min-h-11 tracking-[0.18em] uppercase"
+                        size="cta"
+                        className="min-h-11"
                       >
                         {ballots[m.id] === "for" ? "Ballot cast" : "In favour"}
                       </Button>
@@ -106,7 +124,8 @@ function GovernancePage() {
                         variant="outline"
                         onClick={() => cast(m, "against")}
                         disabled={!open || Boolean(ballots[m.id])}
-                        className="min-h-11 tracking-[0.18em] uppercase"
+                        size="cta"
+                        className="min-h-11"
                       >
                         {ballots[m.id] === "against" ? "Ballot cast" : "Against"}
                       </Button>
