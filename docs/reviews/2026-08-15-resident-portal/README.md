@@ -3,9 +3,13 @@
 **Reviewed 2026-08-15** · live demo, desktop (1440×900) + mobile (390×844), signed-in and
 signed-out states, 20 screens · [annotated version with full write-up →](https://claude.ai/code/artifact/af6cc0b6-9137-465d-96f0-c56740d4256f)
 
+**Status, 2026-08-16: all seven findings below are fixed and closed** (#9–#15), verified
+against `npm run typecheck`, `lint`, `test`, `test:a11y` (22/22 clean), and
+`test:visual` (18/18) — see each item for what shipped.
+
 A hospitality-software and UX critique of the resident portal, done by driving the live
-demo with Playwright rather than reading the source in isolation. Open findings below are
-tracked as GitHub issues (linked inline) rather than left as prose, so they don't go stale.
+demo with Playwright rather than reading the source in isolation. Findings below were
+tracked as GitHub issues (linked inline) rather than left as prose, so they didn't go stale.
 
 ## Verdict
 
@@ -23,10 +27,10 @@ of a marketing page.
 | Brand & visual fidelity | ●●●● | Could sit next to rafflesresidencesboston.com without flinching. |
 | Hospitality voice | ●●●● | Concierge notes and resident quotes read like a real desk log, not filler copy. |
 | Information architecture | ●●●○ | Fourteen resident domains, all two clicks away; the mega-menu earns its keep. |
-| Transactional UX | ●●○○ | The patterns are right; the input chrome breaks the spell. |
+| Transactional UX | ~~●●○○~~ ●●●○ | *As of 2026-08-16:* real date/time pickers, legible CTAs. |
 | Accessibility discipline | ●●●○ | Contrast bugs get caught and documented, not just silently patched. |
 | Mobile experience | ●●●○ | Header survives real stress-testing; forms feel less tailored under 768px. |
-| Staff-side operations | ●○○○ | The resident half is finished. The desk that resolves those requests isn't. |
+| Staff-side operations | ~~●○○○~~ ●●○○ | *As of 2026-08-16:* Concierge dashboard is live; other departments still generic. |
 
 ## What's already five-star
 
@@ -61,42 +65,58 @@ background — short of WCAG AA's 4.5:1 — caught by the automated audit. Paire
 visual-regression suite guarding the header across six breakpoints, this reads like a team
 with a QA discipline, not a single designer's taste.
 
-## Open findings
+## Findings — all resolved
 
-Ranked by how much each one costs the illusion, not by how hard it is to fix. Tracked
-individually so they can be closed out one at a time:
+Ranked by how much each one cost the illusion, not by how hard it was to fix.
 
-1. **Browser-native inputs inside a couture interface** — every date/time field
-   (Amenities, Concierge, Hotel Bridge) drops to the raw OS picker. `react-day-picker` is
-   already a dependency and unused exactly where it's needed most. → [#9](https://github.com/ashleyer/raff-res-hub-demo/issues/9)
+1. ✅ **Browser-native inputs inside a couture interface** — every date/time field
+   (Amenities, Concierge, Hotel Bridge) dropped to the raw OS picker. `react-day-picker` was
+   already a dependency and unused exactly where it was needed most. → [#9, closed](https://github.com/ashleyer/raff-res-hub-demo/issues/9) — added a
+   `DatePicker` (Popover + the existing Calendar) and a `TimeChipPicker` deriving valid
+   chip times from each outlet's own service window.
 
    ![Amenities booking form showing a raw unstyled operating-system date input](assets/04-amenities-date-input.jpg)
 
-2. **Button type sized for browsing, not for spending money** — transactional CTAs
-   (*Send to the Desk*, *Place Order*, *Publish Listing*) run at the same ~10–11px tracked
-   caps as marketing-page buttons. → [#10](https://github.com/ashleyer/raff-res-hub-demo/issues/10)
+2. ✅ **Button type sized for browsing, not for spending money** — transactional CTAs
+   (*Send to the Desk*, *Place Order*, *Publish Listing*) ran at the same ~10–11px tracked
+   caps as marketing-page buttons. → [#10, closed](https://github.com/ashleyer/raff-res-hub-demo/issues/10) — new `size="cta"` Button
+   variant, applied site-wide (~50 call sites, 22 files) rather than only the pages this
+   review happened to cover.
 
-3. **Uneven column weight leaves dead space on wide screens** — Concierge's two-column
-   layout leaves a wide field of blank space before the footer when the request list is
-   short. → [#11](https://github.com/ashleyer/raff-res-hub-demo/issues/11)
+3. ✅ **Uneven column weight leaves dead space on wide screens** — Concierge's two-column
+   layout left a wide field of blank space before the footer when the request list was
+   short. → [#11, closed](https://github.com/ashleyer/raff-res-hub-demo/issues/11) — `items-start` cleanup plus real added
+   content (richer empty state, a standing service-standard panel) so the column's natural
+   height closes the gap.
 
    ![Concierge page showing a large empty area of blank space before the footer](assets/05-concierge-gap.jpg)
 
-4. **Two "this isn't real" interruptions before anything real is seen** — the banner and
-   the first-visit modal both restate the same fact, and the modal's only dismissal is a
-   small unlabeled corner icon. → [#12](https://github.com/ashleyer/raff-res-hub-demo/issues/12)
+4. ✅ **Two "this isn't real" interruptions before anything real is seen** — the banner and
+   the first-visit modal restated the same fact, and the modal's only dismissal was a
+   small unlabeled corner icon. → [#12, closed](https://github.com/ashleyer/raff-res-hub-demo/issues/12) — modal now states a fact the
+   banner doesn't, with an explicit primary "Understood" button.
 
-5. **Currency formatting overstates precision** — the house-value snapshot on Account
-   renders seven-figure numbers to the cent (`$6,240,000.00`). → [#13](https://github.com/ashleyer/raff-res-hub-demo/issues/13)
+5. ✅ **Currency formatting overstates precision** — the house-value snapshot on Account
+   rendered seven-figure numbers to the cent (`$6,240,000.00`). → [#13, closed](https://github.com/ashleyer/raff-res-hub-demo/issues/13) — new shared
+   `formatCurrency()` util; six round-number stats (two more than originally spotted) now
+   render as whole dollars, statements and folio charges correctly stayed at 2 decimals.
 
-## If I were briefing the next sprint
+Bonus: re-running the a11y audit as part of verifying these fixes turned up one more
+pre-existing violation on Concierge (two inline links only underlined on hover) — fixed
+to match the always-underlined convention already used elsewhere in the app.
 
-- **Build out the staff side.** Every flow reviewed here ends by being "lodged," and
-  Concierge Desk is where it's triaged, assigned, and closed — currently the thinnest part
-  of the build, with `/staff-dashboard` an acknowledged placeholder.
-- **Carry the visible-logic idea further.** Extend the "For You" page's transparent
-  reasoning to concierge status updates and governance outcomes, so transparency becomes
-  the site's throughline rather than one page's feature.
+## What shipped from "next sprint"
+
+Both forward-looking ideas below were picked up immediately rather than deferred:
+
+- ✅ **Build out the staff side.** → [#14, closed](https://github.com/ashleyer/raff-res-hub-demo/issues/14) — corrected the premise first:
+  Concierge Desk turned out to already be a fully working triage queue, not a stub. The
+  real gap was `/staff-dashboard`'s generic placeholder; it now shows a live
+  Lodged/In-progress/Priority summary for signed-in Concierge-department staff, linking to
+  the desk queue, without touching the two intentionally-separate staff-auth systems.
+- ✅ **Carry the visible-logic idea further.** → [#15, closed](https://github.com/ashleyer/raff-res-hub-demo/issues/15) — Concierge requests and
+  Governance measures now narrate their status/outcome in a short line, the same pattern
+  "For You" already used.
 
 ---
 
