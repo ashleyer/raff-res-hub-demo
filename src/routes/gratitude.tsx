@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { requireResidentSession } from "@/lib/session-guard";
 import { toast } from "sonner";
+import { Info } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { RequireSession } from "@/components/RequireSession";
 import { ThankYouCarousel } from "@/components/ThankYouCarousel";
@@ -45,6 +46,17 @@ function GratitudePage() {
       title="Thank You Notes"
       intro="A public board for crediting the people who look after the building. Notes appear for every resident to read; leave your residence number off if you would rather thank someone quietly."
     >
+      <p
+        role="note"
+        className="mt-12 flex items-start gap-3 border border-primary/40 bg-primary/5 px-5 py-4 text-sm leading-relaxed text-muted-foreground"
+      >
+        <Info className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+        <span>
+          <span className="text-foreground">These notes are not real.</span> Every thank-you note
+          and staff name below is invented for demonstration purposes only.
+        </span>
+      </p>
+
       <section aria-labelledby="carousel-heading" className="mt-12">
         <h2 id="carousel-heading" className="text-2xl">
           Recently posted

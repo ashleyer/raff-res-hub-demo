@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Lock, Search } from "lucide-react";
+import { Info, Lock, Search } from "lucide-react";
 import { toast } from "sonner";
 import { PageShell } from "@/components/PageShell";
 import { Button } from "@/components/ui/button";
@@ -166,6 +166,17 @@ function DeskQueue() {
 
   return (
     <div className="mt-12">
+      <p
+        role="note"
+        className="mb-8 flex items-start gap-3 border border-primary/40 bg-primary/5 px-5 py-4 text-sm leading-relaxed text-muted-foreground"
+      >
+        <Info className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+        <span>
+          <span className="text-foreground">This queue is not real.</span> Every request, attendant
+          name and reply below is invented for demonstration purposes only.
+        </span>
+      </p>
+
       <div className="grid gap-4 sm:grid-cols-3">
         <Stat label="Open in queue" value={open} />
         <Stat label="Priority waiting" value={urgent} />

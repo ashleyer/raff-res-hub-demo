@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { CalendarDays, CalendarOff, Clock, MapPin, Sparkles, ThumbsUp, Users } from "lucide-react";
+import { DemoTag } from "@/components/DemoTag";
 import { toast } from "sonner";
 import { SEED_EVENTS, type ResidentEvent } from "@/lib/intranet-data";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -226,14 +227,17 @@ function EventsPage() {
             return (
               <li key={e.id}>
                 <article className="flex h-full flex-col border border-border bg-card">
-                  <img
-                    src={e.image}
-                    alt={`${e.title} at The Raffles Residences Boston`}
-                    width={1200}
-                    height={800}
-                    loading="lazy"
-                    className="h-44 w-full object-cover"
-                  />
+                  <div className="relative">
+                    <DemoTag label="Demo photo" title="Illustrative photo; not a real event" />
+                    <img
+                      src={e.image}
+                      alt={`${e.title} at The Raffles Residences Boston`}
+                      width={1200}
+                      height={800}
+                      loading="lazy"
+                      className="h-44 w-full object-cover"
+                    />
+                  </div>
                   <div className="flex flex-1 flex-col p-6">
                     <h2 className="text-2xl leading-snug">{e.title}</h2>
                     <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{e.detail}</p>

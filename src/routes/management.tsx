@@ -79,6 +79,16 @@ function ManagementPage() {
           <h2 id="ann-heading" className="text-2xl">
             Announcements from management
           </h2>
+          <p
+            role="note"
+            className="mt-4 flex items-start gap-3 border border-primary/40 bg-primary/5 px-5 py-4 text-sm leading-relaxed text-muted-foreground"
+          >
+            <Info className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+            <span>
+              <span className="text-foreground">These notices are not real.</span> Every
+              announcement below is invented for demonstration purposes only.
+            </span>
+          </p>
           <ul className="mt-6 space-y-4">
             {ANNOUNCEMENTS.map((a) => (
               <li key={a.id} className="border border-border bg-card p-6">
@@ -496,12 +506,7 @@ function ManagementResults({
         </ul>
       )}
 
-      <Button
-        variant="outline"
-        size="cta"
-        className="mt-6 min-h-11 w-full"
-        onClick={downloadCsv}
-      >
+      <Button variant="outline" size="cta" className="mt-6 min-h-11 w-full" onClick={downloadCsv}>
         Download dataset (CSV)
       </Button>
     </aside>

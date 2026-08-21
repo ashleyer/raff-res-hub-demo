@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { requireResidentSession } from "@/lib/session-guard";
 import { toast } from "sonner";
+import { Info } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { ThankYouCarousel } from "@/components/ThankYouCarousel";
 import { SEED_THANK_YOU_NOTES } from "@/lib/gratitude-data";
@@ -43,6 +44,17 @@ function CommunityPage() {
       title="Community & interest groups"
       intro="A place for neighbours to talk. Join the circles that interest you and follow only those conversations."
     >
+      <p
+        role="note"
+        className="mt-12 flex items-start gap-3 border border-primary/40 bg-primary/5 px-5 py-4 text-sm leading-relaxed text-muted-foreground"
+      >
+        <Info className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+        <span>
+          <span className="text-foreground">These conversations are not real.</span> Every forum
+          post, reply and thank-you note on this page is invented for demonstration purposes only.
+        </span>
+      </p>
+
       <section aria-labelledby="thanks-heading" className="mt-12">
         <p className="eyebrow">Notes of thanks</p>
         <h2 id="thanks-heading" className="mt-3 text-2xl">
@@ -152,12 +164,7 @@ function CommunityBody() {
                       className="min-h-11"
                     />
                   </div>
-                  <Button
-                    type="submit"
-                    variant="outline"
-                    size="cta"
-                    className="min-h-11"
-                  >
+                  <Button type="submit" variant="outline" size="cta" className="min-h-11">
                     Post reply
                   </Button>
                 </form>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { requireResidentSession } from "@/lib/session-guard";
 import { toast } from "sonner";
+import { Info } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { ForYou } from "@/components/ForYou";
 import { RequireSession } from "@/components/RequireSession";
@@ -69,181 +70,191 @@ function MarketplaceBody() {
   const visible = listings.filter((l) => filter === "All" || l.kind === filter);
 
   return (
-    <div className="mt-12 grid gap-10 lg:grid-cols-[1.5fr_1fr]">
-      <section aria-labelledby="listings-heading">
-        <h2 id="listings-heading" className="text-2xl">
-          Open listings
-        </h2>
+    <div className="mt-12">
+      <p
+        role="note"
+        className="mb-10 flex items-start gap-3 border border-primary/40 bg-primary/5 px-5 py-4 text-sm leading-relaxed text-muted-foreground"
+      >
+        <Info className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+        <span>
+          <span className="text-foreground">These listings are not real.</span> Every
+          recommendation, listing and reply below is invented for demonstration purposes only — no
+          real household, service provider or price is represented.
+        </span>
+      </p>
 
-        <div className="mt-6 flex flex-wrap gap-2">
-          {(["All", ...KINDS] as const).map((k) => (
-            <button
-              key={k}
-              type="button"
-              aria-pressed={filter === k}
-              onClick={() => setFilter(k)}
-              className={`min-h-11 border px-4 text-xs tracking-[0.16em] uppercase transition-colors ${
-                filter === k
-                  ? "border-primary bg-primary text-primary-foreground"
-                  : "border-border text-muted-foreground hover:border-primary hover:text-primary"
-              }`}
-            >
-              {k}
-            </button>
-          ))}
-        </div>
+      <div className="grid gap-10 lg:grid-cols-[1.5fr_1fr]">
+        <section aria-labelledby="listings-heading">
+          <h2 id="listings-heading" className="text-2xl">
+            Open listings
+          </h2>
 
-        <ul className="mt-8 space-y-5" aria-live="polite">
-          {visible.map((l) => (
-            <li key={l.id} className="border border-border bg-card p-6">
-              <div className="flex flex-wrap items-start justify-between gap-4">
-                <p className="eyebrow">{l.kind}</p>
-                {typeof l.price === "number" && (
-                  <p className="font-display text-2xl">
-                    {formatCurrency(l.price, { whole: true })}
-                  </p>
-                )}
-              </div>
-              <h3 className="mt-2 text-2xl leading-snug">{l.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{l.body}</p>
-              <p className="mt-3 text-xs tracking-wider text-muted-foreground uppercase">
-                {l.author} · {l.at}
-              </p>
-
-              {l.replies.length > 0 && (
-                <ul className="mt-5 space-y-3 border-t border-border pt-4">
-                  {l.replies.map((r) => (
-                    <li key={r.id} className="border-l-2 border-primary/40 pl-4 text-sm">
-                      <p>{r.body}</p>
-                      <p className="mt-1 text-xs tracking-wider text-muted-foreground uppercase">
-                        {r.author} · {r.at}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-              )}
-
-              <form
-                className="mt-5 flex flex-wrap items-end gap-3 border-t border-border pt-4"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  const draft = (drafts[l.id] ?? "").trim();
-                  if (!draft) {
-                    toast.error("Write a reply first.");
-                    return;
-                  }
-                  addListingReply(l.id, draft, `${currentUser?.name} · ${currentUser?.unit}`);
-                  setDrafts((prev) => ({ ...prev, [l.id]: "" }));
-                }}
+          <div className="mt-6 flex flex-wrap gap-2">
+            {(["All", ...KINDS] as const).map((k) => (
+              <button
+                key={k}
+                type="button"
+                aria-pressed={filter === k}
+                onClick={() => setFilter(k)}
+                className={`min-h-11 border px-4 text-xs tracking-[0.16em] uppercase transition-colors ${
+                  filter === k
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "border-border text-muted-foreground hover:border-primary hover:text-primary"
+                }`}
               >
-                <div className="min-w-[16rem] flex-1 space-y-2">
-                  <Label htmlFor={`m-reply-${l.id}`}>Answer “{l.title}”</Label>
-                  <Input
-                    id={`m-reply-${l.id}`}
-                    value={drafts[l.id] ?? ""}
-                    onChange={(e) => setDrafts((prev) => ({ ...prev, [l.id]: e.target.value }))}
-                    className="min-h-11"
-                  />
+                {k}
+              </button>
+            ))}
+          </div>
+
+          <ul className="mt-8 space-y-5" aria-live="polite">
+            {visible.map((l) => (
+              <li key={l.id} className="border border-border bg-card p-6">
+                <div className="flex flex-wrap items-start justify-between gap-4">
+                  <p className="eyebrow">{l.kind}</p>
+                  {typeof l.price === "number" && (
+                    <p className="font-display text-2xl">
+                      {formatCurrency(l.price, { whole: true })}
+                    </p>
+                  )}
                 </div>
-                <Button
-                  type="submit"
-                  variant="outline"
-                  size="cta"
-                >
-                  Reply
-                </Button>
-              </form>
-            </li>
-          ))}
-        </ul>
-      </section>
+                <h3 className="mt-2 text-2xl leading-snug">{l.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{l.body}</p>
+                <p className="mt-3 text-xs tracking-wider text-muted-foreground uppercase">
+                  {l.author} · {l.at}
+                </p>
 
-      <aside className="lg:sticky lg:top-8 lg:self-start">
-        <form
-          className="border border-border bg-card p-7"
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (!title.trim() || !body.trim()) {
-              toast.error("A title and description are required.");
-              return;
-            }
-            const parsed = Number(price);
-            addListing({
-              kind,
-              title: title.trim(),
-              body: body.trim(),
-              ...(kind === "For sale" && price.trim() && !Number.isNaN(parsed)
-                ? { price: parsed }
-                : {}),
-              author: anonymous
-                ? "Anonymous deed-holder"
-                : `${currentUser?.name} · ${currentUser?.unit}`,
-            });
-            setTitle("");
-            setBody("");
-            setPrice("");
-            toast.success("Listing posted to the marketplace.");
-          }}
-        >
-          <h2 className="text-2xl">Post a listing</h2>
-          <div className="mt-6 space-y-5">
-            <div className="space-y-2">
-              <Label htmlFor="l-kind">Type</Label>
-              <select
-                id="l-kind"
-                value={kind}
-                onChange={(e) => setKind(e.target.value as Listing["kind"])}
-                className="min-h-11 w-full border border-input bg-transparent px-3 text-sm"
-              >
-                {KINDS.map((k) => (
-                  <option key={k}>{k}</option>
-                ))}
-              </select>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="l-title">Title</Label>
-              <Input
-                id="l-title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="min-h-11"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="l-body">Details</Label>
-              <Textarea
-                id="l-body"
-                rows={4}
-                value={body}
-                onChange={(e) => setBody(e.target.value)}
-              />
-            </div>
-            {kind === "For sale" && (
+                {l.replies.length > 0 && (
+                  <ul className="mt-5 space-y-3 border-t border-border pt-4">
+                    {l.replies.map((r) => (
+                      <li key={r.id} className="border-l-2 border-primary/40 pl-4 text-sm">
+                        <p>{r.body}</p>
+                        <p className="mt-1 text-xs tracking-wider text-muted-foreground uppercase">
+                          {r.author} · {r.at}
+                        </p>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                <form
+                  className="mt-5 flex flex-wrap items-end gap-3 border-t border-border pt-4"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    const draft = (drafts[l.id] ?? "").trim();
+                    if (!draft) {
+                      toast.error("Write a reply first.");
+                      return;
+                    }
+                    addListingReply(l.id, draft, `${currentUser?.name} · ${currentUser?.unit}`);
+                    setDrafts((prev) => ({ ...prev, [l.id]: "" }));
+                  }}
+                >
+                  <div className="min-w-[16rem] flex-1 space-y-2">
+                    <Label htmlFor={`m-reply-${l.id}`}>Answer “{l.title}”</Label>
+                    <Input
+                      id={`m-reply-${l.id}`}
+                      value={drafts[l.id] ?? ""}
+                      onChange={(e) => setDrafts((prev) => ({ ...prev, [l.id]: e.target.value }))}
+                      className="min-h-11"
+                    />
+                  </div>
+                  <Button type="submit" variant="outline" size="cta">
+                    Reply
+                  </Button>
+                </form>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <aside className="lg:sticky lg:top-8 lg:self-start">
+          <form
+            className="border border-border bg-card p-7"
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (!title.trim() || !body.trim()) {
+                toast.error("A title and description are required.");
+                return;
+              }
+              const parsed = Number(price);
+              addListing({
+                kind,
+                title: title.trim(),
+                body: body.trim(),
+                ...(kind === "For sale" && price.trim() && !Number.isNaN(parsed)
+                  ? { price: parsed }
+                  : {}),
+                author: anonymous
+                  ? "Anonymous deed-holder"
+                  : `${currentUser?.name} · ${currentUser?.unit}`,
+              });
+              setTitle("");
+              setBody("");
+              setPrice("");
+              toast.success("Listing posted to the marketplace.");
+            }}
+          >
+            <h2 className="text-2xl">Post a listing</h2>
+            <div className="mt-6 space-y-5">
               <div className="space-y-2">
-                <Label htmlFor="l-price">Asking price (USD)</Label>
+                <Label htmlFor="l-kind">Type</Label>
+                <select
+                  id="l-kind"
+                  value={kind}
+                  onChange={(e) => setKind(e.target.value as Listing["kind"])}
+                  className="min-h-11 w-full border border-input bg-transparent px-3 text-sm"
+                >
+                  {KINDS.map((k) => (
+                    <option key={k}>{k}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="l-title">Title</Label>
                 <Input
-                  id="l-price"
-                  inputMode="decimal"
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
+                  id="l-title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
                   className="min-h-11"
                 />
               </div>
-            )}
-            <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">
-              <Label htmlFor="l-anon" className="text-sm font-normal">
-                Post anonymously
-              </Label>
-              <Switch id="l-anon" checked={anonymous} onCheckedChange={setAnonymous} />
+              <div className="space-y-2">
+                <Label htmlFor="l-body">Details</Label>
+                <Textarea
+                  id="l-body"
+                  rows={4}
+                  value={body}
+                  onChange={(e) => setBody(e.target.value)}
+                />
+              </div>
+              {kind === "For sale" && (
+                <div className="space-y-2">
+                  <Label htmlFor="l-price">Asking price (USD)</Label>
+                  <Input
+                    id="l-price"
+                    inputMode="decimal"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                    className="min-h-11"
+                  />
+                </div>
+              )}
+              <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">
+                <Label htmlFor="l-anon" className="text-sm font-normal">
+                  Post anonymously
+                </Label>
+                <Switch id="l-anon" checked={anonymous} onCheckedChange={setAnonymous} />
+              </div>
+              <Button type="submit" size="cta" className="min-h-11 w-full">
+                Publish listing
+              </Button>
             </div>
-            <Button type="submit" size="cta" className="min-h-11 w-full">
-              Publish listing
-            </Button>
-          </div>
-        </form>
-      </aside>
-      <div className="col-span-full">
-        <ForYou variant="inline" area="marketplace" />
+          </form>
+        </aside>
+        <div className="col-span-full">
+          <ForYou variant="inline" area="marketplace" />
+        </div>
       </div>
     </div>
   );

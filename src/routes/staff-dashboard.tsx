@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { Sparkles, ThumbsUp } from "lucide-react";
+import { Info, Sparkles, ThumbsUp } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { Button } from "@/components/ui/button";
 import { currentStaff, signOutStaff, type StaffAccount } from "@/lib/staff-store";
@@ -50,9 +50,7 @@ function ConciergeDeskSummary() {
           <dd className="mt-2 text-3xl">{lodged}</dd>
         </div>
         <div>
-          <dt className="text-xs tracking-[0.18em] text-muted-foreground uppercase">
-            In progress
-          </dt>
+          <dt className="text-xs tracking-[0.18em] text-muted-foreground uppercase">In progress</dt>
           <dd className="mt-2 text-3xl">{inProgress}</dd>
         </div>
         <div>
@@ -70,8 +68,8 @@ function ConciergeDeskSummary() {
         Open the concierge desk queue
       </Link>
       <p className="mt-3 text-xs text-muted-foreground">
-        That queue uses a separate access phrase shown on its own page — it is not the same
-        sign-in as your personnel account.
+        That queue uses a separate access phrase shown on its own page — it is not the same sign-in
+        as your personnel account.
       </p>
     </section>
   );
@@ -98,6 +96,18 @@ function StaffDashboardPage() {
     >
       {!checked ? null : account ? (
         <div className="mt-12 space-y-10">
+          <p
+            role="note"
+            className="flex items-start gap-3 border border-primary/40 bg-primary/5 px-5 py-4 text-sm leading-relaxed text-muted-foreground"
+          >
+            <Info className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+            <span>
+              <span className="text-foreground">This workspace is not real.</span> Your signed-in
+              account and every resident proposal shown below are invented for demonstration
+              purposes only.
+            </span>
+          </p>
+
           {account.department === "Concierge" && <ConciergeDeskSummary />}
           <div className="max-w-xl border border-border bg-card p-8">
             <p className="text-sm text-muted-foreground">Signed in as</p>
