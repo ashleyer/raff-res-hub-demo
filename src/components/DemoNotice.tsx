@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
-const SEEN_KEY = "raffles-demo-notice-seen";
 const BANNER_KEY = "raffles-demo-banner-dismissed";
 
 export function DemoBanner() {
@@ -54,18 +53,7 @@ export function DemoBanner() {
 }
 
 export function DemoModal() {
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    try {
-      if (!sessionStorage.getItem(SEEN_KEY)) {
-        setOpen(true);
-        sessionStorage.setItem(SEEN_KEY, "1");
-      }
-    } catch {
-      setOpen(true);
-    }
-  }, []);
+  const [open, setOpen] = useState(true);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -73,8 +61,8 @@ export function DemoModal() {
         <DialogHeader>
           <DialogTitle className="font-display text-2xl font-light">Demo Mode</DialogTitle>
           <DialogDescription className="text-sm leading-relaxed text-muted-foreground">
-            Every booking, message and payment you make here lives only in this browser's storage —
-            nothing is saved to a real server or shared with anyone.
+            Every booking, message and payment you make here lives only in this browser's storage.
+            Nothing is saved to a real server or shared with anyone.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="sm:justify-center">
