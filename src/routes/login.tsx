@@ -374,12 +374,7 @@ function SignInForm({ redirectTo = "/directory" }: { redirectTo?: string }) {
           {error}
         </p>
 
-        <Button
-          type="submit"
-          disabled={submitting}
-          size="cta"
-          className="min-h-11 w-full"
-        >
+        <Button type="submit" disabled={submitting} size="cta" className="min-h-11 w-full">
           {submitting ? (
             <>
               <Loader2 className="mr-2 size-4 animate-spin" aria-hidden="true" />
@@ -577,12 +572,7 @@ function SignUpForm({ redirectTo = "/directory" }: { redirectTo?: string }) {
           {error}
         </p>
 
-        <Button
-          type="submit"
-          disabled={submitting}
-          size="cta"
-          className="min-h-11 w-full"
-        >
+        <Button type="submit" disabled={submitting} size="cta" className="min-h-11 w-full">
           {submitting ? (
             <>
               <Loader2 className="mr-2 size-4 animate-spin" aria-hidden="true" />

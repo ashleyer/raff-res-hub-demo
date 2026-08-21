@@ -197,11 +197,7 @@ function ConciergePage() {
                           {statusNote(r)}
                         </p>
                         {r.status !== "Completed" && (
-                          <Button
-                            variant="ghost"
-                            onClick={() => advance(r.id)}
-                            size="cta"
-                          >
+                          <Button variant="ghost" onClick={() => advance(r.id)} size="cta">
                             {r.status === "Lodged" ? "Acknowledge" : "Mark complete"}
                           </Button>
                         )}

@@ -73,8 +73,8 @@ export function DemoModal() {
         <DialogHeader>
           <DialogTitle className="font-display text-2xl font-light">Demo Mode</DialogTitle>
           <DialogDescription className="text-sm leading-relaxed text-muted-foreground">
-            Every booking, message and payment you make here lives only in this browser's
-            storage — nothing is saved to a real server or shared with anyone.
+            Every booking, message and payment you make here lives only in this browser's storage —
+            nothing is saved to a real server or shared with anyone.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="sm:justify-center">

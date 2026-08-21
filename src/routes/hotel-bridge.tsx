@@ -303,7 +303,9 @@ function BridgeConsole() {
                   const nextId = e.target.value as OutletId;
                   setOutletId(nextId);
                   const nextOutlet = OUTLETS.find((o) => o.id === nextId);
-                  const nextOptions = nextOutlet ? timeOptionsFromWindow(nextOutlet.serviceWindow) : [];
+                  const nextOptions = nextOutlet
+                    ? timeOptionsFromWindow(nextOutlet.serviceWindow)
+                    : [];
                   if (nextOptions.length > 0 && !nextOptions.includes(time)) {
                     setTime(nextOptions[0]!);
                   }
@@ -343,12 +345,7 @@ function BridgeConsole() {
               />
               <input type="hidden" id="pos-time" value={time} readOnly />
             </div>
-            <Button
-              type="submit"
-              disabled={tableBusy}
-              size="cta"
-              className="min-h-12 w-full"
-            >
+            <Button type="submit" disabled={tableBusy} size="cta" className="min-h-12 w-full">
               {tableBusy && <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />}
               Request table
             </Button>
@@ -399,12 +396,7 @@ function BridgeConsole() {
                 placeholder="Two tasting plates, a bottle of Barolo, service for 8:30 PM…"
               />
             </div>
-            <Button
-              type="submit"
-              disabled={deliveryBusy}
-              size="cta"
-              className="min-h-12 w-full"
-            >
+            <Button type="submit" disabled={deliveryBusy} size="cta" className="min-h-12 w-full">
               {deliveryBusy && <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />}
               Send to my residence
             </Button>

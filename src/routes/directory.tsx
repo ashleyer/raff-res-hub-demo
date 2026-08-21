@@ -559,12 +559,7 @@ function HouseholdProfile() {
               placeholder="Preferred name, arrival preferences, dietary notes…"
             />
           </div>
-          <Button
-            type="submit"
-            variant="outline"
-            size="cta"
-            className="min-h-11 w-full"
-          >
+          <Button type="submit" variant="outline" size="cta" className="min-h-11 w-full">
             <Plus className="mr-2 h-4 w-4" aria-hidden="true" />
             Add resident profile
           </Button>
@@ -638,12 +633,7 @@ function HouseholdProfile() {
               onChange={(e) => setPet({ ...pet, note: e.target.value })}
             />
           </div>
-          <Button
-            type="submit"
-            variant="outline"
-            size="cta"
-            className="min-h-11 w-full"
-          >
+          <Button type="submit" variant="outline" size="cta" className="min-h-11 w-full">
             <Plus className="mr-2 h-4 w-4" aria-hidden="true" />
             Add pet
           </Button>

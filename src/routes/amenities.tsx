@@ -204,11 +204,7 @@ function AmenitiesPage() {
                       <p className="mt-1 text-xs text-muted-foreground italic">{b.notes}</p>
                     )}
                   </div>
-                  <Button
-                    variant="ghost"
-                    onClick={() => release(b.id)}
-                    size="cta"
-                  >
+                  <Button variant="ghost" onClick={() => release(b.id)} size="cta">
                     Release
                   </Button>
                 </li>

@@ -22,27 +22,27 @@ of a marketing page.
 
 ## Scorecard
 
-| Dimension | Read | Note |
-| --- | --- | --- |
-| Brand & visual fidelity | ●●●● | Could sit next to rafflesresidencesboston.com without flinching. |
-| Hospitality voice | ●●●● | Concierge notes and resident quotes read like a real desk log, not filler copy. |
-| Information architecture | ●●●○ | Fourteen resident domains, all two clicks away; the mega-menu earns its keep. |
-| Transactional UX | ~~●●○○~~ ●●●○ | *As of 2026-08-16:* real date/time pickers, legible CTAs. |
-| Accessibility discipline | ●●●○ | Contrast bugs get caught and documented, not just silently patched. |
-| Mobile experience | ●●●○ | Header survives real stress-testing; forms feel less tailored under 768px. |
-| Staff-side operations | ~~●○○○~~ ●●○○ | *As of 2026-08-16:* Concierge dashboard is live; other departments still generic. |
+| Dimension                | Read          | Note                                                                              |
+| ------------------------ | ------------- | --------------------------------------------------------------------------------- |
+| Brand & visual fidelity  | ●●●●          | Could sit next to rafflesresidencesboston.com without flinching.                  |
+| Hospitality voice        | ●●●●          | Concierge notes and resident quotes read like a real desk log, not filler copy.   |
+| Information architecture | ●●●○          | Fourteen resident domains, all two clicks away; the mega-menu earns its keep.     |
+| Transactional UX         | ~~●●○○~~ ●●●○ | _As of 2026-08-16:_ real date/time pickers, legible CTAs.                         |
+| Accessibility discipline | ●●●○          | Contrast bugs get caught and documented, not just silently patched.               |
+| Mobile experience        | ●●●○          | Header survives real stress-testing; forms feel less tailored under 768px.        |
+| Staff-side operations    | ~~●○○○~~ ●●○○ | _As of 2026-08-16:_ Concierge dashboard is live; other departments still generic. |
 
 ## What's already five-star
 
 **The homepage as thesis.** One cinematic photograph, a headline set in a light
-transitional serif, a single soft prompt — *Choose Your Experience* — instead of a wall of
+transitional serif, a single soft prompt — _Choose Your Experience_ — instead of a wall of
 navigation. It borrows the actual rhythm of luxury-hospitality marketing sites.
 
 ![Homepage hero: full-bleed dusk photograph of the Raffles tower over Boston](assets/01-home-hero.jpg)
 
 **The personalization engine shows its work.** Every card on `/for-you` carries the reason
-it appeared — *"Matched to your profile: wine & spirits circle member,"* *"You belong to 2
-circles but have not posted yet."* Most consumer software treats recommendations as a
+it appeared — _"Matched to your profile: wine & spirits circle member,"_ _"You belong to 2
+circles but have not posted yet."_ Most consumer software treats recommendations as a
 black box; this treats them as a concierge's reasoning, said out loud.
 
 ![For You page showing personalized cards each labeled with the reason it was suggested](assets/02-for-you.jpg)
@@ -53,7 +53,7 @@ and ships a "Simulate outage" switch that shows graceful degradation instead of 
 failure never happens — the clearest piece of leader-level systems thinking in the build.
 
 **Micro-copy that thinks like a concierge, not a database.** RSVP cards state exact
-scarcity — *"11 of 14 places taken · 3 remaining"* — instead of a vague "almost full"
+scarcity — _"11 of 14 places taken · 3 remaining"_ — instead of a vague "almost full"
 badge; governance ballots show real vote counts. That precision is carried consistently
 across events, ballots, and reservations.
 
@@ -78,7 +78,7 @@ Ranked by how much each one cost the illusion, not by how hard it was to fix.
    ![Amenities booking form showing a raw unstyled operating-system date input](assets/04-amenities-date-input.jpg)
 
 2. ✅ **Button type sized for browsing, not for spending money** — transactional CTAs
-   (*Send to the Desk*, *Place Order*, *Publish Listing*) ran at the same ~10–11px tracked
+   (_Send to the Desk_, _Place Order_, _Publish Listing_) ran at the same ~10–11px tracked
    caps as marketing-page buttons. → [#10, closed](https://github.com/ashleyer/raff-res-hub-demo/issues/10) — new `size="cta"` Button
    variant, applied site-wide (~50 call sites, 22 files) rather than only the pages this
    review happened to cover.
@@ -120,5 +120,5 @@ Both forward-looking ideas below were picked up immediately rather than deferred
 
 ---
 
-*None of this reads as a portfolio piece pretending to be software. It reads as software
-that happens to also be a portfolio piece — which is the harder thing to build.*
+_None of this reads as a portfolio piece pretending to be software. It reads as software
+that happens to also be a portfolio piece — which is the harder thing to build._

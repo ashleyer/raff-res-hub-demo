@@ -151,12 +151,7 @@ function StaffSignUpPage() {
           <p role="alert" aria-live="polite" className="min-h-5 text-sm text-destructive">
             {error}
           </p>
-          <Button
-            type="submit"
-            disabled={busy}
-            size="cta"
-            className="min-h-11 w-full"
-          >
+          <Button type="submit" disabled={busy} size="cta" className="min-h-11 w-full">
             {busy ? <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" /> : null}
             Create personnel account
           </Button>

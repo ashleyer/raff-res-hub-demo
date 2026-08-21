@@ -240,12 +240,7 @@ function ResetPasswordPage() {
             >
               {error}
             </p>
-            <Button
-              type="submit"
-              disabled={busy}
-              size="cta"
-              className="min-h-11 w-full"
-            >
+            <Button type="submit" disabled={busy} size="cta" className="min-h-11 w-full">
               {pending === "request" ? (
                 <>
                   <Loader2 className="mr-2 size-4 animate-spin" aria-hidden="true" />
