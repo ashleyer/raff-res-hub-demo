@@ -11,6 +11,8 @@ export default tseslint.config(
       "dist",
       ".output",
       ".vinxi",
+      ".vercel",
+      ".wrangler",
       "src/routeTree.gen.ts",
       "src/integrations/supabase/types.ts",
     ],

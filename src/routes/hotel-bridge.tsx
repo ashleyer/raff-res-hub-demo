@@ -13,7 +13,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { formatCurrency } from "@/lib/currency";
 import { DatePicker } from "@/components/ui/date-picker";
-import { TimeChipPicker, timeOptionsFromWindow } from "@/components/TimeChipPicker";
+import { TimeChipPicker } from "@/components/TimeChipPicker";
+import { timeOptionsFromWindow } from "@/lib/time-window";
 import {
   getHotelFolio,
   requestInResidenceDelivery,
