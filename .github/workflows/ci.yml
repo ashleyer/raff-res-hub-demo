@@ -48,12 +48,12 @@ jobs:
       - run: npm run build
       - name: Verify build output
         run: |
-          if [ ! -f .output/server/index.mjs ]; then
-            echo "Build failed: .output/server/index.mjs not found"
+          if [ ! -f .vercel/output/nitro.json ]; then
+            echo "Build failed: .vercel/output/nitro.json not found"
             exit 1
           fi
       - name: Start preview server
-        run: PORT=4173 node .output/server/index.mjs &
+        run: npx nitro preview --port 4173 --host 127.0.0.1 &
       - name: Wait for preview server
         run: npx wait-on --timeout 60000 tcp:localhost:4173
       - name: Functional smoke test (routes, health, sign-in flow)
