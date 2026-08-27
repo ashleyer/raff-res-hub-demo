@@ -55,7 +55,7 @@ jobs:
       - name: Start preview server
         run: npx nitro preview --port 4173 --host 127.0.0.1 &
       - name: Wait for preview server
-        run: npx wait-on --timeout 60000 tcp:localhost:4173
+        run: npx wait-on --timeout 60000 tcp:127.0.0.1:4173
       - name: Functional smoke test (routes, health, sign-in flow)
         run: npm run test:smoke
       - name: Visual regression (header layout across breakpoints)
