@@ -6,6 +6,7 @@ import { Info } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { RequireSession } from "@/components/RequireSession";
 import { usePortal } from "@/lib/portal-store";
+import { PackageNotices } from "@/components/buildinglink/PackageNotices";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -67,6 +68,12 @@ function MessagesBody() {
           thread below is invented for demonstration purposes only, between fictional residents.
         </span>
       </p>
+
+      {currentUser?.unit && (
+        <div className="mb-8">
+          <PackageNotices unit={currentUser.unit} id="messages-packages" />
+        </div>
+      )}
 
       <div className="grid gap-8 md:grid-cols-[260px_minmax(0,1fr)] lg:grid-cols-[320px_minmax(0,1fr)]">
         <nav aria-label="Conversations" className="min-w-0 border border-border bg-card p-5">

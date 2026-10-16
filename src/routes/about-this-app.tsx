@@ -11,6 +11,7 @@ import {
   Mail,
   Phone,
   Github,
+  Link2,
 } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { ContactLink } from "@/components/ContactLink";
@@ -71,7 +72,12 @@ const FEATURES: { icon: typeof Sparkles; title: string; body: string }[] = [
   {
     icon: ShieldCheck,
     title: "Built to hold up, not just look nice",
-    body: "Session handling, accessibility (WCAG 2.2 AA), including type weight tuned for legibility against the site's quiet, thin editorial display font, and automated visual, unit and accessibility checks run against this codebase the same way they would for a production product.",
+    body: "Session handling, accessibility (WCAG 2.2 AA), including type weight tuned for legibility against the site's quiet, thin editorial display font, and automated visual, unit and accessibility checks run against this codebase the same way they would for a production product. The BuildingLink adapter is covered by unit tests too.",
+  },
+  {
+    icon: Link2,
+    title: "Plays well with what the building already runs",
+    body: "A BuildingLink adapter reads the roster, announcements, and packages into this app, each labelled by source, and writes resident requests into the desk's existing queue. Anything that came from BuildingLink says so, with the time it was last synced, and the personnel dashboard shows every sync and what happened if one failed.",
   },
 ];
 
@@ -144,6 +150,33 @@ function AboutThisAppPage() {
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="fits-heading" className="mt-20 border-t border-border pt-14">
+        <p className="eyebrow">How it fits the building</p>
+        <h2 id="fits-heading" className="mt-3 font-display text-4xl sm:text-5xl">
+          Works alongside BuildingLink, not instead of it
+        </h2>
+        <div className="gold-rule mt-5" />
+        <div className="measure mt-8 space-y-6">
+          <p className="text-base leading-relaxed text-foreground/90 sm:text-lg">
+            The building's staff run on BuildingLink, and nothing here asks them to stop.
+            BuildingLink stays the system of record for who lives where, packages, maintenance, and
+            the front desk. This app is the resident-facing layer on top: reservations, concierge,
+            community, governance, and the house account. The two talk through four narrow
+            connections. The roster, announcements, and packages are read into the app and labelled
+            by source. A request you lodge here is written into BuildingLink's queue, so staff keep
+            one list, one status, and one history. Until BuildingLink grants that access, the same
+            request reaches the desk by email with a reference number, and your receipt lives here
+            either way.
+          </p>
+          <p className="text-base leading-relaxed text-foreground/90 sm:text-lg">
+            What I will not do is log in as a resident to scrape data, keep a second copy of the
+            roster, or write anything into BuildingLink beyond creating requests. The personnel
+            dashboard shows every sync, when it last ran, and what the fallback did if it failed. A
+            sync nobody can see is a sync nobody trusts.
+          </p>
         </div>
       </section>
 

@@ -1,6 +1,15 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { CalendarDays, CalendarOff, Clock, MapPin, Sparkles, ThumbsUp, Users } from "lucide-react";
+import {
+  Building2,
+  CalendarDays,
+  CalendarOff,
+  Clock,
+  MapPin,
+  Sparkles,
+  ThumbsUp,
+  Users,
+} from "lucide-react";
 import { DemoTag } from "@/components/DemoTag";
 import { toast } from "sonner";
 import { SEED_EVENTS, type ResidentEvent } from "@/lib/intranet-data";
@@ -13,6 +22,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { usePortal } from "@/lib/portal-store";
 import { ForYou } from "@/components/ForYou";
 import { PastEventsCarousel } from "@/components/PastEventsCarousel";
+import { ProvenanceBadge } from "@/components/buildinglink/ProvenanceBadge";
+import { SyncNotice } from "@/components/buildinglink/SyncNotice";
+import { useEvents } from "@/integrations/buildinglink/hooks";
+import { formatClock, formatLongDate } from "@/integrations/buildinglink/format";
+import type { CalendarEvent } from "@/integrations/buildinglink/types";
 
 export const Route = createFileRoute("/events")({
   head: () => ({
@@ -34,10 +48,77 @@ export const Route = createFileRoute("/events")({
   component: EventsPage,
 });
 
+type CalendarItem =
+  | { kind: "hub"; key: string; at: number; event: ResidentEvent }
+  | { kind: "buildinglink"; key: string; at: number; event: CalendarEvent };
+
+/** A building calendar entry read from BuildingLink. No photo, no RSVP: the
+ *  staff keep this calendar, and the Hub only reads it. */
+function BuildingCalendarCard({ event }: { event: CalendarEvent }) {
+  return (
+    <article className="flex h-full flex-col border border-border bg-card">
+      <div className="flex h-44 w-full items-center justify-center border-b border-border bg-secondary/40">
+        <Building2 className="h-8 w-8 text-primary/70" aria-hidden="true" />
+      </div>
+      <div className="flex flex-1 flex-col p-6">
+        <ProvenanceBadge provenance={event.provenance} className="self-start" />
+        <h2 className="mt-3 text-2xl leading-snug">{event.title}</h2>
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{event.detail}</p>
+        <dl className="mt-4 space-y-1.5 text-xs text-muted-foreground">
+          <div className="flex items-center gap-2">
+            <CalendarDays className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
+            <dt className="sr-only">Date</dt>
+            <dd>{formatLongDate(event.startsAt)}</dd>
+          </div>
+          <div className="flex items-center gap-2">
+            <Clock className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
+            <dt className="sr-only">Time</dt>
+            <dd>
+              {formatClock(event.startsAt)}
+              {event.endsAt ? ` to ${formatClock(event.endsAt)}` : ""}
+            </dd>
+          </div>
+          <div className="flex items-center gap-2">
+            <MapPin className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
+            <dt className="sr-only">Location</dt>
+            <dd>{event.location}</dd>
+          </div>
+        </dl>
+        <p className="mt-auto pt-6 text-xs text-muted-foreground">
+          A building notice from the staff calendar. No RSVP is needed.
+        </p>
+      </div>
+    </article>
+  );
+}
+
 function EventsPage() {
   const { logActivity, bookings, eventIdeas, addEventIdea, supportEventIdea } = usePortal();
   const [events, setEvents] = useState<ResidentEvent[]>(SEED_EVENTS);
   const [rsvped, setRsvped] = useState<Record<number, number>>({});
+  const building = useEvents();
+
+  /* One calendar, two sources: Hub gatherings and entries read from the
+     building's own calendar in BuildingLink. Sorted by date together, and only
+     the BuildingLink entries carry a source label. */
+  const calendar = useMemo<CalendarItem[]>(
+    () =>
+      [
+        ...events.map((e): CalendarItem => ({
+          kind: "hub",
+          key: `hub-${e.id}`,
+          at: new Date(e.date).getTime(),
+          event: e,
+        })),
+        ...building.data.map((e): CalendarItem => ({
+          kind: "buildinglink",
+          key: e.id,
+          at: new Date(e.startsAt).getTime(),
+          event: e,
+        })),
+      ].sort((a, b) => a.at - b.at),
+    [events, building.data],
+  );
   const [supported, setSupported] = useState<number[]>([]);
 
   const today = new Date();
@@ -220,12 +301,27 @@ function EventsPage() {
           <p className="pb-3 text-xs text-muted-foreground">Applied to each RSVP you place.</p>
         </div>
 
+        <SyncNotice
+          loading={building.loading}
+          error={building.error}
+          what="the building calendar"
+          className="mt-8"
+        />
+
         <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {events.map((e) => {
+          {calendar.map((item) => {
+            if (item.kind === "buildinglink") {
+              return (
+                <li key={item.key}>
+                  <BuildingCalendarCard event={item.event} />
+                </li>
+              );
+            }
+            const e = item.event;
             const mine = rsvped[e.id];
             const remaining = e.capacity - e.attending;
             return (
-              <li key={e.id}>
+              <li key={item.key}>
                 <article className="flex h-full flex-col border border-border bg-card">
                   <div className="relative">
                     <DemoTag label="Demo photo" title="Illustrative photo; not a real event" />

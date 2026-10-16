@@ -90,6 +90,11 @@ export type ConciergeRequest = {
   /* Desk-side fields, filled in by staff in the concierge management view. */
   assignedTo?: string;
   replies?: ConciergeReply[];
+  /* Set when the request was written to the desk's system of record through
+     the BuildingLink adapter: the Hub reference on the receipt, and the route
+     it took ("buildinglink" or "desk-email"). Seeded requests have neither. */
+  reference?: string;
+  route?: "buildinglink" | "desk-email";
 };
 
 export type GovernanceMeasure = {

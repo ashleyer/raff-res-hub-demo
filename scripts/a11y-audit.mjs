@@ -64,10 +64,24 @@ const PUBLIC_PAGES = [
   "/sales-and-leasing",
   "/privacy",
   "/terms",
+  "/about-this-app",
+  "/staff-signin",
+  "/staff-signup",
 ];
 
-/** Resident-only pages, scanned after signing in with the demo passcode. */
-const GATED_PAGES = ["/account", "/directory", "/messages"];
+/** Resident-only pages, scanned after signing in with the demo passcode. The
+ *  Services tabs are listed separately because each renders its own form. */
+const GATED_PAGES = [
+  "/account",
+  "/directory",
+  "/messages",
+  "/services?tab=maintenance",
+  "/services?tab=mail",
+];
+
+/** Personnel pages, scanned after registering a throwaway staff account in the
+ *  browser. Nothing leaves the browser: staff accounts live in localStorage. */
+const STAFF_PAGES = ["/staff-dashboard"];
 
 async function scan(page, path) {
   await page.goto(`${BASE}${path}`, { waitUntil: "domcontentloaded" });
@@ -116,6 +130,26 @@ async function signIn(page) {
   return !page.url().endsWith("/login");
 }
 
+async function registerStaff(page) {
+  await page.goto(`${BASE}/staff-signup`, { waitUntil: "domcontentloaded" });
+  /* Close the demo-mode notice by its own button once it has hydrated, so the
+     form underneath is no longer aria-hidden behind the dialog. */
+  await page
+    .getByRole("button", { name: /understood/i })
+    .click({ timeout: 8000 })
+    .catch(() => page.keyboard.press("Escape"));
+  await page.waitForTimeout(300);
+  await page.fill("#staff-name", "Audit Account");
+  await page.fill("#staff-email", `a11y.audit.${Date.now()}@raffles-boston.demo`);
+  await page.selectOption("#staff-department", { index: 0 });
+  await page.fill("#staff-role", "Accessibility audit");
+  await page.fill("#staff-password", "audit-only-password");
+  await page.fill("#staff-confirm", "audit-only-password");
+  await page.locator("form button[type=submit]").first().click();
+  await page.waitForTimeout(1500);
+  return page.url().endsWith("/staff-dashboard");
+}
+
 async function main() {
   console.log(`Accessibility audit (WCAG 2.0/2.1/2.2 A/AA via axe-core) → ${BASE}`);
 
@@ -145,6 +179,24 @@ async function main() {
       record("sign-in", false, "could not sign in with the demo passcode · gated pages skipped");
     } else {
       for (const path of GATED_PAGES) {
+        try {
+          await scan(page, path);
+        } catch (error) {
+          record(path, false, error.message.split("\n")[0]);
+        }
+      }
+    }
+
+    console.log("\nPersonnel areas (registered a throwaway staff account)");
+    const staffReady = await registerStaff(page).catch(() => false);
+    if (!staffReady) {
+      record(
+        "staff sign-up",
+        false,
+        "could not register a staff account · personnel pages skipped",
+      );
+    } else {
+      for (const path of STAFF_PAGES) {
         try {
           await scan(page, path);
         } catch (error) {

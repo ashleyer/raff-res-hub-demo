@@ -46,6 +46,7 @@ import {
   type GovernanceMeasure,
 } from "./intranet-data";
 import type { ActivityEvent } from "./recommendations";
+import { formatUnit, sameUnit, unitKey } from "./units";
 
 type Vote = "up" | "down";
 type Ballot = "for" | "against";
@@ -182,26 +183,11 @@ export type PortalNotification = {
   read: boolean;
 };
 
-/** "22h" / "unit 22H" -> "Residence 22H" */
-export function formatUnit(raw: string): string {
-  const value = raw.trim().replace(/^(residence|unit|apt\.?|apartment)\s+/i, "");
-  if (!value) return "";
-  return `Residence ${value.toUpperCase()}`;
-}
-
-const unitKey = (u: string) =>
-  u
-    .replace(/^(residence|unit|apt\.?|apartment)\s+/i, "")
-    .replace(/\s+/g, "")
-    .toUpperCase();
+export { formatUnit };
 
 /** A real residence number, as opposed to a placeholder. */
 function isKnownUnit(u: string): boolean {
   return /\d/.test(u);
-}
-
-function sameUnit(a: string, b: string): boolean {
-  return unitKey(a) === unitKey(b);
 }
 
 const PortalContext = createContext<PortalValue | null>(null);

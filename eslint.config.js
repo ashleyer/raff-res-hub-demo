@@ -52,6 +52,7 @@ export default tseslint.config(
       "src/components/ui/**/*.{ts,tsx}",
       "src/components/ForYou.tsx",
       "src/lib/portal-store.tsx",
+      "src/integrations/buildinglink/provider.tsx",
     ],
     rules: {
       "react-refresh/only-export-components": "off",

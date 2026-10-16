@@ -12,6 +12,12 @@ import { RememberMeConsent } from "@/components/RememberMeConsent";
 import { HowAccessWorksModal } from "@/components/HowAccessWorksModal";
 import { safeRedirectPath } from "@/lib/session-guard";
 import { signInSchema, signUpSchema, validate, type FieldErrors } from "@/lib/auth-validation";
+import { useRosterVerification } from "@/integrations/buildinglink/hooks";
+
+/* Shown when the roster cannot confirm a sign-up. One calm message, no reason:
+   the desk sees the attempt in its verification queue and takes it from there. */
+const DESK_NOTICE =
+  "We could not complete your registration online. Please contact the concierge desk, who will confirm your residence and finish it for you.";
 
 /** Inline, screen-reader announced message for a single field. */
 function FieldError({ id, message }: { id: string; message?: string | undefined }) {
@@ -391,7 +397,9 @@ function SignInForm({ redirectTo = "/directory" }: { redirectTo?: string }) {
 
 function SignUpForm({ redirectTo = "/directory" }: { redirectTo?: string }) {
   const { signUp } = usePortal();
+  const { verify } = useRosterVerification();
   const navigate = useNavigate();
+  const [notice, setNotice] = useState<string | null>(null);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -441,8 +449,15 @@ function SignUpForm({ redirectTo = "/directory" }: { redirectTo?: string }) {
     }
     setSubmitting(true);
     setError(null);
+    setNotice(null);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 350));
+      /* The residence number and surname are checked against the building's
+         roster first. A match proceeds; anything else waits for the desk. */
+      const outcome = await verify(form.unit, form.name, form.email);
+      if (outcome.outcome === "queued") {
+        setNotice(DESK_NOTICE);
+        return;
+      }
       const result = signUp({ ...form, remember });
       if (!result.ok) {
         setError(result.error ?? "Registration failed.");
@@ -460,7 +475,8 @@ function SignUpForm({ redirectTo = "/directory" }: { redirectTo?: string }) {
       <h2 className="text-2xl">Create an account</h2>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
         Registering creates your household profile with contact details, and keeps your directory
-        profile, reservations and preferences on this device.
+        profile, reservations and preferences on this device. Your residence number and surname are
+        checked against the building&apos;s roster first.
       </p>
       <fieldset disabled={submitting} className="mt-6 space-y-5 disabled:opacity-70">
         <div className="space-y-2">
@@ -567,6 +583,15 @@ function SignUpForm({ redirectTo = "/directory" }: { redirectTo?: string }) {
         </div>
 
         <RememberMeConsent id="su-remember" checked={remember} onChange={setRemember} />
+
+        {notice && (
+          <p
+            role="status"
+            className="border border-primary/40 bg-primary/5 px-4 py-3 text-sm leading-relaxed text-foreground"
+          >
+            {notice}
+          </p>
+        )}
 
         <p role="alert" aria-live="polite" className="min-h-5 text-sm text-destructive">
           {error}
