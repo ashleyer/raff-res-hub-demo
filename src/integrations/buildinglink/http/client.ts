@@ -40,10 +40,12 @@ export class HttpBuildingLinkClient implements BuildingLinkClient {
   private async request<T>(flow: SyncFlow, path: string, init?: RequestInit): Promise<T> {
     let response: Response;
     try {
+      /* No accept header on purpose: the app's own router answers an unmatched
+         /api path with its HTML 404 page, which the check below reads as
+         "proxy absent". The proxy, once built, answers JSON regardless. */
       response = await this.fetchImpl(`${PROXY_BASE}${path}`, {
         ...init,
         credentials: "same-origin",
-        headers: { accept: "application/json", ...(init?.headers ?? {}) },
       });
     } catch {
       throw new BuildingLinkUnavailableError(

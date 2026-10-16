@@ -13,6 +13,7 @@ import { isUnavailable, type BuildingLinkClient } from "./client";
 import { buildDeskEmail, createReferenceCounter, type DeskEmail } from "./fallback";
 import { createBuildingLinkClient } from "./index";
 import { MockBuildingLinkClient } from "./mock/client";
+import { pendingAccessRecords } from "./sync-fallback";
 import type {
   AdapterMode,
   Announcement,
@@ -217,7 +218,17 @@ export function BuildingLinkProvider({
             : "BuildingLink could not be read just now. The last good copy is shown.";
           setResources((prev) => ({
             ...prev,
-            [key]: { ...prev[key], loading: false, error: message, source: "fallback" },
+            [key]: {
+              ...prev[key],
+              /* The sync log is the one resource with a Hub-side stand-in: the
+                 five flows and what each falls back to are known here. */
+              ...(key === "sync" && prev.sync.data === null
+                ? { data: pendingAccessRecords(message) }
+                : {}),
+              loading: false,
+              error: message,
+              source: "fallback",
+            },
           }));
         } finally {
           inFlight.current.delete(key);

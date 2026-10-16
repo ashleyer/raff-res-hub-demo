@@ -9,6 +9,7 @@ import {
   useServiceRequests,
   useSyncStatus,
 } from "./hooks";
+import { HttpBuildingLinkClient } from "./http/client";
 import { MockBuildingLinkClient } from "./mock/client";
 import { lastDailyRun } from "./mock/fixtures";
 import { BuildingLinkProvider } from "./provider";
@@ -175,5 +176,41 @@ describe("useSyncStatus", () => {
       expect(result.current[0].data.find((r) => r.flow === "announcements")?.status).toBe("ok"),
     );
     await waitFor(() => expect(result.current[1].data.length).toBe(before + 1));
+  });
+});
+
+describe("http mode without a proxy", () => {
+  it("degrades every flow to a pending-access record with the fallback named", async () => {
+    const absent = new HttpBuildingLinkClient(
+      (async () =>
+        new Response("<!doctype html>", {
+          status: 404,
+          headers: { "content-type": "text/html" },
+        })) as unknown as typeof fetch,
+    );
+    const { result } = renderHook(() => [useSyncStatus(), useServiceRequests()] as const, {
+      wrapper: wrapperFor(absent),
+    });
+    await waitFor(() => expect(result.current[0].loading).toBe(false));
+    expect(result.current[0].mode).toBe("http");
+    expect(result.current[0].canSimulateOutage).toBe(false);
+    expect(result.current[0].source).toBe("fallback");
+    expect(result.current[0].error).toMatch(/proxy is not deployed/);
+    expect(result.current[0].data).toHaveLength(5);
+    expect(result.current[0].data.every((r) => r.status === "pending access")).toBe(true);
+    expect(result.current[0].data.find((r) => r.flow === "service-requests")?.fallback).toMatch(
+      /emailed to the desk/,
+    );
+
+    const created = await act(() =>
+      result.current[1].create({
+        unit: "22H",
+        category: "Engineering",
+        detail: "Door closer.",
+        priority: "Standard",
+      }),
+    );
+    expect(created.request.route).toBe("desk-email");
+    expect(created.email?.to).toBeTruthy();
   });
 });
