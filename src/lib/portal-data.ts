@@ -469,6 +469,10 @@ export type MaintenanceTicket = {
   status: "Reported" | "Scheduled" | "In progress" | "Resolved";
   reportedAt: string;
   permissionToEnter: boolean;
+  /* Set when the report was written to the desk's system of record through the
+     BuildingLink adapter. Seeded tickets have neither. */
+  reference?: string;
+  route?: "buildinglink" | "desk-email";
 };
 
 export const MAINTENANCE_CATEGORIES = [

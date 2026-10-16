@@ -13,6 +13,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { RequestReceipt } from "@/components/buildinglink/RequestReceipt";
+import { useServiceRequests } from "@/integrations/buildinglink/hooks";
+import type { ServiceRequestRoute } from "@/integrations/buildinglink/types";
 
 /** Reported lost/found items already have a dedicated flow on the Services page — signpost there
  * instead of taking a second, disconnected report through the concierge form. */
@@ -70,11 +73,14 @@ function ConciergePage() {
   const [unit, setUnit] = useState("");
   const [priority, setPriority] = useState(false);
   const [receipt, setReceipt] = useState<{
-    id: number;
+    reference: string;
+    route: ServiceRequestRoute;
     service: string;
     unit: string;
     priority: "Standard" | "Priority";
   } | null>(null);
+  const [sending, setSending] = useState(false);
+  const { create: createServiceRequest } = useServiceRequests();
   /* Signed-in residents should never retype their own residence number. */
   useEffect(() => {
     if (currentUser?.unit) setUnit((v) => v || currentUser.unit!);
@@ -91,22 +97,52 @@ function ConciergePage() {
 
   const visible = requests.filter((r) => filter === "All" || r.status === filter);
 
-  const submit = (e: React.FormEvent) => {
+  /* The request is written to the desk's system of record first, through the
+     BuildingLink adapter, and only then recorded in the Hub's own register with
+     the reference and route it came back with. If BuildingLink is away, the
+     adapter emails the desk instead and the receipt says so. */
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (sending) return;
     if (!detail.trim() || !unit.trim()) {
       toast.error("Please describe the request and give a residence number.");
       return;
     }
     const requestPriority = priority ? "Priority" : "Standard";
-    const id = addConciergeRequest({
-      service,
-      detail: detail.trim(),
-      unit: unit.trim(),
-      priority: requestPriority,
-    });
-    setDetail("");
-    toast.success("Request lodged with the concierge desk.");
-    setReceipt({ id, service, unit: unit.trim(), priority: requestPriority });
+    setSending(true);
+    try {
+      const { request } = await createServiceRequest({
+        unit: unit.trim(),
+        category: service,
+        detail: detail.trim(),
+        priority: requestPriority,
+      });
+      addConciergeRequest({
+        service,
+        detail: detail.trim(),
+        unit: unit.trim(),
+        priority: requestPriority,
+        reference: request.reference,
+        route: request.route,
+      });
+      setDetail("");
+      toast.success(
+        request.route === "buildinglink"
+          ? "Request sent to the desk's queue."
+          : "Request prepared for the desk by email.",
+      );
+      setReceipt({
+        reference: request.reference,
+        route: request.route,
+        service,
+        unit: unit.trim(),
+        priority: requestPriority,
+      });
+    } catch {
+      toast.error("The request could not be lodged. Please try again or call the desk.");
+    } finally {
+      setSending(false);
+    }
   };
 
   const advance = (id: number) => {
@@ -173,6 +209,14 @@ function ConciergePage() {
                           {r.unit} · {r.priority} · {r.placedAt}
                           {r.assignedTo ? ` · ${r.assignedTo}` : ""}
                         </p>
+                        {r.reference && (
+                          <p className="mt-1 text-xs tracking-wider text-muted-foreground">
+                            {r.reference} ·{" "}
+                            {r.route === "buildinglink"
+                              ? "sent to BuildingLink"
+                              : "emailed to the desk"}
+                          </p>
+                        )}
                         {(r.replies ?? []).length > 0 && (
                           <ul className="mt-4 space-y-3 border-l border-primary/40 pl-4">
                             {(r.replies ?? []).map((reply) => (
@@ -312,8 +356,18 @@ function ConciergePage() {
                   <Switch id="priority" checked={priority} onCheckedChange={setPriority} />
                 </div>
 
-                <Button type="submit" size="cta" className="min-h-12 w-full">
-                  Send to the desk
+                <Button type="submit" size="cta" className="min-h-12 w-full" disabled={sending}>
+                  {sending ? (
+                    <>
+                      <Loader2
+                        className="mr-2 h-4 w-4 animate-spin motion-reduce:animate-none"
+                        aria-hidden="true"
+                      />
+                      Sending to the desk
+                    </>
+                  ) : (
+                    "Send to the desk"
+                  )}
                 </Button>
               </div>
             </form>
@@ -330,28 +384,16 @@ function ConciergePage() {
             </DialogTitle>
           </DialogHeader>
           {receipt && (
-            <dl className="space-y-3 text-sm">
-              <div className="flex items-center justify-between border-b border-border pb-2">
-                <dt className="text-muted-foreground">Reference</dt>
-                <dd className="font-medium tracking-wide">REQ-{receipt.id}</dd>
-              </div>
-              <div className="flex items-center justify-between border-b border-border pb-2">
-                <dt className="text-muted-foreground">Service</dt>
-                <dd className="font-medium">{receipt.service}</dd>
-              </div>
-              <div className="flex items-center justify-between border-b border-border pb-2">
-                <dt className="text-muted-foreground">Residence</dt>
-                <dd className="font-medium">{receipt.unit}</dd>
-              </div>
-              <div className="flex items-center justify-between">
-                <dt className="text-muted-foreground">Handling</dt>
-                <dd className="font-medium">{receipt.priority}</dd>
-              </div>
-              <p className="pt-2 text-xs leading-relaxed text-muted-foreground">
-                The concierge desk acknowledges requests within fifteen minutes. Track its status in
-                the request register on this page.
-              </p>
-            </dl>
+            <RequestReceipt
+              reference={receipt.reference}
+              route={receipt.route}
+              rows={[
+                { label: "Service", value: receipt.service },
+                { label: "Residence", value: receipt.unit },
+                { label: "Handling", value: receipt.priority },
+              ]}
+              note="The concierge desk acknowledges requests within fifteen minutes. Track its status in the request register on this page."
+            />
           )}
         </DialogContent>
       </Dialog>

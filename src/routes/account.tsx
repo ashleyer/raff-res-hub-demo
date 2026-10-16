@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { PageShell } from "@/components/PageShell";
 import { RequireSession } from "@/components/RequireSession";
 import { usePortal } from "@/lib/portal-store";
+import { PackageNotices } from "@/components/buildinglink/PackageNotices";
 import { PAYMENT_METHODS } from "@/lib/portal-data";
 import { formatCurrency } from "@/lib/currency";
 import { Button } from "@/components/ui/button";
@@ -58,6 +59,8 @@ function AccountBody() {
   return (
     <div className="mt-12 space-y-10">
       <MarketSnapshot unit={currentUser?.unit ?? "Residence 22H"} />
+
+      {currentUser?.unit && <PackageNotices unit={currentUser.unit} id="account-packages" />}
 
       <section aria-labelledby="balance-heading" className="border border-border bg-card p-8">
         <h2 id="balance-heading" className="text-2xl">

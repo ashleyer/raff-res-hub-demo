@@ -15,6 +15,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { Loader2, X } from "lucide-react";
+import { ProvenanceBadge } from "@/components/buildinglink/ProvenanceBadge";
+import { RequestReceipt } from "@/components/buildinglink/RequestReceipt";
+import { SyncNotice } from "@/components/buildinglink/SyncNotice";
+import { usePackages, useServiceRequests } from "@/integrations/buildinglink/hooks";
+import { formatSyncTime } from "@/integrations/buildinglink/format";
+import type { ServiceRequestRoute } from "@/integrations/buildinglink/types";
 
 const SERVICE_TABS = ["valet", "maintenance", "mail", "lost"] as const;
 
@@ -198,10 +205,60 @@ function ValetSection() {
 
 function MaintenanceSection() {
   const { maintenance, addMaintenance, currentUser } = usePortal();
+  const { create: createServiceRequest } = useServiceRequests();
   const [category, setCategory] = useState<string>(MAINTENANCE_CATEGORIES[0]);
   const [detail, setDetail] = useState("");
   const [urgency, setUrgency] = useState<MaintenanceTicket["urgency"]>("Routine");
   const [entry, setEntry] = useState(true);
+  const [sending, setSending] = useState(false);
+  const [receipt, setReceipt] = useState<{
+    reference: string;
+    route: ServiceRequestRoute;
+    category: string;
+  } | null>(null);
+
+  /* A maintenance report is the one request BuildingLink's developer page says
+     an external program can import, so this form writes through the adapter
+     and keeps the Hub's own ticket as the resident's copy. */
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (sending) return;
+    if (!detail.trim()) {
+      toast.error("Please describe the issue.");
+      return;
+    }
+    const unit = currentUser?.unit ?? "Residence";
+    setSending(true);
+    try {
+      const { request } = await createServiceRequest({
+        unit,
+        category,
+        detail: detail.trim(),
+        priority: urgency === "Urgent" ? "Priority" : "Standard",
+        permissionToEnter: entry,
+      });
+      addMaintenance({
+        category,
+        detail: detail.trim(),
+        unit,
+        urgency,
+        permissionToEnter: entry,
+        reference: request.reference,
+        route: request.route,
+      });
+      setDetail("");
+      setReceipt({ reference: request.reference, route: request.route, category });
+      toast.success(
+        request.route === "buildinglink"
+          ? "Reported to the desk's queue."
+          : "Report prepared for the desk by email.",
+      );
+    } catch {
+      toast.error("The report could not be sent. Please try again or call the desk.");
+    } finally {
+      setSending(false);
+    }
+  };
 
   return (
     <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
@@ -209,6 +266,28 @@ function MaintenanceSection() {
         <h2 id="tickets-heading" className="text-2xl">
           Reported issues
         </h2>
+        {receipt && (
+          <div className="mt-6 border border-primary/40 bg-primary/5 p-6" role="status">
+            <div className="flex items-start justify-between gap-4">
+              <p className="eyebrow">Your receipt</p>
+              <button
+                type="button"
+                onClick={() => setReceipt(null)}
+                aria-label="Dismiss receipt"
+                className="flex h-9 w-9 shrink-0 items-center justify-center text-muted-foreground hover:text-foreground"
+              >
+                <X className="h-4 w-4" aria-hidden="true" />
+              </button>
+            </div>
+            <div className="mt-3">
+              <RequestReceipt
+                reference={receipt.reference}
+                route={receipt.route}
+                rows={[{ label: "Category", value: receipt.category }]}
+              />
+            </div>
+          </div>
+        )}
         <ul className="mt-6 space-y-4" aria-live="polite">
           {maintenance.map((t) => (
             <li key={t.id} className="border border-border bg-card p-6">
@@ -220,6 +299,12 @@ function MaintenanceSection() {
                   ? "Entry permitted in your absence"
                   : "Entry only when at home"}
               </p>
+              {t.reference && (
+                <p className="mt-1 text-xs tracking-wider text-muted-foreground">
+                  {t.reference} ·{" "}
+                  {t.route === "buildinglink" ? "sent to BuildingLink" : "emailed to the desk"}
+                </p>
+              )}
               <span className="mt-4 inline-block border border-primary px-3 py-1 text-xs tracking-[0.16em] text-primary uppercase">
                 {t.status}
               </span>
@@ -230,22 +315,7 @@ function MaintenanceSection() {
 
       <form
         className="border border-border bg-card p-7 lg:sticky lg:top-8 lg:self-start"
-        onSubmit={(e) => {
-          e.preventDefault();
-          if (!detail.trim()) {
-            toast.error("Please describe the issue.");
-            return;
-          }
-          addMaintenance({
-            category,
-            detail: detail.trim(),
-            unit: currentUser?.unit ?? "Residence",
-            urgency,
-            permissionToEnter: entry,
-          });
-          setDetail("");
-          toast.success("Reported to the engineering desk.");
-        }}
+        onSubmit={submit}
       >
         <h2 className="text-2xl">Report an issue</h2>
         <div className="mt-6 space-y-5">
@@ -290,8 +360,18 @@ function MaintenanceSection() {
             </Label>
             <Switch id="m-entry" checked={entry} onCheckedChange={setEntry} />
           </div>
-          <Button type="submit" size="cta" className="min-h-11 w-full">
-            Submit report
+          <Button type="submit" size="cta" className="min-h-11 w-full" disabled={sending}>
+            {sending ? (
+              <>
+                <Loader2
+                  className="mr-2 h-4 w-4 animate-spin motion-reduce:animate-none"
+                  aria-hidden="true"
+                />
+                Sending the report
+              </>
+            ) : (
+              "Submit report"
+            )}
           </Button>
         </div>
       </form>
@@ -300,7 +380,33 @@ function MaintenanceSection() {
 }
 
 function MailSection() {
-  const { parcels, requestParcelDelivery } = usePortal();
+  const { parcels, requestParcelDelivery, currentUser } = usePortal();
+  const packages = usePackages(currentUser?.unit ?? null);
+  const { create: createServiceRequest } = useServiceRequests();
+  /* Delivery requests on desk-logged packages, keyed by package id. */
+  const [requested, setRequested] = useState<Record<string, string>>({});
+  const [busy, setBusy] = useState<string | null>(null);
+
+  /* Packages the desk logged in BuildingLink come first, then the Hub's own
+     notices. Only the BuildingLink ones carry a source label. */
+  const requestDelivery = async (id: string, description: string) => {
+    if (busy) return;
+    setBusy(id);
+    try {
+      const { request } = await createServiceRequest({
+        unit: currentUser?.unit ?? "Residence",
+        category: "Package & Courier",
+        detail: `Please deliver the package logged at the desk: ${description}.`,
+        priority: "Standard",
+      });
+      setRequested((prev) => ({ ...prev, [id]: request.reference }));
+      toast.success(`A concierge will bring it up. Reference ${request.reference}.`);
+    } catch {
+      toast.error("The delivery request could not be sent. Please call the desk.");
+    } finally {
+      setBusy(null);
+    }
+  };
 
   return (
     <section aria-labelledby="mail-heading">
@@ -311,7 +417,44 @@ function MailSection() {
         Deliveries are received at the concierge desk and appear here as soon as they are logged.
         Request delivery to your residence or collect at your convenience.
       </p>
+      <SyncNotice
+        loading={packages.loading}
+        error={packages.error}
+        what="package notices"
+        className="mt-4"
+      />
       <ul className="mt-8 space-y-4" aria-live="polite">
+        {packages.data.map((p) => (
+          <li
+            key={p.id}
+            className="flex flex-wrap items-center justify-between gap-4 border border-border bg-card p-6"
+          >
+            <div>
+              <p className="eyebrow">{p.carrier}</p>
+              <h3 className="mt-2 text-xl">{p.description}</h3>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Logged {formatSyncTime(p.loggedAt)} · {p.unit}
+              </p>
+              <ProvenanceBadge provenance={p.provenance} className="mt-3" />
+            </div>
+            <div className="flex flex-wrap items-center gap-4">
+              <span className="border border-primary px-3 py-1 text-xs tracking-[0.16em] text-primary uppercase">
+                {requested[p.id] ? "Delivery requested" : p.status}
+              </span>
+              {p.status === "At the desk" && !requested[p.id] && (
+                <Button
+                  variant="outline"
+                  size="cta"
+                  className="min-h-11"
+                  disabled={busy === p.id}
+                  onClick={() => void requestDelivery(p.id, p.description)}
+                >
+                  Deliver to my residence
+                </Button>
+              )}
+            </div>
+          </li>
+        ))}
         {parcels.map((p) => (
           <li
             key={p.id}

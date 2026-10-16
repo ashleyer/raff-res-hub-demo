@@ -7,6 +7,12 @@ import { PageShell, TabBar, TabPanel } from "@/components/PageShell";
 import { usePortal } from "@/lib/portal-store";
 import { RequireSession } from "@/components/RequireSession";
 import { ResidenceHandbook } from "@/components/ResidenceHandbook";
+import { ProvenanceBadge } from "@/components/buildinglink/ProvenanceBadge";
+import { SyncNotice } from "@/components/buildinglink/SyncNotice";
+import { useAnnouncements } from "@/integrations/buildinglink/hooks";
+import { formatLongDate } from "@/integrations/buildinglink/format";
+import type { Announcement as BuildingAnnouncement } from "@/integrations/buildinglink/types";
+import type { Announcement } from "@/lib/portal-data";
 
 import {
   ANNOUNCEMENTS,
@@ -59,8 +65,37 @@ const TABS = [
   { id: "survey", label: "Happiness survey" },
 ];
 
+type NoticeItem =
+  | { kind: "hub"; key: string; at: number; notice: Announcement }
+  | { kind: "buildinglink"; key: string; at: number; notice: BuildingAnnouncement };
+
+/** Notices from the Residences Office in the Hub and notices the staff posted in
+ *  BuildingLink, in one list by date. Pinned items first, as before. */
+function useMergedNotices(building: BuildingAnnouncement[]): NoticeItem[] {
+  return useMemo(() => {
+    const items: NoticeItem[] = [
+      ...ANNOUNCEMENTS.map((a): NoticeItem => ({
+        kind: "hub",
+        key: `hub-${a.id}`,
+        at: new Date(a.date).getTime(),
+        notice: a,
+      })),
+      ...building.map((a): NoticeItem => ({
+        kind: "buildinglink",
+        key: a.id,
+        at: new Date(a.postedAt).getTime(),
+        notice: a,
+      })),
+    ];
+    const pinned = (i: NoticeItem) => (i.notice.pinned ? 1 : 0);
+    return items.sort((x, y) => pinned(y) - pinned(x) || y.at - x.at);
+  }, [building]);
+}
+
 function ManagementPage() {
   const [tab, setTab] = useState("announcements");
+  const building = useAnnouncements();
+  const notices = useMergedNotices(building.data);
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.location.hash === "#survey") setTab("survey");
@@ -89,26 +124,41 @@ function ManagementPage() {
               announcement below is invented for demonstration purposes only.
             </span>
           </p>
+          <SyncNotice
+            loading={building.loading}
+            error={building.error}
+            what="building notices"
+            className="mt-4"
+          />
           <ul className="mt-6 space-y-4">
-            {ANNOUNCEMENTS.map((a) => (
-              <li key={a.id} className="border border-border bg-card p-6">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <p className="eyebrow">{a.author}</p>
-                  <p className="text-xs text-muted-foreground">{a.date}</p>
-                </div>
-                <h3 className="mt-3 text-2xl leading-snug">
-                  {a.title}
-                  {a.pinned && (
-                    <span className="ml-3 border border-primary px-2 py-1 align-middle text-[0.6rem] tracking-[0.2em] text-primary uppercase">
-                      Pinned
-                    </span>
+            {notices.map((item) => {
+              const a = item.notice;
+              const author = item.kind === "hub" ? item.notice.author : item.notice.postedBy;
+              const date =
+                item.kind === "hub" ? item.notice.date : formatLongDate(item.notice.postedAt);
+              return (
+                <li key={item.key} className="border border-border bg-card p-6">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <p className="eyebrow">{author}</p>
+                    <p className="text-xs text-muted-foreground">{date}</p>
+                  </div>
+                  <h3 className="mt-3 text-2xl leading-snug">
+                    {a.title}
+                    {a.pinned && (
+                      <span className="ml-3 border border-primary px-2 py-1 align-middle text-[0.6rem] tracking-[0.2em] text-primary uppercase">
+                        Pinned
+                      </span>
+                    )}
+                  </h3>
+                  <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+                    {a.body}
+                  </p>
+                  {item.kind === "buildinglink" && (
+                    <ProvenanceBadge provenance={item.notice.provenance} className="mt-4" />
                   )}
-                </h3>
-                <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-                  {a.body}
-                </p>
-              </li>
-            ))}
+                </li>
+              );
+            })}
           </ul>
         </section>
       </TabPanel>
