@@ -12,6 +12,7 @@ import { type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { Toaster } from "@/components/ui/sonner";
 import { PortalProvider } from "@/lib/portal-store";
+import { BuildingLinkProvider } from "@/integrations/buildinglink/provider";
 import { DemoBanner, DemoModal } from "@/components/DemoNotice";
 import { SurveyPrompt } from "@/components/SurveyPrompt";
 import { AppErrorBoundary } from "@/components/AppErrorBoundary";
@@ -138,19 +139,21 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <PortalProvider>
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:border focus:border-primary focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:text-primary"
-        >
-          Skip to main content
-        </a>
-        <RuntimeErrorReporter />
-        <DemoBanner />
-        <DemoModal />
-        <SurveyPrompt />
-        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <Outlet />
-        <Toaster position="top-center" />
+        <BuildingLinkProvider>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:border focus:border-primary focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:text-primary"
+          >
+            Skip to main content
+          </a>
+          <RuntimeErrorReporter />
+          <DemoBanner />
+          <DemoModal />
+          <SurveyPrompt />
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <Outlet />
+          <Toaster position="top-center" />
+        </BuildingLinkProvider>
       </PortalProvider>
     </QueryClientProvider>
   );
