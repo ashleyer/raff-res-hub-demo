@@ -5,6 +5,7 @@ import { PageShell } from "@/components/PageShell";
 import { Button } from "@/components/ui/button";
 import { currentStaff, signOutStaff, type StaffAccount } from "@/lib/staff-store";
 import { usePortal } from "@/lib/portal-store";
+import { BuildingLinkDashboard } from "@/components/buildinglink/BuildingLinkDashboard";
 
 export const Route = createFileRoute("/staff-dashboard")({
   head: () => ({
@@ -109,6 +110,7 @@ function StaffDashboardPage() {
           </p>
 
           {account.department === "Concierge" && <ConciergeDeskSummary />}
+          <BuildingLinkDashboard />
           <div className="max-w-xl border border-border bg-card p-8">
             <p className="text-sm text-muted-foreground">Signed in as</p>
             <p className="mt-2 text-2xl">{account.name}</p>
