@@ -188,6 +188,11 @@ deliberate choice for a portfolio/demo project, not an oversight:
   `src/start.ts`) but not actually provisioned or used for auth · the `Database` type
   has no tables, and `/health/ready` reports it as `"skipped"` because no Supabase
   credentials are configured. It's scaffolding left in place, not a live dependency.
+- **BuildingLink integration** (`src/integrations/buildinglink/`) is a typed adapter behind
+  one interface, with a deterministic mock for the demo and an HTTP skeleton that only talks
+  to a backend proxy at `/api/buildinglink/*` once BuildingLink grants the building access.
+  Everything read from it is labelled by source on screen. `INTEGRATION.md` has the design,
+  the fallback, and what is deferred.
 - **Hotel/PMS integration** (`src/lib/pms.server.ts`, `pms.functions.ts`) is a
   simulated adapter with a deterministic folio generator, a real circuit-breaker
   (trips after 3 failures, half-open retry after 15s), and a short-lived cache · built
@@ -205,12 +210,13 @@ deliberate choice for a portfolio/demo project, not an oversight:
 
 Copy or edit `.env` at the project root:
 
-| Variable                                                     | Purpose                                                                      |
-| ------------------------------------------------------------ | ---------------------------------------------------------------------------- |
-| `SUPABASE_URL` / `VITE_SUPABASE_URL`                         | Supabase project URL (currently scaffolded, not required for the app to run) |
-| `SUPABASE_PUBLISHABLE_KEY` / `VITE_SUPABASE_PUBLISHABLE_KEY` | Supabase anon/publishable key                                                |
-| `SUPABASE_PROJECT_ID` / `VITE_SUPABASE_PROJECT_ID`           | Supabase project ID                                                          |
-| `GRAPHQL_MESH_URL`                                           | Optional · reported by `/health/ready` if set; not otherwise used            |
+| Variable                                                     | Purpose                                                                             |
+| ------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| `SUPABASE_URL` / `VITE_SUPABASE_URL`                         | Supabase project URL (currently scaffolded, not required for the app to run)        |
+| `SUPABASE_PUBLISHABLE_KEY` / `VITE_SUPABASE_PUBLISHABLE_KEY` | Supabase anon/publishable key                                                       |
+| `SUPABASE_PROJECT_ID` / `VITE_SUPABASE_PROJECT_ID`           | Supabase project ID                                                                 |
+| `GRAPHQL_MESH_URL`                                           | Optional · reported by `/health/ready` if set; not otherwise used                   |
+| `VITE_BUILDINGLINK_MODE`                                     | `mock` (default) or `http` · selects the BuildingLink adapter; see `INTEGRATION.md` |
 
 None of these are required to run the app locally · every feature works with them unset.
 
