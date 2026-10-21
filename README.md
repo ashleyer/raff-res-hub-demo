@@ -7,7 +7,9 @@ anything else: residents want more community · with each other, with the staff 
 such good care of them, and with the building itself. So she built a fully working demo
 to find out what software could do about it: a private online home where residents
 reserve amenities, request the concierge, pay condo fees, meet neighbours, shop the
-marketplace, and take part in building governance · all in one place.
+marketplace, and take part in building governance · all in one place. It sits on top of
+the building's own BuildingLink, not instead of it: the staff system of record stays
+where it is, and the Hub reads from it and writes requests into it, labelled by source.
 
 This is an independent portfolio project designed and built by **Ashley Romano**, a
 resident of Raffles Residences Boston, from her own unit · not an official Raffles,
