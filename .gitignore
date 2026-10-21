@@ -17,10 +17,10 @@ dist-ssr
 *.local
 
 # Environment secrets · see README's "Environment variables" table for what
-# these are; copy .env.example (or the README table) to a local .env.
-.env
-.env.local
-.env.*.local
+# these are; copy .env.example to a local .env. Every .env* file is ignored
+# except the committed template, which holds placeholders only.
+.env*
+!/.env.example
 
 # Wrangler / Cloudflare
 .wrangler/
@@ -44,9 +44,9 @@ dist-ssr
 .lovable/
 tests/visual/output
 
+# Editor local-history plugin snapshots · never source of truth
 .history/
 
 .vscode/
 
 .claude/
-.env*
