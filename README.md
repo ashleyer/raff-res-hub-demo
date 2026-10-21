@@ -7,7 +7,9 @@ anything else: residents want more community · with each other, with the staff 
 such good care of them, and with the building itself. So she built a fully working demo
 to find out what software could do about it: a private online home where residents
 reserve amenities, request the concierge, pay condo fees, meet neighbours, shop the
-marketplace, and take part in building governance · all in one place.
+marketplace, and take part in building governance · all in one place. It sits on top of
+the building's own BuildingLink, not instead of it: the staff system of record stays
+where it is, and the Hub reads from it and writes requests into it, labelled by source.
 
 This is an independent portfolio project designed and built by **Ashley Romano**, a
 resident of Raffles Residences Boston, from her own unit · not an official Raffles,
@@ -208,17 +210,19 @@ deliberate choice for a portfolio/demo project, not an oversight:
 
 ### Environment variables
 
-Copy or edit `.env` at the project root:
+Copy `.env.example` to `.env` at the project root and fill in what you need:
 
 | Variable                                                     | Purpose                                                                             |
 | ------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
 | `SUPABASE_URL` / `VITE_SUPABASE_URL`                         | Supabase project URL (currently scaffolded, not required for the app to run)        |
 | `SUPABASE_PUBLISHABLE_KEY` / `VITE_SUPABASE_PUBLISHABLE_KEY` | Supabase anon/publishable key                                                       |
-| `SUPABASE_PROJECT_ID` / `VITE_SUPABASE_PROJECT_ID`           | Supabase project ID                                                                 |
-| `GRAPHQL_MESH_URL`                                           | Optional · reported by `/health/ready` if set; not otherwise used                   |
+| `SUPABASE_SERVICE_ROLE_KEY`                                  | Server-only Supabase key · never prefixed `VITE_`, never sent to the browser        |
+| `GRAPHQL_MESH_URL` / `GRAPHQL_MESH_TOKEN`                    | Optional · reported by `/health/ready` if set; not otherwise used                   |
 | `VITE_BUILDINGLINK_MODE`                                     | `mock` (default) or `http` · selects the BuildingLink adapter; see `INTEGRATION.md` |
 
 None of these are required to run the app locally · every feature works with them unset.
+BuildingLink credentials are not environment variables of this app at all: they belong to
+the backend proxy described in `INTEGRATION.md`, which is not built yet.
 
 ### Getting started locally
 

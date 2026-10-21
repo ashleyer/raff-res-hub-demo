@@ -6,7 +6,14 @@ import { BuildingLinkProvider } from "@/integrations/buildinglink/provider";
 import { useRosterVerification } from "@/integrations/buildinglink/hooks";
 import { BuildingLinkDashboard } from "./BuildingLinkDashboard";
 
-const NOW = new Date(2026, 9, 16, 13, 15, 0);
+/* The dashboard reads the real clock for "today" and "age", so the mock must
+   share it. A fixed date here would pass on the day it was written and fail
+   the next morning. 1:15 PM keeps every fixture's "today" entry in the past. */
+const NOW = (() => {
+  const d = new Date();
+  d.setHours(13, 15, 0, 0);
+  return d;
+})();
 
 function renderDashboard(client = new MockBuildingLinkClient({ now: () => NOW, latency: false })) {
   const view = render(
